@@ -1,0 +1,58 @@
+\documentclass{article}
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+
+
+\title{\Huge{
+		\indexspace Projekt zespołowy \indexspace Aplikacja internetowa do zarządzania finansami \indexspace \textbf{"Where's my money?!"}}}
+
+\author{Patryk Mroczyński \and Oskar Rutkowski \and Jakub Wiśniewski}
+
+\begin{document}
+	
+	\pagenumbering{gobble}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+	\pagenumbering{arabic}
+	
+	\section{Charakterystyka ogólna projektu}
+	\paragraph{} Aplikacja ma na celu uproszczenie zarządzania budżetem domowym użytkownika. Umożliwia ona dodawanie wydatków i przychodów wraz z przypisaniem im odpowiednich kategorii. Dodawanie może odbywać się albo jako importowanie pliku w formacie CSV, który jest generowany przez użytkownika na stronie banku, albo poprzez ręczne wpisanie przez użytkownika kwoty i przydzielenia kategorii. Użytkownik może definiować subkonta, do których przypisywane są wydatki. Aplikacja umożliwia generowanie raportów i wykresów dla określonego przedziału czasowego z uwzględnieniem tylko wybranych kategorii czy subkont, które są wybrane przez użytkownika. Użytkownik ma dostęp do historii ostatnio generowanych raportów, a także ma możliwość eksportowania ich do wybranego formatu.
+	\section{Architektura systemu}
+	\paragraph{} System oparty jest na modelu klient-serwer, gdzie klient (łącznie z interfejsem i logiką po stronie klienta) jest uruchamiany w przeglądarce, a na maszynie serwerowej działa relacyjna baza danych oraz program, który wykonuje operacje na bazie danych i udostępnia API, z którego korzysta aplikacja kliencka.
+	\section{Wymagania}
+	\paragraph{} W rozdziale opisane są wymagania funkcjonalne oraz niefunkcjonalne z podziałem na aktorów.
+	\subsection{Wymagania funkcjonalne}
+	\begin{enumerate}
+		\item Niezalogowany użytkownik może się zarejestrować oraz zalogować.
+		\item Zalogowany użytkownik może się wylogować oraz zarządzać ustawieniami konta.
+		\item Zalogowany użytkownik może tworzyć subkonta, do których przypisuje wybrane wydatki oraz przychody.
+		\item Zalogowany użytkownik może dodawać wyciąg z konta dowolnego banku jako plik w formacie CSV.
+		\item Zalogowany użytkownik może ręcznie dodać wpis, wpisując kwotę oraz dobierając kategorię.
+		\item Zalogowany użytkownik ma możliwość modyfikacji i usuwania wpisów w aplikacji.
+		\item Zalogowany użytkownik może generować raporty z określonego przedziału czasowego dla określonych kategorii i subkont.
+		\item Zalogowany użytkownik może eksportować swoje raporty finansowe jako pliki w formacie CSV lub PDF.
+		\item Zalogowany użytkownik przy dodawaniu wyciągu konta może wybrać układ pliku CSV między predefiniowanymi bankami lub zdefiniowanym przez siebie układem.
+		
+	\end{enumerate}
+	\subsection{Wymagania niefunkcjonalne}
+	\begin{enumerate}
+		\item Aplikacja serwerowa napisana w języku Python3.
+		\item Aplikacja serwerowa wykorzystuje relacyjną bazę danych PostgreSQL.
+		\item Aplikacja nie wymaga od użytkownika instalowania dodatkowego oprogramowania poza aktualną przeglądarką.
+		\item Aby użytkownik mógł korzystać z aplikacji musi się poprawanie zalogować na założone w serwisie konto.
+		\item Dane użytkownika są przechowywane w bazie danych.
+		\item Hasło użytkownika przechowywane jest jako funkcja skrótu SHA-256.
+		\item Aplikacja kliencka jest zaprojektowana zgodnie z techniką Responsive Web Design.
+		\item API stworzone jest zgodnie z architekturą REST, w formie mikroserwisów.
+		\item Raporty mają formę tabeli lub wykresu.
+	\end{enumerate}
+	\section{Narzędzia, środowiska, biblioteki}
+	\paragraph{}Serwer działa w oparciu o system operacyjny Ubuntu Server 16.04 LTS.
+	Do zarządzania danymi wykorzystywana jest relacyjna baza danych PostgreSQL w wersji 9.6.8.
+	Mikroserwisy działające jako aplikacja serwerowa napisane są w języku Python 3.6.4 wraz z frameworkiem CherryPy 14.0 oraz adapterem Psycopg 2.7.4.
+	Aplikacja kliencka to interaktywna strona internetowa, napisana przy pomocy frameworka React dla języka JavaScript, w którym wykorzystywany jest także język HTML5 oraz CSS3 z preprocesorem LESS. Do tworzenia aplikacji jest używany język EcmaScript 2017 w standardzie ECMA-262, który kompilowany jest przy pomocy kompilatora Babel do języka JavaScript. Strona może być poprawnie wyświetlona na dowolnej aktualnej przeglądarce internetowej.
+	Narzędzia wykorzystane przy tworzeniu aplikacji to Visual Studio Code 1.20.1, DBeaver Community Edition 5.0.
+\end{document}
