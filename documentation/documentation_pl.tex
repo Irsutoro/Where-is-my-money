@@ -28,43 +28,45 @@
 	Serwer składa się z mikroserwisów, które udostępniają odpowiednie metody protokołu HTTP dla klienta.
 	
 	\subsection{Mikroserwisy}
+	W podrozdziale zostały wylistowane mikroserwisy, z których składa się serwer wraz z ich 
+	metodami.
 	\begin{itemize}
-		\item AuthApi - służy do autoryzacji użytkowników
+		\item AuthApi - służy do autoryzacji użytkowników.
 		\item UserApi
 			\begin{itemize}
-				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash} - zwraca listę użytkowników z bazy danych
-				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash} - zwraca szczegóły użytkownika o podanym id
-				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash} - zwraca listę subkont użytkownika
-				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash{:id}\textbackslash} - zwraca szczegóły subkonta użytkownika
-				\item \textbf{POST \textbackslash{api}\textbackslash{users}\textbackslash} - tworzy nowego użytkownika
-				\item \textbf{POST \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash} - tworzy nowe subkonto
-				\item \textbf{PUT \textbackslash{api}\textbackslash{users}\textbackslash} - aktualizuje informacje o użytkowniku
-				\item \textbf{PUT \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash} - aktualizuje informacje o subkoncie
-				\item \textbf{DELETE \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash} - usuwa użytkownika o podanym id
-				\item \textbf{DELETE \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash{:id}\textbackslash} - usuwa użytkownika o podany id
+				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash} - zwraca listę użytkowników z bazy danych.
+				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash} - zwraca szczegóły użytkownika o podanym id.
+				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash} - zwraca listę subkont użytkownika.
+				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash{:id}\textbackslash} - zwraca szczegóły subkonta użytkownika.
+				\item \textbf{POST \textbackslash{api}\textbackslash{users}\textbackslash} - tworzy nowego użytkownika.
+				\item \textbf{POST \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash} - tworzy nowe subkonto.
+				\item \textbf{PUT \textbackslash{api}\textbackslash{users}\textbackslash} - aktualizuje informacje o użytkowniku.
+				\item \textbf{PUT \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash} - aktualizuje informacje o subkoncie.
+				\item \textbf{DELETE \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash} - usuwa użytkownika o podanym id.
+				\item \textbf{DELETE \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash{:id}\textbackslash} - usuwa użytkownika o podany id.
 			\end{itemize}
 		\item TransactionApi
 			\begin{itemize}
-				\item \textbf{GET \textbackslash{api}\textbackslash{transactions}\textbackslash} - zwraca listę transakcji dla użytkownika
-				\item \textbf{GET \textbackslash{api}\textbackslash{transactions}\textbackslash{:id}\textbackslash} - zwraca szczegóły transakcji o podanym id
-				\item \textbf{POST \textbackslash{api}\textbackslash{transactions}\textbackslash} - dodaje nową transakcję do historii
-				\item \textbf{PUT \textbackslash{api}\textbackslash{transactions}\textbackslash} - aktualizuje informacje o transakcji
-				\item \textbf{DELETE \textbackslash{api}\textbackslash{transactions}\textbackslash{:id}\textbackslash} - usuwa transakcję o podanym id
+				\item \textbf{GET \textbackslash{api}\textbackslash{transactions}\textbackslash} - zwraca listę transakcji dla użytkownika.
+				\item \textbf{GET \textbackslash{api}\textbackslash{transactions}\textbackslash{:id}\textbackslash} - zwraca szczegóły transakcji o podanym id.
+				\item \textbf{POST \textbackslash{api}\textbackslash{transactions}\textbackslash} - dodaje nową transakcję do historii.
+				\item \textbf{PUT \textbackslash{api}\textbackslash{transactions}\textbackslash} - aktualizuje informacje o transakcji.
+				\item \textbf{DELETE \textbackslash{api}\textbackslash{transactions}\textbackslash{:id}\textbackslash} - usuwa transakcję o podanym id.
 			\end{itemize}
 		\item CsvSettingApi
 			\begin{itemize}
-				\item \textbf{GET \textbackslash{api}\textbackslash{csvsettings}\textbackslash} - zwraca listę predefiniowanych ustawień arkuszy dla banków oraz własne ustawienia użytkownika
-				\item \textbf{GET \textbackslash{api}\textbackslash{csvsettings}\textbackslash{:id}\textbackslash} - zwraca pojedyncze ustawienie CSV
-				\item \textbf{POST \textbackslash{api}\textbackslash{csvsettings}\textbackslash} - tworzy nowe ustawienie arkusza
-				\item \textbf{PUT \textbackslash{api}\textbackslash{csvsettings}\textbackslash} - aktualizuje informacje o ustawieniu arkusza
-				\item \textbf{DELETE \textbackslash{api}\textbackslash{csvsettings}\textbackslash{:id}\textbackslash} - usuwa ustawienie arkusza o podanym id
+				\item \textbf{GET \textbackslash{api}\textbackslash{csvsettings}\textbackslash} - zwraca listę predefiniowanych ustawień arkuszy dla banków oraz własne ustawienia użytkownika.
+				\item \textbf{GET \textbackslash{api}\textbackslash{csvsettings}\textbackslash{:id}\textbackslash} - zwraca pojedyncze ustawienie CSV.
+				\item \textbf{POST \textbackslash{api}\textbackslash{csvsettings}\textbackslash} - tworzy nowe ustawienie arkusza.
+				\item \textbf{PUT \textbackslash{api}\textbackslash{csvsettings}\textbackslash} - aktualizuje informacje o ustawieniu arkusza.
+				\item \textbf{DELETE \textbackslash{api}\textbackslash{csvsettings}\textbackslash{:id}\textbackslash} - usuwa ustawienie arkusza o podanym id.
 			\end{itemize}
 		\item CategoryApi
 			\begin{itemize}
-				\item \textbf{GET \textbackslash{api}\textbackslash{categories}\textbackslash} - zwraca listę predefiniowanych kategorii oraz własnych użytkownika
-				\item \textbf{POST \textbackslash{api}\textbackslash{categories}\textbackslash} - dodaje nową kategorię
-				\item \textbf{PUT \textbackslash{api}\textbackslash{categories}\textbackslash} - aktualizuje informacje o kategorii
-				\item \textbf{DELETE \textbackslash{api}\textbackslash{transactions}\textbackslash{:id}\textbackslash} - usuwa kategorię o podanym id
+				\item \textbf{GET \textbackslash{api}\textbackslash{categories}\textbackslash} - zwraca listę predefiniowanych kategorii oraz własnych użytkownika.
+				\item \textbf{POST \textbackslash{api}\textbackslash{categories}\textbackslash} - dodaje nową kategorię.
+				\item \textbf{PUT \textbackslash{api}\textbackslash{categories}\textbackslash} - aktualizuje informacje o kategorii.
+				\item \textbf{DELETE \textbackslash{api}\textbackslash{transactions}\textbackslash{:id}\textbackslash} - usuwa kategorię o podanym id.
 			\end{itemize}
 	\end{itemize}
 	\section{Wymagania}
@@ -111,7 +113,7 @@
 		\label{fig:er}
 	\end{figure}
 	
-	Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się pięć tabel. Tabela \texttt{Użytkownicy} zawiera dane użytkownika takie jak jego login oraz skrót hasła. Tabele \texttt{Subkonta}, \texttt{Układy CSV} oraz \texttt{Kategorie} mają odniesienia do tabeli \texttt{Użytkownicy}, które są opcjonalne w przypadku dwóch wymienionych jako ostatnie. W przypadku braku odniesienia, wpisy te są uznawane jako wspólne (predefiniowane) dla wszystkich użytkowników. Jeden rekord w tabeli \texttt{Wpisy} musi mieć odwołanie do każdej z tabel \texttt{Subkonta}, \texttt{Użytkownicy} oraz \texttt{Kategorie}
+	Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się pięć tabel. Tabela \texttt{Użytkownicy} zawiera dane użytkownika takie jak jego login oraz skrót hasła. Tabele \texttt{Subkonta}, \texttt{Układy CSV} oraz \texttt{Kategorie} mają odniesienia do tabeli \texttt{Użytkownicy}, które są opcjonalne w przypadku dwóch wymienionych jako ostatnie. W przypadku braku odniesienia, wpisy te są uznawane jako wspólne (predefiniowane) dla wszystkich użytkowników. Jeden rekord w tabeli \texttt{Wpisy} musi mieć odwołanie do każdej z tabel \texttt{Subkonta}, \texttt{Użytkownicy} oraz \texttt{Kategorie}.
 	
 	
 \end{document}
