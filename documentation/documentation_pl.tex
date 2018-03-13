@@ -103,12 +103,15 @@
 	Aplikacja kliencka to interaktywna strona internetowa, napisana przy pomocy frameworka React dla języka JavaScript, w którym wykorzystywany jest także język HTML5 oraz CSS3 z preprocesorem LESS. Do tworzenia aplikacji jest używany język EcmaScript 2017 w standardzie ECMA-262, który kompilowany jest przy pomocy kompilatora Babel do języka JavaScript. Strona może być poprawnie wyświetlona na dowolnej aktualnej przeglądarce internetowej.
 	Narzędzia wykorzystane przy tworzeniu aplikacji to Visual Studio Code 1.20.1, DBeaver Community Edition 5.0.
 	\section{Schemat bazy danych}
-	\paragraph{} W rozdziale opisane zostały relacje pomiędzy tabelami w relacyjnej bazie danych. Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się pięć tabel.
+	\paragraph{} W rozdziale opisane zostały relacje pomiędzy tabelami w relacyjnej bazie danych. 
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\linewidth]{assets/er.jpg}
 		\caption[]{Model związków encji}
 		\label{fig:er}
 	\end{figure}
+	
+	Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się pięć tabel. Tabela \texttt{Użytkownicy} zawiera dane użytkownika takie jak jego login oraz skrót hasła. Tabele \texttt{Subkonta}, \texttt{Układy CSV} oraz \texttt{Kategorie} mają odniesienia do tabeli \texttt{Użytkownicy}, które są opcjonalne w przypadku dwóch wymienionych jako ostatnie. W przypadku braku odniesienia, wpisy te są uznawane jako wspólne (predefiniowane) dla wszystkich użytkowników. Jeden rekord w tabeli \texttt{Wpisy} musi mieć odwołanie do każdej z tabel \texttt{Subkonta}, \texttt{Użytkownicy} oraz \texttt{Kategorie}
+	
 	
 \end{document}
