@@ -6,7 +6,9 @@
 \usepackage{float}
 
 \title{\Huge{
-		\indexspace Projekt zespołowy \indexspace Aplikacja internetowa do zarządzania finansami \indexspace \textbf{"Where's my money?!"}}}
+		\indexspace Projekt zespołowy \\[1cm] 
+		\indexspace Aplikacja internetowa do zarządzania finansami 
+		\indexspace \textbf{"Where's my money?!"}}}
 
 \author{Patryk Mroczyński \and Oskar Rutkowski \and Jakub Wiśniewski}
 
@@ -22,7 +24,49 @@
 	\section{Charakterystyka ogólna projektu}
 	\paragraph{} Aplikacja ma na celu uproszczenie zarządzania budżetem domowym użytkownika. Umożliwia ona dodawanie wydatków i przychodów wraz z przypisaniem im odpowiednich kategorii. Dodawanie może odbywać się albo jako importowanie pliku w formacie CSV, który jest generowany przez użytkownika na stronie banku, albo poprzez ręczne wpisanie przez użytkownika kwoty i przydzielenia kategorii. Użytkownik może definiować subkonta, do których przypisywane są wydatki. Aplikacja umożliwia generowanie raportów i wykresów dla określonego przedziału czasowego z uwzględnieniem tylko wybranych kategorii czy subkont, które są wybrane przez użytkownika. Użytkownik ma możliwość eksportowania raportów do wybranego formatu.
 	\section{Architektura systemu}
-	\paragraph{} System oparty jest na modelu klient-serwer, gdzie klient (łącznie z interfejsem i logiką po stronie klienta) jest uruchamiany w przeglądarce, a na maszynie serwerowej działa relacyjna baza danych oraz program, który wykonuje operacje na bazie danych i udostępnia API, z którego korzysta aplikacja kliencka. Serwer składa się z mikrousług, które udostępniają metody zgodnie z architekturą REST. 
+	\paragraph{} System oparty jest na modelu klient-serwer, gdzie klient (łącznie z interfejsem i logiką po stronie klienta) jest uruchamiany w przeglądarce, a na maszynie serwerowej działa relacyjna baza danych oraz program, który wykonuje operacje na bazie danych i udostępnia API, z którego korzysta aplikacja kliencka. Serwer składa się z mikrousług, które udostępniają metody zgodnie z architekturą REST. \\[0.5cm]
+	Serwer składa się z mikroserwisów, które udostępniają odpowiednie metody protokołu HTTP dla klienta.
+	
+	\subsection{Mikroserwisy}
+	\begin{itemize}
+		\item AuthApi - służy do autoryzacji użytkowników
+		\item UserApi
+			\begin{itemize}
+				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash} - zwraca listę użytkowników z bazy danych
+				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash} - zwraca szczegóły użytkownika o podanym id
+				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash} - zwraca listę subkont użytkownika
+				\item \textbf{GET \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash{:id}\textbackslash} - zwraca szczegóły subkonta użytkownika
+				\item \textbf{POST \textbackslash{api}\textbackslash{users}\textbackslash} - tworzy nowego użytkownika
+				\item \textbf{POST \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash} - tworzy nowe subkonto
+				\item \textbf{PUT \textbackslash{api}\textbackslash{users}\textbackslash} - aktualizuje informacje o użytkowniku
+				\item \textbf{PUT \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash} - aktualizuje informacje o subkoncie
+				\item \textbf{DELETE \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash} - usuwa użytkownika o podanym id
+				\item \textbf{DELETE \textbackslash{api}\textbackslash{users}\textbackslash{:id}\textbackslash{subaccounts}\textbackslash{:id}\textbackslash} - usuwa użytkownika o podany id
+			\end{itemize}
+		\item TransactionApi
+			\begin{itemize}
+				\item \textbf{GET \textbackslash{api}\textbackslash{transactions}\textbackslash} - zwraca listę transakcji dla użytkownika
+				\item \textbf{GET \textbackslash{api}\textbackslash{transactions}\textbackslash{:id}\textbackslash} - zwraca szczegóły transakcji o podanym id
+				\item \textbf{POST \textbackslash{api}\textbackslash{transactions}\textbackslash} - dodaje nową transakcję do historii
+				\item \textbf{PUT \textbackslash{api}\textbackslash{transactions}\textbackslash} - aktualizuje informacje o transakcji
+				\item \textbf{DELETE \textbackslash{api}\textbackslash{transactions}\textbackslash{:id}\textbackslash} - usuwa transakcję o podanym id
+			\end{itemize}
+		\item CsvSettingApi
+			\begin{itemize}
+				\item \textbf{GET \textbackslash{api}\textbackslash{csvsettings}\textbackslash} - zwraca listę predefiniowanych ustawień arkuszy dla banków oraz własne ustawienia użytkownika
+				\item \textbf{GET \textbackslash{api}\textbackslash{csvsettings}\textbackslash{:id}\textbackslash} - zwraca pojedyncze ustawienie CSV
+				\item \textbf{POST \textbackslash{api}\textbackslash{csvsettings}\textbackslash} - tworzy nowe ustawienie arkusza
+				\item \textbf{PUT \textbackslash{api}\textbackslash{csvsettings}\textbackslash} - aktualizuje informacje o ustawieniu arkusza
+				\item \textbf{DELETE \textbackslash{api}\textbackslash{csvsettings}\textbackslash{:id}\textbackslash} - usuwa ustawienie arkusza o podanym id
+			\end{itemize}
+		\item CategoryApi
+			\begin{itemize}
+				\item \textbf{GET \textbackslash{api}\textbackslash{categories}\textbackslash} - zwraca listę predefiniowanych kategorii oraz własnych użytkownika
+				\item \textbf{POST \textbackslash{api}\textbackslash{categories}\textbackslash} - dodaje nową kategorię
+				\item \textbf{PUT \textbackslash{api}\textbackslash{categories}\textbackslash} - aktualizuje informacje o kategorii
+				\item \textbf{DELETE \textbackslash{api}\textbackslash{transactions}\textbackslash{:id}\textbackslash} - usuwa kategorię o podanym id
+			\end{itemize}
+	\end{itemize}
 	\section{Wymagania}
 	\paragraph{} W rozdziale opisane są wymagania funkcjonalne oraz niefunkcjonalne z podziałem na aktorów.
 	\subsection{Wymagania funkcjonalne}
