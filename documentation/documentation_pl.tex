@@ -4,13 +4,16 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{textcomp}
 
 \title{\Huge{
 		\indexspace Projekt zespołowy \\[1cm] 
 		\indexspace Aplikacja internetowa do zarządzania finansami 
 		\indexspace \textbf{"Where's my money?!"}}}
 
-\author{Patryk Mroczyński \and Oskar Rutkowski \and Jakub Wiśniewski}
+\author{Patryk Mroczyński \textlangle{}\textit{patryk.mroczynski@student.put.poznan.pl}\textrangle{} 126810
+   \and Oskar Rutkowski \textlangle{}\textit{oskar.rutkowski@student.put.poznan.pl}\textrangle{} 126845 
+   \and Jakub Wiśniewski \textlangle{}\textit{jakub.t.wisniewski@student.put.poznan.pl}\textrangle{} 126824} 
 
 \begin{document}
 	
@@ -113,7 +116,8 @@
 		\item Aplikacja nie wymaga od użytkownika instalowania dodatkowego oprogramowania poza aktualną przeglądarką.
 		\item Aby użytkownik mógł korzystać z aplikacji musi się poprawanie zalogować na założone w serwisie konto.
 		\item Dane użytkownika są przechowywane w bazie danych.
-		\item Hasło użytkownika przechowywane jest jako funkcja skrótu SHA-256.
+		\item Hasło użytkownika przechowywane jest jako wynik funkcji skrótu SHA-256.
+		\item Hasło użytkownika ma minimum 8 znaków długości oraz składa się z co najmniej jednej cyfry, jednego znaku specjalnego, jednej wielkiej litery i jednej małej litery.
 		\item Aplikacja kliencka jest zaprojektowana zgodnie z techniką Responsive Web Design.
 		\item API stworzone jest zgodnie z architekturą REST, w formie mikroserwisów.
 		\item Raporty mają formę tabeli lub wykresu.
