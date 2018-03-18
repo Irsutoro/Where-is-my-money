@@ -127,8 +127,8 @@
 	Do zarządzania danymi wykorzystywana jest relacyjna baza danych PostgreSQL w wersji 9.6.8.
 	Mikroserwisy działające jako aplikacja serwerowa napisane są w języku Python 3.6.4 wraz z frameworkiem CherryPy 14.0 oraz adapterem Psycopg 2.7.4. \\
 	\paragraph*{} Aplikacja kliencka to interaktywna strona internetowa, napisana przy pomocy frameworka React dla języka JavaScript, w którym wykorzystywany jest także język HTML5 oraz CSS3 z preprocesorem LESS. Do tworzenia aplikacji jest używany język EcmaScript 2017 w standardzie ECMA-262, który kompilowany jest przy pomocy kompilatora Babel do języka JavaScript. Strona może być poprawnie wyświetlona na dowolnej aktualnej przeglądarce internetowej. \\
-	\paragraph*{} Narzędzia wykorzystane przy tworzeniu aplikacji to Visual Studio Code 1.20.1, DBeaver Community Edition 5.0, analizator protokołów Wireshark 2.4.5 \\
-	\paragraph*{} Narzędzia wspomagające pracę zespołu to Trello.com do organizacji zadań, repozytorium GitHub do zarządzania kontrolą wersji kodu, TexStudio do tworzenia dokumentacji, Microsoft Visio do tworzenia schematów oraz diagramów.
+	\paragraph*{} Narzędzia wykorzystane przy tworzeniu aplikacji to Visual Studio Code 1.20.1, DBeaver Community Edition 5.0, Wireshark 2.4.5 \\
+	\paragraph*{} Narzędzia, które zostały wykorzystane do wspierania pracy zespołowej to Trello.com do organizacji zadań, system kontoli wersji Git wraz z repozytorium na stronie GitHub.com, TexStudio (z użyciem MiKTeX) do tworzenia dokumentacji oraz Microsoft Visio do tworzenia schematów oraz diagramów.
 	\section{Najważniejsze protokoły}
 	\paragraph*{} W rozdziale opisane są najważniejsze protokoły wykorzystywane w aplikacji.
 	\section{Schemat bazy danych}
@@ -140,7 +140,7 @@
 		\label{fig:er}
 	\end{figure}
 	
-	Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się pięć tabel. Tabela \texttt{Użytkownicy} zawiera dane użytkownika takie jak jego login oraz skrót hasła. Tabele \texttt{Subkonta}, \texttt{Układy CSV} oraz \texttt{Kategorie} mają odniesienia do tabeli \texttt{Użytkownicy}, które są opcjonalne w przypadku dwóch wymienionych jako ostatnie. W przypadku braku odniesienia, wpisy te są uznawane jako wspólne (predefiniowane) dla wszystkich użytkowników. Jeden rekord w tabeli \texttt{Wpisy} musi mieć odwołanie do każdej z tabel \texttt{Subkonta}, \texttt{Użytkownicy} oraz \texttt{Kategorie}.
+	Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się sześć tabel. Tabela \texttt{Users} zawiera dane użytkownika takie jak jego login, adres email, nazwa użytkownika oraz wynik przetworzenia hasła przez funkcję skrótu. Tabele \texttt{Subaccounts}, \texttt{CSV Format} oraz \texttt{Categories} mają odniesienia do tabeli \texttt{Users}. W przypadku braku odniesienia do id użytkownika w tabeli \texttt{CSV Format}, wpisy uznawane są jako wspólne (predefiniowane) dla wszystkich użytkowników. Jeden rekord w tabeli \texttt{Entries} musi mieć odwołanie do tabel \texttt{Users} oraz \texttt{Categories} oraz moze mieć opcjonalne odwołanie do tabeli \texttt{Subaccounts}. Tabela \texttt{TitleToCategoryMap} zawiera wzór tytułu, który jest używany do zapamiętywania domyślnych kategorii przy wczytywaniu wpisów z pliku w formacie CSV.
 	
 	
 \end{document}
