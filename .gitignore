@@ -3,3 +3,5 @@
 *.pdf
 *.toc
 *.synctex.gz
+*.fls
+*.fdb_latexmk

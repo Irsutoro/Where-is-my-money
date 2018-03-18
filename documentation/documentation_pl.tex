@@ -97,7 +97,9 @@
 	\subsection{Wymagania funkcjonalne}
 	W wymaganiach funkcjonalnych wyszczególnionych jest dwóch aktorów: użytkownik niezalogowany oraz użytkownik zalogowany.
 	\begin{itemize}
+		\item Niezalogowany użytkownik może skorzystać z wersji testowej aplikacji bez rejestracji.
 		\item Niezalogowany użytkownik może się zarejestrować oraz zalogować.
+		\item Niezalogowany użytkownik ma możliwość wysłania prośby o zresetowanie hasła poprzez podaniel adresu email.
 		\item Zalogowany użytkownik może się wylogować oraz zarządzać ustawieniami konta.
 		\item Zalogowany użytkownik może tworzyć subkonta, do których przypisuje wybrane wydatki oraz przychody.
 		\item Zalogowany użytkownik może dodawać wyciąg z konta dowolnego banku jako plik w formacie CSV.
@@ -114,7 +116,9 @@
 	\begin{itemize}
 		\item Aplikacja serwerowa napisana w języku Python3.
 		\item Aplikacja serwerowa wykorzystuje relacyjną bazę danych PostgreSQL.
+		\item Osobna baza danych dla wersji testowej oraz dla pełnej wersji dla zalogowanych użytkowników.
 		\item Aplikacja nie wymaga od użytkownika instalowania dodatkowego oprogramowania poza aktualną przeglądarką.
+		\item Wykorzystanie architektury PWA (z ang. Progressive Web Applications) w celu instalowania aplikacji na urządzeniach mobilnych.
 		\item Aby użytkownik mógł korzystać z aplikacji musi się poprawanie zalogować na założone w serwisie konto.
 		\item Dane użytkownika są przechowywane w bazie danych.
 		\item Hasło użytkownika przechowywane jest jako wynik funkcji skrótu SHA-256.
@@ -126,12 +130,13 @@
 	\section{Narzędzia, środowiska, biblioteki}
 	\paragraph{}Serwer działa w oparciu o system operacyjny Ubuntu Server 16.04 LTS.
 	Do zarządzania danymi wykorzystywana jest relacyjna baza danych PostgreSQL w wersji 9.6.8.
-	Mikroserwisy działające jako aplikacja serwerowa napisane są w języku Python 3.6.4 wraz z frameworkiem CherryPy 14.0 oraz adapterem Psycopg 2.7.4. \\
-	\paragraph*{} Aplikacja kliencka to interaktywna strona internetowa, napisana przy pomocy frameworka React dla języka JavaScript, w którym wykorzystywany jest także język HTML5 oraz CSS3 z preprocesorem LESS. Do tworzenia aplikacji jest używany język EcmaScript 2017 w standardzie ECMA-262, który kompilowany jest przy pomocy kompilatora Babel do języka JavaScript. Strona może być poprawnie wyświetlona na dowolnej aktualnej przeglądarce internetowej. \\
-	\paragraph*{} Narzędzia wykorzystane przy tworzeniu aplikacji to Visual Studio Code 1.20.1, DBeaver Community Edition 5.0, Wireshark 2.4.5 \\
+	Mikroserwisy działające jako aplikacja serwerowa napisane są w języku Python 3.6.4 wraz z frameworkiem CherryPy 14.0 oraz adapterem Psycopg 2.7.4. 
+	\paragraph*{} Aplikacja kliencka to interaktywna strona internetowa, napisana przy pomocy frameworka React dla języka JavaScript, w którym wykorzystywany jest także język HTML5 oraz CSS3 z preprocesorem LESS. Do tworzenia aplikacji jest używany język EcmaScript 2017 w standardzie ECMA-262, który kompilowany jest przy pomocy kompilatora Babel do języka JavaScript. Strona może być poprawnie wyświetlona na dowolnej aktualnej przeglądarce internetowej.
+	\paragraph*{} Dodatkowe narzędzia wykorzystane przy tworzeniu aplikacji to Visual Studio Code 1.20.1, DBeaver Community Edition 5.0, Wireshark 2.4.5 
 	\paragraph*{} Narzędzia, które zostały wykorzystane do wspierania pracy zespołowej to Trello.com do organizacji zadań, system kontoli wersji Git wraz z repozytorium na stronie GitHub.com, TexStudio (z użyciem MiKTeX) do tworzenia dokumentacji oraz Microsoft Visio do tworzenia schematów oraz diagramów.
 	\section{Najważniejsze protokoły}
-	\paragraph*{} W rozdziale opisane są najważniejsze protokoły wykorzystywane w aplikacji.
+	\paragraph*{} 
+	Użytkownik komunikuje się z serwerem poprzez protokół HTTPS (z ang. Hypertext Transfer Protocol Secure) w warstwie aplikacji, który wykorzystuje TLS (z ang. Transport Layer Security) w wartstwie prezentacji do szyfrowania danych wysyłanych do serwera i odszyfrowywania danych otrzymywanych. TLS wykorzystuje do transportu protokół TCP w warstwie transportowej.
 	\section{Schemat bazy danych}
 	\paragraph{} W rozdziale opisane zostały relacje pomiędzy tabelami w relacyjnej bazie danych. 
 	\begin{figure}[H]
