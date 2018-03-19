@@ -8,12 +8,12 @@
 
 \title{\Huge{
 		\indexspace Projekt zespołowy \\[1cm] 
-		\indexspace Aplikacja internetowa do zarządzania finansami 
-		\indexspace \textbf{"Where's my money?!"}}}
+		\indexspace Aplikacja internetowa do zarządzania finansami \\[1cm]
+		\indexspace \textbf{"Where's my money?!"}\\[4.9cm]}}
 
-\author{Patryk Mroczyński \textlangle{}\textit{patryk.mroczynski@student.put.poznan.pl}\textrangle{} 126810
-   \and Oskar Rutkowski \textlangle{}\textit{oskar.rutkowski@student.put.poznan.pl}\textrangle{} 126845 
-   \and Jakub Wiśniewski \textlangle{}\textit{jakub.t.wisniewski@student.put.poznan.pl}\textrangle{} 126824} 
+\author{Patryk Mroczyński \\ \textlangle{}\textit{patryk.mroczynski@student.put.poznan.pl}\textrangle{} \\126810
+   \and Oskar Rutkowski \\ \textlangle{}\textit{oskar.rutkowski@student.put.poznan.pl}\textrangle{} \\126845 
+   \and Jakub Wiśniewski \\ \textlangle{}\textit{jakub.t.wisniewski@student.put.poznan.pl}\textrangle{} \\126824} 
 
 \begin{document}
 	
@@ -148,5 +148,5 @@
 	
 	Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się sześć tabel. Tabela \texttt{Users} zawiera dane użytkownika takie jak jego login, adres email, nazwa użytkownika oraz wynik przetworzenia hasła przez funkcję skrótu. Tabele \texttt{Subaccounts}, \texttt{CSV Format} oraz \texttt{Categories} mają odniesienia do tabeli \texttt{Users}. W przypadku braku odniesienia do id użytkownika w tabeli \texttt{CSV Format}, wpisy uznawane są jako wspólne (predefiniowane) dla wszystkich użytkowników. Jeden rekord w tabeli \texttt{Entries} musi mieć odwołanie do tabel \texttt{Users} oraz \texttt{Categories} oraz moze mieć opcjonalne odwołanie do tabeli \texttt{Subaccounts}. Tabela \texttt{TitleToCategoryMap} zawiera wzór tytułu, który jest używany do zapamiętywania domyślnych kategorii przy wczytywaniu wpisów z pliku w formacie CSV.
 	
-	
+	\section{Diagramy UML}
 \end{document}
