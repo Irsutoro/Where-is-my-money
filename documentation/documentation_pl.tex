@@ -5,34 +5,30 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{textcomp}
-\usepackage{svg}
-
-\title{\Huge{
-		\indexspace Projekt zespołowy \\[1cm] 
-		\indexspace Aplikacja internetowa do zarządzania finansami \\[1cm]
-		\indexspace \textbf{"Where's my money?!"}\\[4.9cm]}}
-\begin{document}
-	
-	\begin{figure}[htbp]
-		\centering
-		\includesvg{logo.svg}
-		\caption{svg image}
-	\end{figure}
-	
-\end{document}
-\author{Patryk Mroczyński \\ \textlangle{}\textit{patryk.mroczynski@student.put.poznan.pl}\textrangle{} \\126810
-   \and Oskar Rutkowski \\ \textlangle{}\textit{oskar.rutkowski@student.put.poznan.pl}\textrangle{} \\126845 
-   \and Jakub Wiśniewski \\ \textlangle{}\textit{jakub.t.wisniewski@student.put.poznan.pl}\textrangle{} \\126824} 
 
 \begin{document}
 	
 	\pagenumbering{gobble}
-	\maketitle
+		\begin{titlepage}
+		\centering
+		
+		 \Huge{
+		 	\indexspace Projekt zespołowy \\ 
+		 	\indexspace Aplikacja internetowa do zarządzania finansami \\[1cm]
+		 	\indexspace \textbf{"Where's my money?!"\\[1cm]}}
+		
+		\includegraphics[width=5cm]{assets/logo.png}\\[1cm]
+		\Large{Patryk Mroczyński \\ \textlangle{}\textit{patryk.mroczynski@student.put.poznan.pl}\textrangle{} \\126810\\
+		Oskar Rutkowski \\ \textlangle{}\textit{oskar.rutkowski@student.put.poznan.pl}\textrangle{} \\126845 \\
+		Jakub Wiśniewski \\ \textlangle{}\textit{jakub.t.wisniewski@student.put.poznan.pl}\textrangle{} \\126824 \\[0.5cm]}
+	\today
+		
+	\end{titlepage}
 	\newpage
 	\tableofcontents
 	\newpage
 	\pagenumbering{arabic}
-	
+
 	\section{Charakterystyka ogólna projektu}
 	\paragraph{} Aplikacja ma na celu uproszczenie zarządzania budżetem domowym użytkownika. Umożliwia ona dodawanie wydatków i przychodów wraz z przypisaniem im odpowiednich kategorii. Dodawanie może odbywać się albo jako importowanie pliku w formacie CSV, który jest generowany przez użytkownika na stronie banku, albo poprzez ręczne wpisanie przez użytkownika kwoty i przydzielenia kategorii. Użytkownik może definiować subkonta, do których przypisywane są wydatki. Aplikacja umożliwia generowanie raportów i wykresów dla określonego przedziału czasowego z uwzględnieniem tylko wybranych kategorii czy subkont, które są wybrane przez użytkownika. Użytkownik ma możliwość eksportowania raportów do wybranego formatu.
 	\section{Architektura systemu}
