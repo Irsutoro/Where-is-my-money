@@ -54,13 +54,13 @@
 				
 				\item \textbf{POST /api/users/:id/subaccounts/} - tworzy nowe subkonto.
 				
-				\item \textbf{PUT /api/users/} - aktualizuje informacje o użytkowniku.
+				\item \textbf{PUT /api/users/:id} - aktualizuje informacje o użytkowniku.
 				
-				\item \textbf{PUT /api/users/:id/{subaccounts}/} - aktualizuje informacje o subkoncie.
+				\item \textbf{PUT /api/users/:id/subaccounts/:id/} - aktualizuje informacje o subkoncie.
 				
 				\item \textbf{DELETE /api/users/:id/} - usuwa użytkownika o podanym id.
 				
-				\item \textbf{DELETE /api/users/:id/subaccounts/:id/} - usuwa użytkownika o podany id.
+				\item \textbf{DELETE /api/users/:id/subaccounts/:id/} - usuwa subkonto o podanym id.
 			\end{itemize}
 		\item TransactionApi
 			\begin{itemize}
@@ -70,7 +70,7 @@
 				
 				\item \textbf{POST /api/transactions/} - dodaje nową transakcję do historii.
 				
-				\item \textbf{PUT /api/transactions/} - aktualizuje informacje o transakcji.
+				\item \textbf{PUT /api/transactions/:id/} - aktualizuje informacje o transakcji.
 				
 				\item \textbf{DELETE /api/transactions/:id/} - usuwa transakcję o podanym id.
 			\end{itemize}
@@ -82,7 +82,7 @@
 				
 				\item \textbf{POST /api/csvsettings/} - tworzy nowe ustawienie arkusza.
 				
-				\item \textbf{PUT /api/csvsettings/} - aktualizuje informacje o ustawieniu arkusza.
+				\item \textbf{PUT /api/csvsettings/:id/} - aktualizuje informacje o ustawieniu arkusza.
 				
 				\item \textbf{DELETE /api/csvsettings/:id/} - usuwa ustawienie arkusza o podanym id.
 			\end{itemize}
@@ -92,7 +92,7 @@
 				
 				\item \textbf{POST /api/categories/} - dodaje nową kategorię.
 				
-				\item \textbf{PUT /api/categories/} - aktualizuje informacje o kategorii.
+				\item \textbf{PUT /api/categories/:id/} - aktualizuje informacje o kategorii.
 				
 				\item \textbf{DELETE /api/transactions/:id/} - usuwa kategorię o podanym id.
 			\end{itemize}
