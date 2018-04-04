@@ -149,11 +149,11 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\linewidth]{assets/er.jpg}
-		\caption[]{Model związków encji}
+		\caption[]{Schemat relacyjny}
 		\label{fig:er}
 	\end{figure}
 	
-	Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się sześć tabel. Tabela \texttt{Users} zawiera dane użytkownika takie jak jego login, adres email, nazwa użytkownika oraz wynik przetworzenia hasła przez funkcję skrótu. Tabele \texttt{Subaccounts}, \texttt{CSV Format} oraz \texttt{Categories} mają odniesienia do tabeli \texttt{Users}. W przypadku braku odniesienia do id użytkownika w tabeli \texttt{CSV Format}, wpisy uznawane są jako wspólne (predefiniowane) dla wszystkich użytkowników. Jeden rekord w tabeli \texttt{Entries} musi mieć odwołanie do tabel \texttt{Users} oraz \texttt{Categories} oraz moze mieć opcjonalne odwołanie do tabeli \texttt{Subaccounts}. Tabela \texttt{TitleToCategoryMap} zawiera wzór tytułu, który jest używany do zapamiętywania domyślnych kategorii przy wczytywaniu wpisów z pliku w formacie CSV.
+	Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się siedem tabel. Tabela \texttt{Users} zawiera dane użytkownika takie jak jego login, adres email, nazwa użytkownika oraz wynik przetworzenia hasła przez funkcję skrótu. Tabele \texttt{Subaccounts}, \texttt{CSV Format} oraz \texttt{Categories} mają odniesienia do tabeli \texttt{Users}. W przypadku braku odniesienia do id użytkownika w tabeli \texttt{CSV Format}, wpisy uznawane są jako wspólne (predefiniowane) dla wszystkich użytkowników. Jeden rekord w tabeli \texttt{Entries} musi mieć odwołanie do tabel \texttt{Users}, \texttt{Currencies} oraz \texttt{Categories} oraz moze mieć opcjonalne odwołanie do tabeli \texttt{Subaccounts}. Tabela \texttt{TitleToCategoryMap} zawiera wzór tytułu, który jest używany do zapamiętywania domyślnych kategorii przy wczytywaniu wpisów z pliku w formacie CSV.
 	\section{Diagramy UML}
 	\paragraph*{} W rozdziale zostały umieszczone oraz opisane diagramy przypadków użycia dla aktorów zalogowany oraz niezalogowany jak także diagramy sekwencji rejestracji, logowania, tworzenia subkonta, dodawania wpisów ręcznie oraz wyciągów z banków, modyfikacji wpisów, usuwania wpisów, generowania raportów.
 	\subsection{Diagramy UML przypadków użycia}
