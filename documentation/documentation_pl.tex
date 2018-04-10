@@ -46,21 +46,22 @@
 				
 				\item \textbf{GET /api/users/:id/} - zwraca szczegóły użytkownika o podanym id.
 				
-				\item \textbf{GET /api/users/:id/subaccounts/} - zwraca listę subkont użytkownika.
-				
-				\item \textbf{GET /api/users/:id/subaccounts/:id/} - zwraca szczegóły subkonta użytkownika.
-				
 				\item \textbf{POST /api/users/} - tworzy nowego użytkownika.
-				
-				\item \textbf{POST /api/users/:id/subaccounts/} - tworzy nowe subkonto.
 				
 				\item \textbf{PUT /api/users/:id} - aktualizuje informacje o użytkowniku.
 				
-				\item \textbf{PUT /api/users/:id/subaccounts/:id/} - aktualizuje informacje o subkoncie.
-				
 				\item \textbf{DELETE /api/users/:id/} - usuwa użytkownika o podanym id.
 				
-				\item \textbf{DELETE /api/users/:id/subaccounts/:id/} - usuwa subkonto o podanym id.
+			\end{itemize}
+		\item SubaccountApi
+			\begin{itemize}
+				\item \textbf{GET /api/subaccounts/:id} - zwraca listę subkont dla użytkownika.
+				
+				\item \textbf{POST /api/subaccounts/} - dodaje nowe subkonto.
+				
+				\item \textbf{PUT /api/subaccounts/:id/} - aktualizuje informacje o subkoncie o danym id.
+				
+				\item \textbf{DELETE /api/subaccounts/:id/} - usuwa subkonto o podanym id.
 			\end{itemize}
 		\item TransactionApi
 			\begin{itemize}
@@ -94,7 +95,17 @@
 				
 				\item \textbf{PUT /api/categories/:id/} - aktualizuje informacje o kategorii.
 				
-				\item \textbf{DELETE /api/transactions/:id/} - usuwa kategorię o podanym id.
+				\item \textbf{DELETE /api/categories/:id/} - usuwa kategorię o podanym id.
+			\end{itemize}
+		\item CategoryMappingApi
+			\begin{itemize}
+				\item \textbf{GET /api/categorymapping/} - zwraca listę mapowań dla użytkownika.
+				
+				\item \textbf{POST /api/categorymapping/} - dodaje nowe mapowanie.
+				
+				\item \textbf{PUT /api/categorymapping/:id/} - aktualizuje informacje o mapowaniu o danym id.
+				
+				\item \textbf{DELETE /api/categorymapping/:id/} - usuwa mapowanie o podanym id.
 			\end{itemize}
 	\end{itemize}
 	\section{Wymagania}
