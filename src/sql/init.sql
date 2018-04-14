@@ -13,13 +13,13 @@ CREATE TABLE users (
 
 CREATE TABLE subaccounts (
     id serial PRIMARY KEY,
-    user_id int NOT NULL REFERENCES users(id),
+    user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     name varchar(30) NOT NULL
 );
 
 CREATE TABLE categories (
     id serial PRIMARY KEY,
-    user_id int NOT NULL REFERENCES users(id),
+    user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     name varchar(30) NOT NULL
 );
 
@@ -31,14 +31,14 @@ CREATE TABLE currencies (
 
 CREATE TABLE title_to_category_map (
     id serial PRIMARY KEY,
-    user_id int NOT NULL REFERENCES users(id),
-    category_id int NOT NULL REFERENCES categories(id),
+    user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    category_id int NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
     pattern varchar(50) NOT NULL
 );
 
 CREATE TABLE csv_formats (
     id serial PRIMARY KEY,
-    user_id int REFERENCES users(id),
+    user_id int REFERENCES users(id) ON DELETE CASCADE,
     name varchar(30) NOT NULL,
     title_index int NOT NULL,
     date_index int NOT NULL,
@@ -49,9 +49,9 @@ CREATE TABLE csv_formats (
 
 CREATE TABLE entries (
     id serial PRIMARY KEY,
-    user_id int NOT NULL REFERENCES users(id),
-    category_id int NOT NULL REFERENCES categories(id),
-    subaccount_id int NOT NULL REFERENCES subaccounts(id),
+    user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    category_id int NOT NULL REFERENCES categories(id) ON DELETE RESTRICT,
+    subaccount_id int NOT NULL REFERENCES subaccounts(id) ON DELETE RESTRICT,
     currency_id int NOT NULL REFERENCES currencies(id),
     date bigint NOT NULL,
     amount int NOT NULL,
