@@ -57,3 +57,5 @@ CREATE TABLE entries (
     amount int NOT NULL,
     comment varchar(200)
 );
+
+CREATE DATABASE wmm_test TEMPLATE wmm;
