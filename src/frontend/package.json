@@ -1,0 +1,22 @@
+{
+  "name": "wmm",
+  "version": "0.0.1",
+  "description": "Where is my money?!",
+  "dependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "start": "parcel ./public/index.html"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "semantic-ui-react": "^0.79.1"
+  }
+}
