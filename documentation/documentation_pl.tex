@@ -30,7 +30,7 @@
 	\pagenumbering{arabic}
 
 	\section{Charakterystyka ogólna projektu}
-	\paragraph{} Aplikacja ma na celu uproszczenie zarządzania budżetem domowym użytkownika. Umożliwia ona dodawanie wydatków i przychodów wraz z przypisaniem im odpowiednich kategorii. Dodawanie może odbywać się albo jako importowanie pliku w formacie CSV, który jest generowany przez użytkownika na stronie banku, albo poprzez ręczne wpisanie przez użytkownika kwoty i przydzielenia kategorii. Użytkownik może definiować subkonta, do których przypisywane są wydatki. Aplikacja umożliwia generowanie raportów i wykresów dla określonego przedziału czasowego z uwzględnieniem tylko wybranych kategorii czy subkont, które są wybrane przez użytkownika. Użytkownik ma możliwość eksportowania raportów do wybranego formatu.
+	\paragraph{} Aplikacja ma na celu uproszczenie zarządzania budżetem domowym użytkownika. Umożliwia ona dodawanie wydatków i przychodów wraz z przypisaniem im odpowiednich kategorii. Dodawanie może odbywać się albo jako importowanie pliku w formacie CSV, który jest generowany przez użytkownika na stronie banku, albo poprzez ręczne wpisanie przez użytkownika kwoty i przydzielenia kategorii. Użytkownik może definiować subkonta, do których przypisywane są wydatki. Aplikacja umożliwia generowanie raportów i wykresów dla określonego przedziału czasowego z uwzględnieniem tylko wybranych kategorii czy subkont, które są wybrane przez użytkownika. Użytkownik ma możliwość eksportowania raportów do wybranego przez siebie formatu. Dostępne formaty raportów to pdf i csv.
 	\section{Architektura systemu}
 	\paragraph{} System oparty jest na modelu klient-serwer, gdzie klient (łącznie z interfejsem i logiką po stronie klienta) jest uruchamiany w przeglądarce, a na maszynie serwerowej działa relacyjna baza danych oraz program, który wykonuje operacje na bazie danych i udostępnia API, z którego korzysta aplikacja kliencka. Serwer składa się z mikrousług, które udostępniają metody zgodnie z architekturą REST. \\[0.5cm]
 	Serwer składa się z mikroserwisów, które udostępniają odpowiednie metody protokołu HTTP dla klienta.
@@ -113,24 +113,30 @@
 	\subsection{Wymagania funkcjonalne}
 	W wymaganiach funkcjonalnych wyszczególnionych jest dwóch aktorów: użytkownik niezalogowany oraz użytkownik zalogowany.
 	\begin{itemize}
-		\item Niezalogowany użytkownik może skorzystać z wersji testowej aplikacji bez rejestracji.
-		\item Niezalogowany użytkownik może się zarejestrować oraz zalogować.
-		\item Niezalogowany użytkownik ma możliwość wysłania prośby o zresetowanie hasła poprzez podanie adresu email.
-		\item Zalogowany użytkownik może się wylogować
-		\item Zalogowany użytkownik może w opcjach konta edytować adres email, hasło oraz nazwę konta.
-		\item Zalogowany użytkownik może tworzyć subkonta, do których przypisuje wybrane wydatki oraz przychody.
-		\item Zalogowany użytkownik może dodawać wyciąg z konta dowolnego banku jako plik w formacie CSV.
-		\item Zalogowany użytkownik może ręcznie dodać wpis, wpisując kwotę oraz dobierając kategorię, a także walutę.
-		\item Zalogowany użytkownik ma możliwość modyfikacji i usuwania wpisów w aplikacji.
-		\item Zalogowany użytkownik może generować raporty z określonego przedziału czasowego dla określonych kategorii i subkont.
-		\item Zalogowany użytkownik może eksportować swoje raporty finansowe jako pliki w formacie CSV lub PDF.
-		\item Zalogowany użytkownik przy dodawaniu wyciągu konta może wybrać układ pliku CSV między predefiniowanymi bankami lub zdefiniowanym przez siebie układem.
-		\item Zalogowany użytkownik może dodać wzór tytułu oraz dopasować do niego kategorię, aby zautomatyzować uzupełnianie kategorii przy dodawaniu wpisów z pliku w formacie CSV.
-		\item Zalogowany użytkownik może dodawać komentarze do wpisów.
+		\item Niezalogowany użytkownik
+			\begin{itemize}
+				\item Możliwość skorzystania z wersji testowej aplikacji bez rejestracji.
+				\item Możliwość rejestracji oraz logowania.
+				\item Możliwość wysłania prośby o zresetowanie hasła poprzez podanie adresu email.
+			\end{itemize}
 		
+		\item Zalogowany użytkownik
+			\begin{itemize}
+				\item Możliwość wylogowania.
+				\item Możliwość edycji w opcjach konta adresu email, hasła oraz nazwy konta.
+				\item Możliwość tworzenia subkont, do których może przypisywać wybrane wydatki oraz przychody.
+				\item Możliwość dodawania wyciągów z konta dowolnego banku jako plik w formacie CSV.
+				\item Możliwość ręcznego dodawania wpisów, wpisując kwotę oraz dobierając kategorię, a także walutę.
+				\item Możliwość modyfikacji i usuwania wpisów w aplikacji.
+				\item Możliwość generowania raportów z określonego przedziału czasowego dla określonych kategorii i subkont.
+				\item Możliwość eksportowania swoich raportów finansowych jako pliki w formacie CSV lub PDF.
+				\item Możliwość wybrania układu pliku CSV między predefiniowanymi bankami lub zdefiniowanym przez siebie układem przy dodawaniu wyciągu z konta bankowego.
+				\item Możliwość dodania wzoru tytułu oraz dopasowania do niego kategorii, aby zautomatyzować uzupełnianie kategorii przy dodawaniu wpisów z pliku w formacie CSV.
+				\item Możliwość dodawania komentarzy do wpisów.
+			\end{itemize}
 	\end{itemize}
 	\subsection{Wymagania niefunkcjonalne}
-	W wymaganiach funkcjonalnych wyszczególnionych jest trzech aktorów: użytkownik, aplikacja serwerowa oraz aplikacja kliencka.
+	W wymaganiach niefunkcjonalnych opisane są technologie jak i techniki związane z budową aplikacji klienckiej oraz serwerowej.
 	\begin{itemize}
 		\item Aplikacja serwerowa napisana w języku Python3.
 		\item Aplikacja serwerowa wykorzystuje relacyjną bazę danych PostgreSQL.
@@ -184,6 +190,7 @@
 	\end{figure} 
 	\paragraph*{} Zgodnie z rysunkiem \ref{fig:zalakt} oraz wymaganiami funkcjonalnymi, użytkownik zalogowany ma możliwość wylogowania; utworzenia subkonta; generowania raportów a w nim możliwość eksportu raportu oraz wybór formatu; wejścia w ustawienia konta, a w nim, zmianę hasła, zmianę adresu e-mail, zmianę nazwy użytkownika; wybranie istniejącego subkonta, a w nim, dodanie wpisu wraz z wyborem kategorii, dodanie wyciągu z banku wraz z edycją formatu CSV, utworzeniem nowego formatu CSV, czy wybraniem CSV, edycji wpisu oraz usunięcia wpisu.
 	\subsection{Diagramy UML sekwencji}
+	\paragraph{} Diagramy sekwencji reprezentują przebieg działań wykonywanych w systemie. Zawierają one działanie zarówno aplikacji klienckiej jak i serwerowej przedstawiając pełny przebieg zdarzeń.
 	\begin{figure}[H]
 		
 		\hspace*{-3cm} 
@@ -235,6 +242,7 @@
 	\end{figure} 
 	
 	\section{Projekt interfejsu graficznego}
+	\paragraph{} Poniższe obrazy przedstawiają projekt graficzny aplikacji klienckiej.
 	
 	\begin{figure}[H]
 		\includegraphics[scale=0.6]{assets/startowa.png}
@@ -245,10 +253,5 @@
 		\includegraphics[scale=0.6]{assets/logowanie.png}
 		\caption[]{Interfejs ekranu logowania}
 		\label{fig:logowanie}
-	\end{figure} 
-	\begin{figure}[H]
-		\includegraphics[scale=0.35]{assets/tabele.png}
-		\caption[]{Interfejs ekranu z wpisami}
-		\label{fig:tabele}
-	\end{figure} 
+	\end{figure}
 \end{document}
