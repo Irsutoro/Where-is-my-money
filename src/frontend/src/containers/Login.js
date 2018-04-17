@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { switchForm, registerUser, loginUser } from '../actions/loginActions';
-import RegisterForm from '../components/RegisterForm';
-import LoginForm from '../components/LoginForm'
-import { Button } from 'semantic-ui-react'
+import { Segment, Menu, Image, Grid, Input, Button, List, Container, Header } from 'semantic-ui-react'
+import logo from '../resources/images/logo.svg';
 
 class Login extends Component {
     constructor(props) {
@@ -18,13 +17,23 @@ class Login extends Component {
     }
 
     render() {
+        const styles={
+            root:{
+                marginTop: '-7vh',
+                marginLeft: '6vw'
+            },
+            gridek:{
+                marginTop: '3vh'
+            }
+        }
+
         return (
             <div>
                 <Segment inverted>
-                    <Menu inverted pointing secondary/>
-                </Segment>  
+                    <Menu inverted pointing secondary />
+                </Segment>
                 <Menu.Menu position="left" style={styles.root}>
-                    <Image src="logo.svg" size="small"/>
+                    <Image src={ logo } size="small" />
                 </Menu.Menu>
 
                 <div className="position">
@@ -32,22 +41,22 @@ class Login extends Component {
                         <Grid.Row >
                             <Grid.Column width={5}>
                                 <div className="mainstring">WHERE'S MY MONEY?!</div>
-                                <div className="space"/>
+                                <div className="space" />
                                 <div className="substring">Najlepsza aplikacja do zarządzania Twoim budżetem na wyciągnięcie ręki!</div>
-                                <br/>
+                                <br />
                                 <div className="substring">Miej kontrolę nad swoimi finansami, dzięki naszej aplikacji.</div>
-                                <br/>
-                                <br/>
+                                <br />
+                                <br />
                             </Grid.Column>
-                            <GridColumn>
-                            </GridColumn>
-                            <GridColumn width={4}>
+                            <Grid.Column>
+                            </Grid.Column>
+                            <Grid.Column width={4}>
                                 <div id="login-form">
-                                    <input type="radio" id="login" name="switch" className="hide"/>
-                                    <input type="radio" id="signup" name="switch" className="hide"/>
+                                    <input type="radio" id="login" name="switch" className="hide" />
+                                    <input type="radio" id="signup" name="switch" className="hide" />
                                     <div>
                                         <label for="login" className="changebut button5">LOGIN</label>
-                                        <label for="signup"className="changebut button5">REGISTER</label>
+                                        <label for="signup" className="changebut button5">REGISTER</label>
                                     </div>
                                     <div className="section-out">
                                         <section className="login-section">
@@ -55,18 +64,18 @@ class Login extends Component {
                                                 <form action="">
                                                     <div className="labelborder">
                                                         <label className="labelstring">Podaj swój adres E-mail:</label>
-                                                        <br/>
+                                                        <br />
                                                         <Input placeholder="E-mail" className='inputborder'></Input>
                                                     </div>
-                                                    <div className="space"/>
+                                                    <div className="space" />
                                                     <label className="labelstring">Podaj swoje hasło:</label>
-                                                    <br/>
+                                                    <br />
                                                     <Input placeholder="Hasło" className='inputborder'></Input>
-                                                    <div className="space"/>
+                                                    <div className="space" />
                                                     <Button name='login' onClick={this.switchForm}>Login</Button>
-                                                    <div className="space"/>
+                                                    <div className="space" />
                                                     <label className="labelstring">Nie pamiętasz hasła?</label>
-                                                    <br/>
+                                                    <br />
                                                     <a className="labelstring">Przypomnij hasło.</a>
                                                 </form>
                                             </div>
@@ -77,47 +86,44 @@ class Login extends Component {
                                                 <form action="">
                                                     <div className="labelborder">
                                                         <label className="labelstring">Podaj nowy login:</label>
-                                                        <br/>
+                                                        <br />
                                                         <Input placeholder="Podaj nowy login" className='inputborder'></Input>
-                                                        <br/>
+                                                        <br />
                                                         <label className="labelstring">Podaj swój adres E-mail:</label>
-                                                        <br/>
+                                                        <br />
                                                         <Input placeholder="E-mail" className='inputborder'></Input>
                                                     </div>
-                                                    <br/>
+                                                    <br />
                                                     <label className="labelstring">Podaj swoje hasło:</label>
-                                                    <br/>
+                                                    <br />
                                                     <Input placeholder="Hasło" className='inputborder'></Input>
-                                                    <br/>
+                                                    <br />
                                                     <label className="labelstring">Potwierdź hasło:</label>
-                                                    <br/>
+                                                    <br />
                                                     <Input placeholder="Potwierdź hasło" className='inputborder'></Input>
-                                                    <div className="space"/>
+                                                    <div className="space" />
                                                     <Button name='register' onClick={this.switchForm}>Register</Button>
                                                 </form>
                                             </div>
-
                                         </section>
-                                </div>
 
-                                    {this.props.activeForm === 'login' ?
-                                        <LoginForm
-                                            isLoading={this.props.loginLoading}
-                                            isError={this.props.loginError}
-                                            submit={(loginData) => this.props.loginUser(loginData)}
-                                        />
-                                        : this.props.activeForm === 'register' ?
-                                            <RegisterForm
-                                                isLoading={this.props.registerLoading}
-                                                isError={this.props.registerError}
-                                                submit={(registerData) => this.props.registerUser(registerData)}
-                                            />
-                                            : null
-                                    }
-                                    </div> 
-                                    
-                        
-                            </GridColumn>
+                                        {/* {this.props.activeForm === 'login' ?
+                                                <LoginForm
+                                                    isLoading={this.props.loginLoading}
+                                                    isError={this.props.loginError}
+                                                    submit={(loginData) => this.props.loginUser(loginData)}
+                                                />
+                                                : this.props.activeForm === 'register' ?
+                                                    <RegisterForm
+                                                        isLoading={this.props.registerLoading}
+                                                        isError={this.props.registerError}
+                                                        submit={(registerData) => this.props.registerUser(registerData)}
+                                                    />
+                                                    : null
+                                            } */}
+                                    </div>
+                                </div>
+                            </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={5}>
@@ -135,39 +141,33 @@ class Login extends Component {
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
-                </div>
-                
-            <Segment inverted vertical style={{ padding: '1em' }}>
-                <Container>
-                    <Grid divided inverted stackable>
-                    
-                        <Grid.Column width={4}>
-                        <Header inverted as='h4' content='O nas' />
-                        <List link inverted>
-                            <List.Item as='a'>Patryk Mroczyński</List.Item>
-                            <List.Item as='a'>Jakub Wiśniewski</List.Item>
-                            <List.Item as='a'>Oskar Rutkowski</List.Item>
-                        </List>
-                        </Grid.Column>
-                        <Grid.Column width={3}>
-                        <Header inverted as='h4' content='Usługi' />
-                        <List link inverted>
-                            <List.Item as='a'>Regulamin</List.Item>
-                            <List.Item as='a'>Prywatność</List.Item>
-                            <List.Item as='a'>FAQ</List.Item>
-                        </List>
-                        </Grid.Column>
-                        
-                   
-                    </Grid>
-                </Container>
-            </Segment>
-            
-                
-                
+                </div >
 
-                
-            </div>
+                <Segment inverted vertical style={{ padding: '1em' }}>
+                    <Container>
+                        <Grid divided inverted stackable>
+
+                            <Grid.Column width={4}>
+                                <Header inverted as='h4' content='O nas' />
+                                <List link inverted>
+                                    <List.Item as='a'>Patryk Mroczyński</List.Item>
+                                    <List.Item as='a'>Jakub Wiśniewski</List.Item>
+                                    <List.Item as='a'>Oskar Rutkowski</List.Item>
+                                </List>
+                            </Grid.Column>
+                            <Grid.Column width={3}>
+                                <Header inverted as='h4' content='Usługi' />
+                                <List link inverted>
+                                    <List.Item as='a'>Regulamin</List.Item>
+                                    <List.Item as='a'>Prywatność</List.Item>
+                                    <List.Item as='a'>FAQ</List.Item>
+                                </List>
+                            </Grid.Column>
+                        </Grid>
+                    </Container>
+                </Segment>
+
+            </div >
         );
     }
 }

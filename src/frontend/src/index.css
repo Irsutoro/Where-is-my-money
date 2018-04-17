@@ -1,7 +1,7 @@
 body, html {
   height: 100%;
   margin: 0;
-  background: url("drzewko.svg") #96897b;
+  background: url("./resources/images/drzewko.svg") #96897b;
   background-repeat: no-repeat;
   background-position: -20px 100px;
   background-size: 100%;
