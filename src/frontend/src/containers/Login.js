@@ -20,23 +20,173 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <Button name='login' onClick={this.switchForm}>Login</Button>
-                <Button name='register' onClick={this.switchForm}>Register</Button>
+                <Segment inverted>
+                <Menu inverted pointing secondary/>
+            </Segment>  
+            <Menu.Menu position="left" style={styles.root}>
+                    <Image src="logo.svg" size="small"/>
+            </Menu.Menu>
+            <div className="position">
+            <Grid columns={5} textAlign='center'>
+                <Grid.Row >
+                        <Grid.Column width={5}>
+                        <div className="mainstring">
+                            WHERE'S MY MONEY?!
+                        </div>
+                        <div className="space"/>
+                        <div className="substring">
+                        Najlepsza aplikacja do zarządzania Twoim budżetem na wyciągnięcie ręki!
+                        </div>
+                        <br/>
+                        <div className="substring">
+                        Miej kontrolę nad swoimi finansami, dzięki naszej aplikacji.
+                        </div>
+                        <br/>
+                        <br/>
+                    </Grid.Column>
+                    <GridColumn>
+                    </GridColumn>
+                    <GridColumn width={4}>
+                    
+                        <div id="login-form">
 
-                {this.props.activeForm === 'login' ?
-                    <LoginForm
-                        isLoading={this.props.loginLoading}
-                        isError={this.props.loginError}
-                        submit={(loginData) => this.props.loginUser(loginData)}
-                    />
-                    : this.props.activeForm === 'register' ?
-                        <RegisterForm
-                            isLoading={this.props.registerLoading}
-                            isError={this.props.registerError}
-                            submit={(registerData) => this.props.registerUser(registerData)}
-                        />
-                        : null
-                }
+                            <input type="radio" checked id="login" name="switch" class="hide"/>
+                            <input type="radio" id="signup" name="switch" class="hide"/>
+
+                            <div>
+                                
+                                    <label for="login" className="changebut button5">LOGIN</label>
+                                    <label for="signup"className="changebut button5">REGISTER</label>
+                               
+                            </div>
+
+                            <div class="section-out">
+                                <section class="login-section">
+                                    <div class="login">
+                                        <form action="">
+                                        <div className="labelborder">
+                                        <label className="labelstring">
+                                            Podaj swój adres E-mail:
+                                        </label>
+                                        <br/>
+                                            <Input placeholder="E-mail" className='inputborder'></Input>
+                                        </div>
+                                        <div className="space"/>
+                                        <label className="labelstring">Podaj swoje hasło:</label>
+                                        <br/>
+                                        <Input placeholder="Hasło" className='inputborder'></Input>
+                                        <div className="space"/>
+                                        <Button name='login' onClick={this.switchForm}>Login</Button>
+                                        <div className="space"/>
+                                        <label className="labelstring">Nie pamiętasz hasła?</label>
+                                        <br/>
+                                        <a className="labelstring">Przypomnij hasło.</a>
+                                        </form>
+                                    </div>
+
+                            
+                            </section>
+
+                            <section class="signup-section">
+                            <div class="login">
+                            <form action="">
+                            <div className="labelborder">
+                            <label className="labelstring">Podaj nowy login:</label>
+                                        <br/>
+                                        <Input placeholder="Podaj nowy login" className='inputborder'></Input>
+                                        <br/>
+                                        <label className="labelstring">
+                                            Podaj swój adres E-mail:
+                                        </label>
+                                        <br/>
+                                            <Input placeholder="E-mail" className='inputborder'></Input>
+                                        </div>
+                                        <br/>
+                                        <label className="labelstring">Podaj swoje hasło:</label>
+                                        <br/>
+                                        <Input placeholder="Hasło" className='inputborder'></Input>
+                                        <br/>
+                                        <label className="labelstring">Potwierdź hasło:</label>
+                                        <br/>
+                                        <Input placeholder="Potwierdź hasło" className='inputborder'></Input>
+                                        <div className="space"/>
+                                        <Button name='register' onClick={this.switchForm}>Register</Button>
+                            </form>
+                        </div>
+
+                        </section>
+                        </div>
+
+                        {this.props.activeForm === 'login' ?
+                            <LoginForm
+                                isLoading={this.props.loginLoading}
+                                isError={this.props.loginError}
+                                submit={(loginData) => this.props.loginUser(loginData)}
+                            />
+                            : this.props.activeForm === 'register' ?
+                                <RegisterForm
+                                    isLoading={this.props.registerLoading}
+                                    isError={this.props.registerError}
+                                    submit={(registerData) => this.props.registerUser(registerData)}
+                                />
+                                : null
+                        }
+                        </div> 
+                        
+                        
+                    </GridColumn>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column width={5}>
+                    </Grid.Column>
+                    
+                    <Grid.Column>
+                    </Grid.Column>
+                    
+                    <Grid.Column width={4}>
+                        <List link color="orange" >
+                            <List.Item as='a'>
+                                <div className="demostring">
+                                    Lub wypróbuj wersję demo!
+                                </div>
+                            </List.Item>
+                        </List>
+                    
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
+            </div>
+                
+            <Segment inverted vertical style={{ padding: '1em' }}>
+                <Container>
+                    <Grid divided inverted stackable>
+                    
+                        <Grid.Column width={4}>
+                        <Header inverted as='h4' content='O nas' />
+                        <List link inverted>
+                            <List.Item as='a'>Patryk Mroczyński</List.Item>
+                            <List.Item as='a'>Jakub Wiśniewski</List.Item>
+                            <List.Item as='a'>Oskar Rutkowski</List.Item>
+                        </List>
+                        </Grid.Column>
+                        <Grid.Column width={3}>
+                        <Header inverted as='h4' content='Usługi' />
+                        <List link inverted>
+                            <List.Item as='a'>Regulamin</List.Item>
+                            <List.Item as='a'>Prywatność</List.Item>
+                            <List.Item as='a'>FAQ</List.Item>
+                        </List>
+                        </Grid.Column>
+                        
+                   
+                    </Grid>
+                </Container>
+            </Segment>
+            
+                
+                
+
+                
             </div>
         );
     }
