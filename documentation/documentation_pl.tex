@@ -39,14 +39,19 @@
 	W podrozdziale zostały wylistowane mikroserwisy, z których składa się serwer wraz z ich 
 	metodami.
 	\begin{itemize}
-		\item AuthApi - służy do autoryzacji użytkowników.
+		\item AuthApi
+			\begin{itemize}
+				\item \textbf{GET /api/auth/:login/:password} - zwraca id oraz token basic auth dla użytkownika o podanym loginie i haśle.
+
+				\item \textbf{POST /api/auth/} - tworzy nowego użytkownika.
+
+				\item \textbf{PUT /api/auth/:token} - aktywuje konto użytkownika.
+			\end{itemize}
 		\item UserApi
 			\begin{itemize}
 				\item \textbf{GET /api/users/} - zwraca listę użytkowników z bazy danych.
 				
 				\item \textbf{GET /api/users/:id/} - zwraca szczegóły użytkownika o podanym id.
-				
-				\item \textbf{POST /api/users/} - tworzy nowego użytkownika.
 				
 				\item \textbf{PUT /api/users/:id} - aktualizuje informacje o użytkowniku.
 				

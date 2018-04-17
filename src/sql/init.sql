@@ -9,7 +9,7 @@ CREATE TABLE users (
     password varchar(64) NOT NULL,
     email varchar(254) UNIQUE NOT NULL,
     username varchar(40) NOT NULL,
-    is_activated boolean DEFAULT FALSE,
+    is_activated boolean DEFAULT FALSE NOT NULL,
     token varchar(20),
     registration_date date NOT NULL
 );
