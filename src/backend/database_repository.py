@@ -21,6 +21,7 @@ TOKEN_LENGTH = 20
 
 REGISTER_USER = "INSERT INTO users (login, password, email, username, registration_date, token) VALUES (%s, %s, %s, %s, %s, %s)"
 ACTIVATE_USER_ACCOUNT = "UPDATE users SET is_activated=TRUE, token=NULL WHERE token = %s RETURNING id"
+CHECK_IF_USER_EXISTS = "SELECT id FROM users WHERE login = %s and password = %s"
 
 VALIDATE_PASSWORD = "SELECT is_activated FROM users WHERE login=%s AND password=%s"
 CHANGE_USERNAME = "UPDATE users SET username=%s WHERE login=%s"
