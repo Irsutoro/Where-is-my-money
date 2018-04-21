@@ -1,0 +1,27 @@
+.login-segment {
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+
+.login-segment-tab {
+    margin: 0 !important;
+}
+
+.login-segment-tab .ui.tab {
+    margin: 0 -1px !important;
+}
+
+.login-segment-tab .ui.tab .field:last-child {
+    display: flex;
+    justify-content: center;
+}
+
+.login-segment-tab .ui.menu {
+    margin-top: -5px !important;
+}
+
+.login-segment-tab .item {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}

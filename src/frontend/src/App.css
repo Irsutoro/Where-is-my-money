@@ -1,33 +1,22 @@
-.App {
-  width: 90%;
-  margin: auto;
+.main-container {
+  display: flex !important;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 2.85714286em;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
+.content {
+  margin: 0 !important;
+  box-shadow: none !important;
+  flex: 1;
+  padding-bottom: 1em !important;
+  min-height: calc(100vh - 2.85714286em);
+  border-radius: 0 !important;
+  border: 0 !important;
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  background-image: url("./resources/images/drzewko.svg") !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: -15px 5px !important;
+  background-color: #96897b !important;
 }
