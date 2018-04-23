@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react'
+import './RegisterForm.css'
 
 export default class RegisterForm extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ export default class RegisterForm extends Component {
         <Form.Input fluid label='Login' name='login' placeholder='Login' value={this.state.login} onChange={this.handleChange} />
         <Form.Input fluid label='Email' name='email' placeholder='Email' value={this.state.email} onChange={this.handleChange} />
         <Form.Input fluid label='Hasło' name='password' placeholder='Hasło' value={this.state.password} onChange={this.handleChange} />
-        <Form.Button>Zarejestruj</Form.Button>
+        <Form.Button color='google plus'>Zarejestruj</Form.Button>
       </Form>
     );
   }

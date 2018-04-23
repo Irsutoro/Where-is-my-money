@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react'
+import './LoginForm.css'
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -31,10 +32,11 @@ export default class LoginForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.onSubmit}>
-        <Form.Input fluid label='Login' name='login' placeholder='Login' value={this.state.login} onChange={this.handleChange} />
-        <Form.Input fluid label='Hasło' name='password' placeholder='Hasło' value={this.state.password} onChange={this.handleChange} />
-        <Form.Button>Zaloguj</Form.Button>
+      
+      <Form onSubmit={this.onSubmit} >
+        <Form.Input fluid label='Login' name='login' placeholder='Login'  onChange={this.handleChange} />
+        <Form.Input fluid label='Hasło' name='password' placeholder='Hasło'  onChange={this.handleChange} />
+        <Form.Button color='google plus'>Zaloguj</Form.Button>
       </Form>
     );
   }
