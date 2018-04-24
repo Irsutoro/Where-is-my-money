@@ -178,7 +178,7 @@
 	
 	Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się siedem tabel. Tabela \texttt{Users} zawiera dane użytkownika takie jak jego login, adres email, nazwa użytkownika oraz wynik przetworzenia hasła przez funkcję skrótu. Tabele \texttt{Subaccounts}, \texttt{CSV Format} oraz \texttt{Categories} mają odniesienia do tabeli \texttt{Users}. W przypadku braku odniesienia do id użytkownika w tabeli \texttt{CSV Format}, wpisy uznawane są jako wspólne (predefiniowane) dla wszystkich użytkowników. Jeden rekord w tabeli \texttt{Entries} musi mieć odwołanie do tabel \texttt{Users}, \texttt{Currencies} oraz \texttt{Categories} oraz moze mieć opcjonalne odwołanie do tabeli \texttt{Subaccounts}. Tabela \texttt{TitleToCategoryMap} zawiera wzór tytułu, który jest używany do zapamiętywania domyślnych kategorii przy wczytywaniu wpisów z pliku w formacie CSV.
 	\section{Diagramy UML}
-	\paragraph*{} W rozdziale zostały umieszczone oraz opisane diagramy przypadków użycia dla aktorów zalogowany oraz niezalogowany jak także diagramy sekwencji rejestracji, logowania, tworzenia subkonta, dodawania wpisów ręcznie oraz wyciągów z banków, modyfikacji wpisów, usuwania wpisów, generowania raportów.
+	\paragraph*{} W rozdziale zostały umieszczone oraz opisane diagramy przypadków użycia dla aktorów zalogowany oraz niezalogowany jak także diagramy sekwencji czynności możliwych do wykonania przez użytkownika niezalogowanego jak i zalogowanego.
 	\subsection{Diagramy UML przypadków użycia}
 	\begin{figure}[h]
 		\centering
@@ -195,68 +195,75 @@
 	\end{figure} 
 	\paragraph*{} Zgodnie z rysunkiem \ref{fig:zalakt} oraz wymaganiami funkcjonalnymi, użytkownik zalogowany ma możliwość wylogowania; utworzenia subkonta; generowania raportów a w nim możliwość eksportu raportu oraz wybór formatu; wejścia w ustawienia konta, a w nim, zmianę hasła, zmianę adresu e-mail, zmianę nazwy użytkownika; wybranie istniejącego subkonta, a w nim, dodanie wpisu wraz z wyborem kategorii, dodanie wyciągu z banku wraz z edycją formatu CSV, utworzeniem nowego formatu CSV, czy wybraniem CSV, edycji wpisu oraz usunięcia wpisu.
 	\subsection{Diagramy UML sekwencji}
-	\paragraph{} Diagramy sekwencji reprezentują przebieg działań wykonywanych w systemie. Zawierają one działanie zarówno aplikacji klienckiej jak i serwerowej przedstawiając pełny przebieg zdarzeń.
+	\paragraph*{} W tym paragrafie zostały przedstawione na rysunkach oraz opisane diagramy UML sekwencji dla użytkownika zalogowanego oraz użytkownika niezalogowanego. Są to diagramy sekwencji rejestracji użytkownika niezalogowanego, logowania użytkownika niezalogowanego, tworzenia subkonta przez użytkownika zalogowanego, dodawania wpisu przez użytkownika zalogowanego, dodawania wyciągu z banku użytkownika zalogowanego, modyfikacji oraz usuwania wpisów przez użytkownika zalogowanego oraz generowania raportów przez użytkownika zalogowanego.
 	\begin{figure}[H]
-		
-		\hspace*{-3cm} 
-		\includegraphics[scale=0.8]{assets/umlSEQ1.png}
+		\hspace*{-2.5cm} 
+		\includegraphics[scale=0.9]{assets/sq1.png}
 		\caption[]{Diagram UML sekwencji rejestracji}
 		\label{fig:umlreje}
 	\end{figure} 
+	\begin{figure}[H]
+		\hspace*{-2.5cm} 
+		\includegraphics[scale=0.9]{assets/sq2.png}
+		\caption[]{Diagram UML sekwencji logowania}
+		\label{fig:umllog}
+	\end{figure} 
 	\begin{figure}[h]
-		\vspace{-2.5cm}
-		\hspace*{-3cm} 
-		\includegraphics[scale=0.8]{assets/umlSEQ2.png}
+		\vspace{-3.5cm}
+		\hspace*{-2.5cm} 
+		\includegraphics[scale=0.9]{assets/sq3.png}
 		\caption[]{Diagram UML sekwencji tworzenia subkonta}
 		\label{fig:umlsub}
 	\end{figure} 
 	\begin{figure}[H]
 		
-		\hspace*{-3cm} 
-		\includegraphics[scale=0.8]{assets/umlSEQ3.png}
+		\hspace*{-1.5cm} 
+		\includegraphics[scale=0.8]{assets/sq4.png}
 		\caption[]{Diagram UML sekwencji dodawania wpisu}
 		\label{fig:umlwpr}
 	\end{figure} 
 	\begin{figure}[H]
 		
-		\hspace*{-2cm} 
-		\includegraphics[scale=0.9]{assets/umlSEQ4.png}
+		\hspace*{-1.5cm} 
+		\includegraphics[scale=0.9]{assets/sq5.png}
 		\caption[]{Diagram UML sekwencji dodawania wyciągu z banku}
 		\label{fig:umlwpb}
 	\end{figure}
 	\begin{figure}[H]
-		
-		\hspace*{-3cm} 
-		\includegraphics[scale=0.9]{assets/umlSEQ5.png}
+		\hspace*{-1.5cm} 
+		\includegraphics[scale=0.9]{assets/sq6.png}
 		\caption[]{Diagram UML sekwecji modyfikacji wpisów}
 		\label{fig:umlmod}
 	\end{figure}  
 	\begin{figure}[H]
 		
-		\hspace*{-3cm} 
-		\includegraphics[scale=0.9]{assets/umlSEQ6.png}
+		\hspace*{-1.5cm} 
+		\includegraphics[scale=0.9]{assets/sq7.png}
 		\caption[]{Diagram UML sekwencji usuwania wpisów}
 		\label{fig:umlusu}
 	\end{figure} 
 	\begin{figure}[H]
 		
-		\hspace*{-3cm} 
-		\includegraphics[scale=0.9]{assets/umlSEQ7.png}
+		\hspace*{-1.5cm} 
+		\includegraphics[scale=0.9]{assets/sq8.png}
 		\caption[]{Diagram UML sekwencji generowania raportów}
 		\label{fig:umlrap}
 	\end{figure} 
 	
 	\section{Projekt interfejsu graficznego}
-	\paragraph{} Poniższe obrazy przedstawiają projekt graficzny aplikacji klienckiej.
+	\paragraph*{} W tym rozdziale został przedstawiony projekt interfejsu graficznego aplikacji klienckiej.
 	
 	\begin{figure}[H]
-		\includegraphics[scale=0.6]{assets/startowa.png}
-		\caption[]{Interfejs ekranu startowego}
-		\label{fig:start}
-	\end{figure} 
-	\begin{figure}[H]
-		\includegraphics[scale=0.6]{assets/logowanie.png}
+		\vspace*{-2cm}
+		\hspace*{-2cm}
+		\includegraphics[scale=0.45]{assets/mc1.png}
 		\caption[]{Interfejs ekranu logowania}
 		\label{fig:logowanie}
-	\end{figure}
+	\end{figure} 
+	\begin{figure}[H]
+		\hspace*{-2cm}
+		\includegraphics[scale=0.45]{assets/mc2.png}
+		\caption[]{Interfejs ekranu rejestracji}
+		\label{fig:rejestracja}
+	\end{figure} 
 \end{document}
