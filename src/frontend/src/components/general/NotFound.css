@@ -1,0 +1,22 @@
+.error-page {
+    margin-top: 5em;
+}
+
+.error-page img {
+    position: relative !important;
+    top: 10%;
+    width: 20% !important;
+    margin: auto
+}
+
+.error-page h1 {
+    color: white !important;
+    text-shadow: 2px 2px 8px black;
+    font-family: Georgia, 'Times New Roman', Times, serif !important;
+    top: 50%;
+    position: relative;
+    font-size: 2em !important;
+    right: auto;
+    width: 100%;
+    text-align: center;
+}
