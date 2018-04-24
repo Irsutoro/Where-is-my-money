@@ -1,5 +1,6 @@
 .intro-container .ui.header {
     color: white !important;
+    text-shadow: 2px 2px 8px black;
 }
 
 .intro-container h1{
@@ -9,4 +10,20 @@
 .intro-container h2{
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 2em !important;
+}
+
+.intro-container .ui.button {
+    margin-top: 15px !important;
+    background-color: #dba159;
+    color: white;
+    font-size: 30px;
+    border-radius: 15px;
+}
+
+.intro-container .ui.button:hover {
+    filter: brightness(95%);
+}
+
+.intro-container .ui.button:active {
+    filter: brightness(105%);
 }
