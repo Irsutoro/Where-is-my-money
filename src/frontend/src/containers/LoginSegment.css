@@ -1,7 +1,6 @@
 .login-segment {
     padding: 0 !important;
-    margin-top: 10em !important;
-    border-radius: 0 0 30% 30% !important;
+    border-radius: 0 !important;
 }
 
 .login-segment-tab {
@@ -10,7 +9,7 @@
 
 .login-segment-tab .ui.tab {
     margin: 0 -1px !important;
-    border-radius: 0 0 30% 30% !important;
+    border-radius: 0 !important;
 }
 
 .login-segment-tab .ui.tab .field:last-child {

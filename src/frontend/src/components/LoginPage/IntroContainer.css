@@ -1,14 +1,12 @@
 .intro-container .ui.header {
     color: white !important;
 }
-.intro-container{
-    margin-top: 10em;
-}
-.h1{
+
+.intro-container h1{
     font-family: Georgia, 'Times New Roman', Times, serif !important;
     font-size: 4em !important;
 }
-.h2{
+.intro-container h2{
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 2em !important;
 }
