@@ -171,12 +171,22 @@
 	\paragraph{} W rozdziale opisane zostały relacje pomiędzy tabelami w relacyjnej bazie danych. 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\linewidth]{assets/er.jpg}
-		\caption[]{Schemat relacyjny}
-		\label{fig:er}
+		\includegraphics[width=0.8\linewidth]{assets/erd.png}
+		\caption[]{Model związków encji}
+		\label{fig:erd}
 	\end{figure}
 	
-	Zgodnie z rysunkiem \ref{fig:er}, w bazie danych znajduje się siedem tabel. Tabela \texttt{Users} zawiera dane użytkownika takie jak jego login, adres email, nazwa użytkownika oraz wynik przetworzenia hasła przez funkcję skrótu. Tabele \texttt{Subaccounts}, \texttt{CSV Format} oraz \texttt{Categories} mają odniesienia do tabeli \texttt{Users}. W przypadku braku odniesienia do id użytkownika w tabeli \texttt{CSV Format}, wpisy uznawane są jako wspólne (predefiniowane) dla wszystkich użytkowników. Jeden rekord w tabeli \texttt{Entries} musi mieć odwołanie do tabel \texttt{Users}, \texttt{Currencies} oraz \texttt{Categories} oraz moze mieć opcjonalne odwołanie do tabeli \texttt{Subaccounts}. Tabela \texttt{TitleToCategoryMap} zawiera wzór tytułu, który jest używany do zapamiętywania domyślnych kategorii przy wczytywaniu wpisów z pliku w formacie CSV.
+	\paragraph{} Zgodnie z rysunkiem \ref{fig:erd}, w bazie danych znajduje się dziewięć tabel. Najważniejsze z nich to \texttt{entries} oraz \texttt{users}, które odpowiadają za przechowywanie informacji o użytkownikach oraz o wpisach tychże użytkowników. Ponadto istnieją dwie tabele, które mają ułatwić użytkownikom zarządzanie swoim budżetem - \texttt{subaccounts} o raz \texttt{categories}, które pomagają skategoryzować swoje wpisy. Dzięki skategoryzowaniu użytkownicy mogą przygotowywać bardziej szczegółowe i interesujące raporty. Tabela \texttt{currencies} opisuje waluty, co ułatwia wpisywanie użytkownikom informacji o wydatkach w obcych nominałach bez potrzeby ręcznego przeliczania na główną walutę. Tabele \texttt{csv\_formats} oraz \texttt{title\_to\_category\_map} wspomagają automatyzację procesu wczytywania danych z plików CSV. Pierwsza z nich opisuje format pliku CSV (m.in. kolejność kolumn oraz separator), a druga pozwala zdefiniować użytkownikowi automatyczne mapowanie tytułu wpisu na kategorię. Tokeny, które są wykorzystywane m.in. podczas procesu aktywacji konta oraz resetowania hasła są przechowywane w tabeli \texttt{tokens}, a ich kategorie w tabeli \texttt{token\_categories}.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\linewidth]{assets/rel.png}
+		\caption[]{Model relacyjny}
+		\label{fig:rel}
+	\end{figure}
+
+	\paragraph{} Na rysunku \ref{fig:rel} znajduje się rozwinięcie modelu związków encji do modelu relacyjnego. Schemat zawiera tabele wraz z ich kluczami głównymi, kluczami obcymi oraz atrybutami. Klucze główne są oznaczone czcionką pogrubioną oraz kluczem przy nazwie kolumny, a klucze obce charakteryzują się czcionką pochyloną. Przy nazwach kolumn znajdują się typy danychm oznaczenia unikalności (litera "U") oraz informacja o tym czy wartość w danej kolumnie może przyjmować wartość NULL (litera "N")
+
 	\section{Diagramy UML}
 	\paragraph*{} W rozdziale zostały umieszczone oraz opisane diagramy przypadków użycia dla aktorów zalogowany oraz niezalogowany jak także diagramy sekwencji czynności możliwych do wykonania przez użytkownika niezalogowanego jak i zalogowanego.
 	\subsection{Diagramy UML przypadków użycia}
