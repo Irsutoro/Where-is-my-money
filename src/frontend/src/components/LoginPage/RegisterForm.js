@@ -34,9 +34,9 @@ export default class RegisterForm extends Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Form.Input fluid label='Login' name='login' placeholder='Login' value={this.state.login} onChange={this.handleChange} />
-        <Form.Input fluid label='Email' name='email' placeholder='Email' value={this.state.email} onChange={this.handleChange} />
-        <Form.Input fluid label='Hasło' name='password' placeholder='Hasło' value={this.state.password} onChange={this.handleChange} />
+        <Form.Input fluid label='Login' placeholder='Login' name='login' value={this.state.login} onChange={this.handleChange} />
+        <Form.Input fluid label='Email' placeholder='Email' name='email' value={this.state.email} onChange={this.handleChange} />
+        <Form.Input fluid label='Hasło' placeholder='Hasło' name='password' type="password" value={this.state.password} onChange={this.handleChange} />
         <Form.Button>Zarejestruj</Form.Button>
       </Form>
     );

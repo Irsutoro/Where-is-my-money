@@ -26,6 +26,7 @@ export const loginUser = loginData => dispatch => {
     type: LOGIN_FORM_LOADING,
     payload: true
   })
+  console.log(loginData)
   // login request with loginData, then =>
   dispatch({
     type: LOGIN_USER_SUCCESS

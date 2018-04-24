@@ -33,8 +33,8 @@ export default class LoginForm extends Component {
     return (
       
       <Form onSubmit={this.handleSubmit} >
-        <Form.Input fluid label='Login' name='login' placeholder='Login' value={this.state.login} onChange={this.handleChange} />
-        <Form.Input fluid label='Hasło' name='password' placeholder='Hasło' value={this.state.password} onChange={this.handleChange} />
+        <Form.Input fluid label='Login' placeholder='Login' name='login' type="text" value={this.state.login} onChange={this.handleChange} />
+        <Form.Input fluid label='Hasło' placeholder='Hasło' name='password' type="password" value={this.state.password} onChange={this.handleChange} />
         <Form.Button>Zaloguj</Form.Button>
       </Form>
     );
