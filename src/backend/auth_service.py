@@ -23,7 +23,7 @@ class AuthService:
                 auth_token = b64encode(bytes(f'{login}:{password}', 'utf-8')).decode("utf-8")
                 response = {'id': user_id, 'authorization': auth_token}
                 return json.dumps(response)
-                
+
             except TypeError:
                 raise cherrypy.HTTPError(403, "UNAUTHORIZED")
 
@@ -39,15 +39,15 @@ class AuthService:
                 raise cherrypy.HTTPError(400, "BAD REQUEST")
             except json.decoder.JSONDecodeError:
                 raise cherrypy.HTTPError(404, "REQUEST NOT FOUND")
-        
+
     def PUT(self, token):
         with WMM_MAIN_DB:
             changed = WMM_MAIN_DB.execute(ACTIVATE_USER_ACCOUNT, (token,), ResultSet.ONE)
             if changed is None:
                 raise cherrypy.HTTPError(404, "USER WITH THIS TOKEN NOT FOUND")
-            
-        
-        
+
+
+
 
 
 if __name__ == '__main__':

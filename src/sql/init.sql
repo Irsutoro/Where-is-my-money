@@ -8,9 +8,8 @@ CREATE TABLE users (
     login varchar(20) UNIQUE NOT NULL,
     password varchar(64) NOT NULL,
     email varchar(254) UNIQUE NOT NULL,
-    username varchar(40) NOT NULL,
+    username varchar(50) NOT NULL,
     is_activated boolean DEFAULT FALSE NOT NULL,
-    token varchar(20),
     registration_date date NOT NULL
 );
 
@@ -57,8 +56,19 @@ CREATE TABLE entries (
     subaccount_id int NOT NULL REFERENCES subaccounts(id) ON DELETE RESTRICT,
     currency_id int NOT NULL REFERENCES currencies(id),
     date bigint NOT NULL,
-    amount int NOT NULL,
+    amount double precision NOT NULL,
     comment varchar(200)
+);
+
+CREATE TABLE token_categories (
+    id serial PRIMARY KEY,
+    name varchar(50) NOT NULL
+);
+
+CREATE TABLE tokens (
+    user_id int NOT NULL REFERENCES users(id),
+    token_category_id int NOT NULL REFERENCES token_categories(id),
+    expiration_date date NOT NULL
 );
 
 CREATE DATABASE wmm_test TEMPLATE wmm;
