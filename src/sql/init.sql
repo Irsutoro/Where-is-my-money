@@ -71,4 +71,5 @@ CREATE TABLE tokens (
     expiration_date date NOT NULL
 );
 
+\connect postgres
 CREATE DATABASE wmm_test TEMPLATE wmm;
