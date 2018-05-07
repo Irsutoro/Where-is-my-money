@@ -20,7 +20,7 @@ export default class LoginForm extends Component {
                     <Grid.Column width={3}>
                         <Header inverted as='h4' content='Usługi' />
                         <List link inverted>
-                            <List.Item as='a'>Regulamin</List.Item>
+                            <List.Item ><a href="/regulations">Regulamin</a></List.Item>
                             <List.Item as='a'>Prywatność</List.Item>
                             <List.Item as='a'>FAQ</List.Item>
                         </List>

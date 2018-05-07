@@ -10,6 +10,7 @@ import Navigation from './components/general/Navigation'
 import Footer from './components/general/Footer'
 import NotFound from './components/general/NotFound'
 import LoginPage from './components/LoginPage/LoginPage'
+import Regulations from './components/general/Regulations'
 
 export default class App extends Component {
   render() {
@@ -22,6 +23,7 @@ export default class App extends Component {
               <Switch>
                 <Route exact path="/" component={LoginPage} />
                 <Route path="/login" component={LoginPage}/>
+                <Route path="/regulations" component={Regulations}/>
                 <Route component={NotFound} />
               </Switch>
             </Segment>
