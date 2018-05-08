@@ -9,11 +9,10 @@
   margin: 0 !important;
   box-shadow: none !important;
   flex: 1;
-  padding-bottom: 1em !important;
-  min-height: calc(100vh - 7em);
+  /*min-height: calc(100vh - 7em);*/
   border-radius: 0 !important;
   border: 0 !important;
-
+  padding: 0 0 !important;
   background-image: url("./resources/images/drzewko.svg") !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;

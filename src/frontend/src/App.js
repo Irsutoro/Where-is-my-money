@@ -11,6 +11,7 @@ import Footer from './components/general/Footer'
 import NotFound from './components/general/NotFound'
 import LoginPage from './components/LoginPage/LoginPage'
 import Regulations from './components/general/Regulations'
+import MainPage from './components/MainPage/MainPage';
 
 export default class App extends Component {
   render() {
@@ -24,6 +25,7 @@ export default class App extends Component {
                 <Route exact path="/" component={LoginPage} />
                 <Route path="/login" component={LoginPage}/>
                 <Route path="/regulations" component={Regulations}/>
+                <Route path="/main" component={MainPage}/>
                 <Route component={NotFound} />
               </Switch>
             </Segment>
