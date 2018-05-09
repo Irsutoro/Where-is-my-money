@@ -8,11 +8,12 @@ class ResultSet(Enum):
 
 class Database:
     def __init__(self, dbname, user, host, password, port):
-        self.connection_string = f"dbname={dbname} user={user} host={host} password={password} port={port}"
+        self.connection_string = f'dbname={dbname} user={user} host={host} password={password} port={port}'
         self.connection = None
 
     def __enter__(self):
         self.connection = psycopg2.connect(self.connection_string)
+        return self
 
     def __exit__(self, *args):
         self.connection.close()

@@ -68,8 +68,15 @@ CREATE TABLE token_categories (
 CREATE TABLE tokens (
     user_id int NOT NULL REFERENCES users(id),
     token_category_id int NOT NULL REFERENCES token_categories(id),
-    expiration_date date NOT NULL
+    expiration_date date NOT NULL,
+    value varchar(30) NOT NULL
 );
+
+INSERT INTO token_categories (name) VALUES ('activation'), ('reset_password');
 
 \connect postgres
 CREATE DATABASE wmm_test TEMPLATE wmm;
+
+
+
+

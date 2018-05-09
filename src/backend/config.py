@@ -1,12 +1,12 @@
 import cherrypy
 import psycopg2
 from cherrypy.lib import auth_basic
-from database_repository import WMM_MAIN_DB, VALIDATE_PASSWORD, Database
+from database_repository import QUERIES, Database, ResultSet, WMM_MAIN_DB
 
 
 def validate_password(realm, username, password):
-    with WMM_MAIN_DB:
-        result = WMM_MAIN_DB.execute(VALIDATE_PASSWORD, (username, password.lower()), Database.ResultSet.ONE)
+    with WMM_MAIN_DB as db:
+        result = db.execute(QUERIES['AuthApi']['ValidateUser'], (username, password), ResultSet.ONE)
         if result is None:
             return False
         elif not result[0]:

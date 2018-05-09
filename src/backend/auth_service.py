@@ -1,50 +1,51 @@
-import json
 import random
 import string
 from base64 import b64encode
-from datetime import datetime
 
 import cherrypy
 import psycopg2
 
 from config import CHERRYPY_CONFIG_DEFAULT, WITHOUT_AUTHENTICATION
 from database_management import ResultSet
-from database_repository import (ACTIVATE_USER_ACCOUNT, CHECK_IF_USER_EXISTS,
-                                REGISTER_USER, TOKEN_LENGTH, WMM_MAIN_DB)
+from database_repository import WMM_MAIN_DB, QUERIES, TOKEN_LENGTH
 
 
 @cherrypy.expose
 class AuthService:
 
+    @cherrypy.tools.json_out()
     def GET(self, login, password):
-        with WMM_MAIN_DB:
-            try:
-                user_id = WMM_MAIN_DB.execute(CHECK_IF_USER_EXISTS, (login, password), ResultSet.ONE)[0]
-                auth_token = b64encode(bytes(f'{login}:{password}', 'utf-8')).decode("utf-8")
-                response = {'id': user_id, 'authorization': auth_token}
-                return json.dumps(response)
+        with WMM_MAIN_DB as db:
+            user_exists = db.execute(QUERIES['AuthApi']['ValidateUser'], (login, password), ResultSet.ONE)[0]
+            if user_exists:
+                auth_token = b64encode(bytes(f'{login}:{password}', 'utf-8')).decode('utf-8')
+                return {'auth_token': auth_token}
+            else:
+                raise cherrypy.HTTPError(404, 'User not found')
 
-            except TypeError:
-                raise cherrypy.HTTPError(403, "UNAUTHORIZED")
-
+    @cherrypy.tools.json_in()
     def POST(self):
-        with WMM_MAIN_DB:
+        with WMM_MAIN_DB as db:
             try:
-                request = json.loads(cherrypy.request.body.read().decode('UTF-8'))
+                request = cherrypy.request.json
                 token = ''.join(random.choices(string.ascii_uppercase + string.digits, k=TOKEN_LENGTH))
-                WMM_MAIN_DB.execute(REGISTER_USER, (request['login'], request['password'].lower(), request['email'], request['username'], datetime.now(), token), ResultSet.NONE)
+                id = db.execute(QUERIES['AuthApi']['Register'], (request['login'], request['password'].upper(), request['email'], request['username']), ResultSet.ONE)
+                db.execute(QUERIES['AuthApi']['AssignActivationToken'], (id, token), ResultSet.NONE)
             except psycopg2.IntegrityError:
                 raise cherrypy.HTTPError(422, "USER WITH THIS LOGIN OR EMAIL ALREADY EXISTS")
             except (KeyError, TypeError):
                 raise cherrypy.HTTPError(400, "BAD REQUEST")
-            except json.decoder.JSONDecodeError:
-                raise cherrypy.HTTPError(404, "REQUEST NOT FOUND")
 
+    @cherrypy.tools.json_out()
     def PUT(self, token):
-        with WMM_MAIN_DB:
-            changed = WMM_MAIN_DB.execute(ACTIVATE_USER_ACCOUNT, (token,), ResultSet.ONE)
-            if changed is None:
-                raise cherrypy.HTTPError(404, "USER WITH THIS TOKEN NOT FOUND")
+        with WMM_MAIN_DB as db:
+            try:
+                activated_login = db.execute(QUERIES['AuthApi']['ActivateAccount'], (token,), ResultSet.ONE)[0]
+                db.execute(QUERIES['General']['DeactivateToken'], (token,), ResultSet.NONE)
+                return {'activated_login': activated_login}
+            except TypeError:
+                raise cherrypy.HTTPError(404, 'User with this token not found')
+
 
 
 
