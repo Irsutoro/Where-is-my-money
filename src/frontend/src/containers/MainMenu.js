@@ -109,7 +109,7 @@ class MainMenu extends Component {
 MainMenu.propTypes = {
     pullData: PropTypes.bool.isRequired,
     pulled: PropTypes.bool.isRequired,
-    pullError: PropTypes.func.isRequired
+    pullError: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
