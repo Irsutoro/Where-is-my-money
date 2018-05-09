@@ -73,3 +73,29 @@
     display:block;
     margin-bottom: 2rem;
   }
+
+  .ui.form{
+    background-color: #333333;
+  }
+  .ui.input{
+    width: 30vw;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  .ui.modal .header{
+    background-color: #dba159;
+    color: white;
+    color: white !important;
+    text-shadow: 2px 2px 8px black;
+  }
+  .ui.modal{
+    border-radius: 15px ;
+  }
+  .ui.modal .actions{
+    background-color: #333333;
+  }
+  .modal-btn{
+    
+    color: white !important;
+    text-shadow: 2px 2px 8px black !important;
+  }
