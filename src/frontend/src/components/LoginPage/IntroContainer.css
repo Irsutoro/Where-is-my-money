@@ -5,11 +5,11 @@
 
 .intro-container h1{
     font-family: Georgia, 'Times New Roman', Times, serif !important;
-    font-size: 4em !important;
+    font-size: 3em !important;
 }
 .intro-container h2{
     font-family: Arial, Helvetica, sans-serif !important;
-    font-size: 2em !important;
+    font-size: 1.5em !important;
 }
 
 .intro-container .ui.button {

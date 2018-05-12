@@ -41,20 +41,8 @@ class MainMenu extends Component {
                 <Sidebar.Pushable className="main-page-pushable">
                     <Sidebar as={Menu} animation='scale down' width='thin' visible={visible} icon='labeled' vertical inverted>
                         <Menu.Item >
-                        <Icon name='shop' />
-                        <a href='/'>Zakupy</a>
-                        </Menu.Item>
-                        <Menu.Item >
-                        <Icon name='gamepad' />
-                        <a href='/'>Gry</a>
-                        </Menu.Item>
-                        <Menu.Item >
-                        <Icon name='calendar' />
-                        <a href='/'>Wakacje</a>
-                        </Menu.Item>
-                        <Menu.Item >
-                        <Icon name='car' />
-                        <a href='/'>Samochód</a>
+                        <Icon name='user' />
+                        <a href='/'>Janusz Janowy</a>
                         </Menu.Item>
                         <Menu.Item className="add-new-subaccount">
                         <Icon name='add circle' />

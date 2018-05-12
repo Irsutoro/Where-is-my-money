@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export default class LoginForm extends Component {
       <Form onSubmit={this.handleSubmit} >
         <Form.Input fluid label='Login' placeholder='Login' name='login' type="text" value={this.state.login} onChange={this.handleChange} />
         <Form.Input fluid label='Hasło' placeholder='Hasło' name='password' type="password" value={this.state.password} onChange={this.handleChange} />
-        <Form.Button>Zaloguj</Form.Button>
+        <Link to="/main"><Form.Button>Zaloguj</Form.Button></Link>
       </Form>
     );
   }

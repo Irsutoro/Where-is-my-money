@@ -3,8 +3,9 @@ import {
   REGISTER_USER_ERROR,
   REGISTER_USER_SUCCESS,
   LOGIN_USER_ERROR,
-  LOGIN_USER_SUCCESS } 
-from './types';
+  LOGIN_USER_SUCCESS
+}
+  from './types';
 
 export const registerUser = registerData => dispatch => {
   dispatch({
@@ -12,13 +13,15 @@ export const registerUser = registerData => dispatch => {
     payload: true
   })
   // register request with registerData, then =>
-  dispatch({
-    type: REGISTER_USER_SUCCESS
-  })
-  dispatch({
-    type: LOGIN_FORM_LOADING,
-    payload: false
-  })
+  setTimeout(() => {
+    dispatch({
+      type: REGISTER_USER_SUCCESS
+    })
+    dispatch({
+      type: LOGIN_FORM_LOADING,
+      payload: false
+    })
+  }, 3000)
 }
 
 export const loginUser = loginData => dispatch => {

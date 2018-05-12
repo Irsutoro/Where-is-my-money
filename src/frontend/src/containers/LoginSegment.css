@@ -7,6 +7,16 @@
     margin: auto !important;
 }
 
+.login-segment:before {
+    left: -1px !important;
+    border-radius: 1rem !important;
+    background: rgba(100, 100, 100, .8) !important;
+}
+
+.login-segment:after {
+    border-color: #ffffff rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.1) !important;
+}
+
 .login-segment-tab {
     margin: 0 !important;
 }
