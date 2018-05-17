@@ -66,7 +66,7 @@ CREATE TABLE token_categories (
 );
 
 CREATE TABLE tokens (
-    user_id int NOT NULL REFERENCES users(id),
+    user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     token_category_id int NOT NULL REFERENCES token_categories(id),
     expiration_date date NOT NULL,
     value varchar(30) NOT NULL

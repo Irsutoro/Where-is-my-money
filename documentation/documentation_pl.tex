@@ -41,7 +41,7 @@
 	\begin{itemize}
 		\item AuthApi
 			\begin{itemize}
-				\item \textbf{GET /api/auth/:login/:password} - zwraca id oraz token basic auth dla użytkownika o podanym loginie i haśle.
+				\item \textbf{GET /api/auth/:login/:password} - zwraca token basic auth dla użytkownika o podanym loginie i haśle.
 
 				\item \textbf{POST /api/auth/} - tworzy nowego użytkownika.
 
@@ -49,18 +49,17 @@
 			\end{itemize}
 		\item UserApi
 			\begin{itemize}
-				\item \textbf{GET /api/users/} - zwraca listę użytkowników z bazy danych.
 
-				\item \textbf{GET /api/users/:id/} - zwraca szczegóły użytkownika o podanym id.
+				\item \textbf{GET /api/user/} - zwraca szczegóły użytkownika.
 
-				\item \textbf{PUT /api/users/:id} - aktualizuje informacje o użytkowniku.
+				\item \textbf{PUT /api/user/} - aktualizuje informacje o użytkowniku.
 
-				\item \textbf{DELETE /api/users/:id/} - usuwa użytkownika o podanym id.
+				\item \textbf{DELETE /api/user/} - usuwa użytkownika.
 
 			\end{itemize}
 		\item SubaccountApi
 			\begin{itemize}
-				\item \textbf{GET /api/subaccounts/:id} - zwraca listę subkont dla użytkownika.
+				\item \textbf{GET /api/subaccounts/} - zwraca listę subkont dla użytkownika.
 
 				\item \textbf{POST /api/subaccounts/} - dodaje nowe subkonto.
 

@@ -6,10 +6,8 @@ from database_repository import QUERIES, Database, ResultSet, WMM_MAIN_DB
 
 def validate_password(realm, username, password):
     with WMM_MAIN_DB as db:
-        result = db.execute(QUERIES['AuthApi']['ValidateUser'], (username, password), ResultSet.ONE)
-        if result is None:
-            return False
-        elif not result[0]:
+        result = db.execute(QUERIES['Auth']['ValidateUser'], (username, password), ResultSet.ONE)
+        if result is None or not result[0]:
             return False
         else:
             return True
