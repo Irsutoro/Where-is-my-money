@@ -1,8 +1,6 @@
 .main-container {
   display: flex !important;
   flex-direction: column;
-  min-height: 100vh;
-  padding-top: 7em;
 }
 
 .content {
@@ -13,6 +11,7 @@
   border-radius: 0 !important;
   border: 0 !important;
   padding: 0 0 !important;
+  min-height: 100vh;
   background-image: url("./resources/images/drzewko.svg") !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;

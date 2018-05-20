@@ -17,6 +17,7 @@ class MainMenu extends Component {
         this.toggleVisibility = this.toggleVisibility.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleFocus=this.handleFocus.bind(this);
+        this.submitForm=this.submitForm.bind(this);
     }
     toggleVisibility(){
         this.setState({ visible: !this.state.visible });
@@ -31,7 +32,12 @@ class MainMenu extends Component {
             isChildOpen: true
         });
     }
-    
+    submitForm(){
+        this.props.onAdd(this.state)
+        this.setState({
+            isParentOpen: !this.state.isParentOpen
+        });
+    }
 
     render() {
         const { visible } = this.state;
@@ -39,33 +45,32 @@ class MainMenu extends Component {
             
            
                 <Sidebar.Pushable className="main-page-pushable">
-                    <Sidebar as={Menu} animation='scale down' width='thin' visible={visible} icon='labeled' vertical inverted>
+                    <Sidebar as={Menu} animation='uncover' width='thin' visible={visible} icon='labeled' vertical inverted>
                         <Menu.Item >
                         <Icon name='user' />
                         <a href='/'>Janusz Janowy</a>
                         </Menu.Item>
                         <Menu.Item className="add-new-subaccount">
                         <Icon name='add circle' />
-                        <a onClick={this.handleClick}> Dodaj subkonto</a>
-                        <Modal open={this.state.isParentOpen}>
+                        <a onClick={() => {this.handleClick(); this.props.onAdd();}}> Dodaj subkonto</a>
+                        <Modal open={this.state.isParentOpen} >
                             <Modal.Header>Dodaj subkonto</Modal.Header>
                             <Modal.Content >
-                                <Form>
-                                <Input onFocus={this.handleFocus} list='languages' size='big' placeholder='Wybierz nazwę nowego subkonta' />
-                                    <datalist id='languages'>
-                                        <option value='Rozrywka' />
-                                        <option value='Zdrowie' />
-                                        <option value='Praca' />
-                                        <option value='Zakupy' />
+                                <Form onSubmit={()=>{this.submitForm()}}>
+                                <Input onFocus={this.handleFocus} list='subacc' size='big' placeholder='Wybierz nazwę nowego subkonta' />
+                                    <datalist id='subacc'>
+                                        <option value='Jan Kowalski' />
+                                        <option value='Adam Nowak' />
                                     </datalist>
+                                    <br/>
+                                <Button onClick={()=>{this.handleClick()}} negative className='modal-btn'>
+                                Anuluj
+                                </Button>
+                                
+                                <Button onClick={()=>{this.handleClick()}} positive icon='checkmark' className='modal-btn' labelPosition='right' content='Potwierdź' />
+                                
                                 </Form>
                             </Modal.Content>
-                            <Modal.Actions>
-                                <Button onClick={this.handleClick} negative className='modal-btn'>
-                                No
-                                </Button>
-                                <Button onClick={this.handleClick} positive icon='checkmark' className='modal-btn' labelPosition='right' content='Yes' />
-                            </Modal.Actions>
                         </Modal>
 
                         </Menu.Item>

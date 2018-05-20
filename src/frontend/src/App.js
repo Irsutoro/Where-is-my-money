@@ -12,6 +12,7 @@ import NotFound from './components/general/NotFound'
 import LoginPage from './components/LoginPage/LoginPage'
 import Regulations from './components/general/Regulations'
 import MainPage from './components/MainPage/MainPage';
+import SubaccPage from './components/SubaccPage/SubaccPage';
 
 export default class App extends Component {
   render() {
@@ -19,13 +20,15 @@ export default class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="main-container">
-            <Navigation />
+           
             <Segment className="content">
+            <Navigation />
               <Switch>
                 <Route exact path="/" component={LoginPage} />
                 <Route path="/login" component={LoginPage}/>
                 <Route path="/regulations" component={Regulations}/>
                 <Route path="/main" component={MainPage}/>
+                <Route path="/subaccInfo" component={SubaccPage}/>
                 <Route component={NotFound} />
               </Switch>
             </Segment>
