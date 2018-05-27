@@ -73,6 +73,7 @@ CREATE TABLE tokens (
 );
 
 INSERT INTO token_categories (name) VALUES ('activation'), ('reset_password');
+INSERT INTO currencies (fullname, code) VALUES ('Polski Złoty', 'PLN'), ('Dollar', 'USD');
 
 \connect postgres
 CREATE DATABASE wmm_test TEMPLATE wmm;

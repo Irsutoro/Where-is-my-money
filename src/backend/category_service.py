@@ -5,14 +5,14 @@ from database_repository import WMM_MAIN_DB, QUERIES
 from database_management import ResultSet
 
 @cherrypy.expose
-class SubaccountService:
+class CategoryService:
 
     @cherrypy.tools.json_out()
     def GET(self):
         with WMM_MAIN_DB as db:
             user_id = db.execute(QUERIES['General']['UserId'], (cherrypy.request.login,), ResultSet.ONE)[0]
-            subaccount_list = db.execute(QUERIES['Subaccount']['List'], (user_id,), ResultSet.ALL)
-            return [{'id': id, 'name': name} for id, name in subaccount_list]
+            category_list = db.execute(QUERIES['Category']['List'], (user_id,), ResultSet.ALL)
+            return [{'id': id, 'name': name} for id, name in category_list]
 
     @cherrypy.tools.json_in()
     def POST(self):
@@ -20,7 +20,7 @@ class SubaccountService:
             request = cherrypy.request.json
             user_id = db.execute(QUERIES['General']['UserId'], (cherrypy.request.login,), ResultSet.ONE)[0]
             try:
-                db.execute(QUERIES['Subaccount']['New'], (user_id, request['name']), ResultSet.NONE)
+                db.execute(QUERIES['Category']['New'], (user_id, request['name']), ResultSet.NONE)
             except (KeyError, TypeError):
                 raise cherrypy.HTTPError(400, "Bad request")
 
@@ -30,20 +30,20 @@ class SubaccountService:
             request = cherrypy.request.json
             user_id = db.execute(QUERIES['General']['UserId'], (cherrypy.request.login,), ResultSet.ONE)[0]
             try:
-                updated = db.execute(QUERIES['Subaccount']['Update'], (request['name'], id, user_id), ResultSet.NONE)
+                updated = db.execute(QUERIES['Category']['Update'], (request['name'], id, user_id), ResultSet.ONE)
                 if not updated:
-                    raise cherrypy.HTTPError(404, 'Subaccount not found')
+                    raise cherrypy.HTTPError(404, 'Category not found')
             except (KeyError, TypeError):
                 raise cherrypy.HTTPError(400, "Bad request")
 
     def DELETE(self, id):
         with WMM_MAIN_DB as db:
             user_id = db.execute(QUERIES['General']['UserId'], (cherrypy.request.login,), ResultSet.ONE)[0]
-            deleted = db.execute(QUERIES['Subaccount']['Delete'], (id, user_id), ResultSet.NONE)
+            deleted = db.execute(QUERIES['Category']['Delete'], (id, user_id), ResultSet.NONE)
             if not deleted:
                     raise cherrypy.HTTPError(404, 'Category not found')
 
 
 if __name__ == '__main__':
     cherrypy.config.update(CHERRYPY_CONFIG_DEFAULT)
-    cherrypy.quickstart(SubaccountService(), '/api/subaccounts', WITH_AUTHENTICATION)
+    cherrypy.quickstart(CategoryService(), '/api/categories', WITH_AUTHENTICATION)
