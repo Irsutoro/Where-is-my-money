@@ -4,8 +4,9 @@ import {
   REGISTER_USER_SUCCESS,
   LOGIN_USER_ERROR,
   LOGIN_USER_SUCCESS
-}
-  from './types';
+} from './types';
+
+import { routerActions } from 'react-router-redux'
 
 export const registerUser = registerData => dispatch => {
   dispatch({
@@ -29,13 +30,23 @@ export const loginUser = loginData => dispatch => {
     type: LOGIN_FORM_LOADING,
     payload: true
   })
-  console.log(loginData)
-  // login request with loginData, then =>
-  dispatch({
-    type: LOGIN_USER_SUCCESS
-  })
-  dispatch({
-    type: LOGIN_FORM_LOADING,
-    payload: false
-  })
+
+  setTimeout(() => {
+    if (loginData.login === 'ppiesiak' && loginData.password === '1234') {
+      dispatch(routerActions.push('/main'))
+      dispatch({
+        type: LOGIN_FORM_LOADING,
+        payload: false
+      })
+    } else {
+      dispatch({
+        type: LOGIN_USER_ERROR,
+        payload: true
+      })
+      dispatch({
+        type: LOGIN_FORM_LOADING,
+        payload: false
+      })
+    }
+  }, 2000)
 }

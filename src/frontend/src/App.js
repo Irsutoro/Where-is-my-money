@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Provider } from 'react-redux';
-import store from './store';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { configureStore, history } from './store'
+import { Switch, Route } from 'react-router-dom'
+import { ConnectedRouter } from 'react-router-redux'
 
 import './App.css';
 import { Grid, Segment, Container } from 'semantic-ui-react'
@@ -14,27 +15,28 @@ import Regulations from './components/general/Regulations'
 import MainPage from './components/MainPage/MainPage';
 import SubaccPage from './components/SubaccPage/SubaccPage';
 
+const store = configureStore()
+
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <ConnectedRouter history={history}>
           <div className="main-container">
-           
             <Segment className="content">
-            <Navigation />
+              <Navigation />
               <Switch>
                 <Route exact path="/" component={LoginPage} />
-                <Route path="/login" component={LoginPage}/>
-                <Route path="/regulations" component={Regulations}/>
-                <Route path="/main" component={MainPage}/>
-                <Route path="/subaccInfo" component={SubaccPage}/>
+                <Route path="/login" component={LoginPage} />
+                <Route path="/regulations" component={Regulations} />
+                <Route path="/main" component={MainPage} />
+                <Route path="/subaccInfo" component={SubaccPage} />
                 <Route component={NotFound} />
               </Switch>
             </Segment>
             <Footer />
           </div>
-        </Router>
+        </ConnectedRouter>
       </Provider>
     );
   }
