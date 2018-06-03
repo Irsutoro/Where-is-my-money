@@ -46,11 +46,37 @@ class TransactionService:
         with WMM_MAIN_DB as db:
             try:
                 user_id = db.execute(QUERIES['General']['UserId'], (cherrypy.request.login,), ResultSet.ONE)[0]
-                db.execute(QUERIES['Transaction']['New'], (user_id, request['category_id'],
-                                                            request['subaccount_id'], request['currency_id'],
-                                                            request['date'], request['amount'],
-                                                            request.get('comment', None)), ResultSet.NONE)
+                if db.execute(QUERIES['Transaction']['Authorize'], (user_id, request['subaccount_id'], request['category_id']), ResultSet.ONE)[0]:
+                    db.execute(QUERIES['Transaction']['New'], (user_id, request['category_id'],
+                                                                request['subaccount_id'], request['currency_id'],
+                                                                request['date'], request['amount'],
+                                                                request.get('comment', None)), ResultSet.NONE)
+                else:
+                    raise cherrypy.HTTPError(401, 'Unauthorized')
             except (KeyError, TypeError):
                 raise cherrypy.HTTPError(400, 'Bad Request')
-    #TODO zabezpieczyć nie swoje kategoeir i subkonta
-    #TODO: PUT, DELETE
+
+    @cherrypy.tools.json_in()
+    def PUT(self, id):
+        request = cherrypy.request.json
+        with WMM_MAIN_DB as db:
+            try:
+                user_id = db.execute(QUERIES['General']['UserId'], (cherrypy.request.login,), ResultSet.ONE)[0]
+                if db.execute(QUERIES['Transaction']['Authorize'], (user_id, request['subaccount_id'], request['category_id']), ResultSet.ONE)[0]:
+                    updated = db.execute(QUERIES['Transaction']['Update'], (request['category_id'], request['subaccount_id'],
+                                                                            request['currency_id'], request['date'],
+                                                                            request['amount'], request['comment'], id, user_id), ResultSet.ONE)
+                    if not updated:
+                        raise cherrypy.HTTPError(404, 'Entry not found')
+                else:
+                    raise cherrypy.HTTPError(401, 'Unauthorized')
+            except (KeyError, TypeError):
+                raise cherrypy.HTTPError(400, 'Bad Request')
+
+    def DELETE(self, id):
+        request = cherrypy.request.json
+        with WMM_MAIN_DB as db:
+            user_id = db.execute(QUERIES['General']['UserId'], (cherrypy.request.login,), ResultSet.ONE)[0]
+            deleted = db.execute(QUERIES['Transaction']['Delete'], (user_id, id), ResultSet.ONE)
+            if not deleted:
+                raise cherrypy.HTTPError(404, 'Entry not found')
