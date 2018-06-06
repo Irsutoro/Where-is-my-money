@@ -37,6 +37,9 @@ import {
       type: SUBACCOUNT_LOADING,
       payload: true
     })
+    
+    var object = {"id": 13, "name": postData};
+    
 
     fetch('http://localhost:3000/subaccounts',{
             method: 'POST',
@@ -44,14 +47,15 @@ import {
                 'Accept':'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(postData)
+            body: JSON.stringify(object)
         }).then(res => res.json())
           .then(postData =>
             
             dispatch({
                 type: SUBACCOUNT_CREATED,
                 payload: postData
-              }));
+              })
+            );
               
     dispatch({
       type: SUBACCOUNT_LOADING,

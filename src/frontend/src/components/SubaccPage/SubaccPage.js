@@ -8,57 +8,32 @@ export default class SubaccPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAddModalOpen: false,
-            isEditModalOpen: false,
-            neededForEdit: {},
-            data: []
+           
         }
-
-        this.fetchData = this.fetchData.bind(this);
         
     }
 
-    toggleModal(modalOpenStateName){
-        this.setState({
-            [modalOpenStateName]: !this.state[modalOpenStateName]
-        })
-    }
 
-    submitData(data){
-
-    }
-
-    submitEdit(data){
-
-    }
-
-    editRow(row){
-        this.setState({
-            isEditModalOpen: true,
-            neededForEdit: {
-
-            }
-        })
-    }
-
-    deleteRow(row){
-
-    }
     
     render() {
-        
+        const data = [{
+            id: 1,
+            name: 'hajs',
+            code: 'PLN',
+            date: '23.03.2103',
+            amount: 3,
+            comment: 'pożyczka'            
+          },{
+            id: 2,
+            name: 'hajs',
+            code: 'PLN',
+            date: '24.03.2103',
+            amount: 2,
+            comment: 'pożyczka'            
+          }
+        ]
         return (
-            <div>
-                <h1>
-                    Tabela finansów użytkownika {}
-                </h1>
-                <SubaccTable
-                data =  {this.state.data}
-                editRow = {this.editRow}
-                deleteRow = {this.deleteRow}
-                submitEdit = {this.submitEdit}
-                />
-           </div>
+            <SubaccTable data={data}/>
         );
     }
 }
