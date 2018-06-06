@@ -18,14 +18,6 @@ export default class SubaccPage extends Component {
         
     }
 
-    componentDidMount(){
-        this.fetchData();
-    }
-
-    fetchData(){
-
-    }
-
     toggleModal(modalOpenStateName){
         this.setState({
             [modalOpenStateName]: !this.state[modalOpenStateName]

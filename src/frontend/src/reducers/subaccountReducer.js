@@ -1,13 +1,14 @@
 import {
     SUBACCOUNT_ERROR,
     SUBACCOUNT_SUCCESS,
+    SUBACCOUNT_CREATED,
     SUBACCOUNT_LOADING
   }
     from '../actions/types';
   
   const initialState = {
     pullData: false,
-    pulled: false,
+    pulled: [],
     pullError: false
   };
   
@@ -21,7 +22,12 @@ import {
       case SUBACCOUNT_SUCCESS:
         return {
           ...state,
-          pulled: true
+          pulled: action.payload
+        }
+      case SUBACCOUNT_CREATED:
+        return{
+          ...state,
+          newAcc: action.payload
         }
       case SUBACCOUNT_ERROR:
         return {

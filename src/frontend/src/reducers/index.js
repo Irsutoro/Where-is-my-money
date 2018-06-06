@@ -6,5 +6,5 @@ import { routerReducer } from 'react-router-redux'
 export default combineReducers({
   routerReducer,
   loginReducer,
-  subaccountReducer
+  subaccData: subaccountReducer
 });
