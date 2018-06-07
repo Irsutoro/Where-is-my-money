@@ -3,6 +3,10 @@ import psycopg2
 from cherrypy.lib import auth_basic
 from database_repository import QUERIES, Database, ResultSet, WMM_MAIN_DB
 
+EMAIL_SENDER = 'email'
+EMAIL_PASS = 'pass'
+EMAIL_SERVER = 'smtp.gmail.com'
+EMAIL_PORT = 587
 
 def validate_password(realm, username, password):
     with WMM_MAIN_DB as db:

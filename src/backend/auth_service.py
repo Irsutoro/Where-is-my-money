@@ -5,10 +5,12 @@ from base64 import b64encode
 import cherrypy
 import psycopg2
 
-from config import CHERRYPY_CONFIG_DEFAULT, WITHOUT_AUTHENTICATION
+from config import CHERRYPY_CONFIG_DEFAULT, WITHOUT_AUTHENTICATION, EMAIL_PASS, EMAIL_SENDER, EMAIL_SERVER, EMAIL_PORT
 from database_management import ResultSet
 from database_repository import WMM_MAIN_DB, QUERIES, TOKEN_LENGTH
 
+import smtplib
+from email.message import EmailMessage
 
 @cherrypy.expose
 class AuthService:
@@ -35,6 +37,20 @@ class AuthService:
                 raise cherrypy.HTTPError(422, "User with this login or email already exists")
             except (KeyError, TypeError):
                 raise cherrypy.HTTPError(400, "Bad request")
+
+        msg = EmailMessage()
+        msg.set_content('Token aktywacyjny: ' + token)
+        msg['Subject'] = 'Aktywacja konta w serwisie Where is my Money?!'
+        msg['From'] = EMAIL_SENDER
+        msg['To'] = request['email']
+
+        server = smtplib.SMTP(EMAIL_SERVER, EMAIL_PORT)
+        server.ehlo()
+        server.starttls()
+        server.login(EMAIL_SENDER, EMAIL_PASS)
+        server.send_message(msg)
+
+
 
     @cherrypy.tools.json_out()
     def PUT(self, token):
