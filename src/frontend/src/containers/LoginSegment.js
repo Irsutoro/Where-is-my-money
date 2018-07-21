@@ -11,7 +11,7 @@ import './LoginSegment.css'
 class LoginSegment extends Component {
     render() {
         return (
-            <Segment loading={this.props.formLoading} className="login-segment">
+            <Segment basic loading={this.props.formLoading} className="login-segment">
                 <Tab
                     className="login-segment-tab"
                     menu={{
@@ -42,10 +42,6 @@ class LoginSegment extends Component {
                             }
                         }
                     ]}
-                    grid = {{
-                        paneWidth: 4,
-                        tabWidth: 4
-                    }}
                     renderActiveOnly={false}
                 />
             </Segment>

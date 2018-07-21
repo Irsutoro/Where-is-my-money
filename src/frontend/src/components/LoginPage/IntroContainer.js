@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Container, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 
-import './IntroContainer.css'
-
 export default class IntroContainer extends Component {
     render() {
         return (

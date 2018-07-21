@@ -1,20 +1,4 @@
-.main-container {
-  display: flex !important;
-  flex-direction: column;
-}
-
 .content {
-  margin: 0 !important;
-  box-shadow: none !important;
-  flex: 1;
-  /*min-height: calc(100vh - 7em);*/
-  border-radius: 0 !important;
-  border: 0 !important;
-  padding: 0 0 !important;
   min-height: 100vh;
-  background-image: url("./resources/images/drzewko.svg") !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-position: -15px 5px !important;
-  background-color: #96897b !important;
+  padding-top: 8vh;
 }

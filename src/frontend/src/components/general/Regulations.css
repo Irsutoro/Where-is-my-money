@@ -2,7 +2,7 @@
     margin-top: 5em;
 }
 
-.regulations-page h1, h2 {
+.regulations-page h1 {
     color: white !important;
     text-shadow: 2px 2px 8px black;
     font-family: Georgia, 'Times New Roman', Times, serif !important;
@@ -15,18 +15,6 @@
 }
 
 .regulations-page h2 {
-    color: white !important;
-    text-shadow: 2px 2px 8px black;
-    font-family: Georgia, 'Times New Roman', Times, serif !important;
-    top: 50%;
-    position: relative;
-    font-size: 1.5em !important;
-    right: auto;
-    width: 100%;
-    text-align: center;
-}
-
-.content {
     color: white !important;
     text-shadow: 2px 2px 8px black;
     font-family: Georgia, 'Times New Roman', Times, serif !important;
