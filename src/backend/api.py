@@ -3,6 +3,7 @@ from auth_service import AuthService
 from user_service import UserService
 from subaccount_service import SubaccountService
 from category_service import CategoryService
+from currency_service import CurrencyService
 from transaction_service import TransactionService
 from config import WITH_AUTHENTICATION, WITHOUT_AUTHENTICATION, CHERRYPY_CONFIG_DEFAULT
 
@@ -14,6 +15,8 @@ if __name__ == '__main__':
     cherrypy.tree.mount(SubaccountService(), '/api/subaccounts', WITH_AUTHENTICATION)
     cherrypy.tree.mount(CategoryService(), '/api/categories', WITH_AUTHENTICATION)
     cherrypy.tree.mount(TransactionService(), '/api/transactions', WITH_AUTHENTICATION)
+    cherrypy.tree.mount(CurrencyService(), '/api/currency', WITH_AUTHENTICATION)
+
 
     cherrypy.engine.start()
     cherrypy.engine.block()
