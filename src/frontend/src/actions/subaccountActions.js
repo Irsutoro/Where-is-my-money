@@ -2,63 +2,59 @@ import {
     SUBACCOUNT_ERROR,
     SUBACCOUNT_SUCCESS,
     SUBACCOUNT_LOADING,
-    SUBACCOUNT_CREATED } 
+    SUBACCOUNT_CREATED,
+    SUBACCOUNT_SET } 
   from './types';
   
+  const subaccUrl = 'http://www.iraminius.pl/wmm/api/subaccounts'
+
+  import axios from 'axios'
+
   export const pullSubaccountData = () => dispatch => {
+    console.log("ppulll")
     dispatch({
       type: SUBACCOUNT_LOADING,
       payload: true
     })
-
-    fetch('http://localhost:3000/subaccounts',{
-            method: 'GET',
-            headers: {
-                'Accept':'application/json',
-                'Content-Type': 'application/json'
-            },
-            
-        }).then(res => res.json())
-          .then(subaccs =>
-            
-            dispatch({
-                type: SUBACCOUNT_SUCCESS,
-                payload: subaccs
-              }));
-              
+    axios.get(subaccUrl, {
+      
+    })
+    .then(res => res.json())
+    .then(subaccs => {
+      console.log(subaccs)
+      dispatch({
+        type: SUBACCOUNT_SUCCESS,
+        payload: subaccs
+      })
+    })
+    .catch(()=>{
+      dispatch({
+        type: SUBACCOUNT_ERROR,
+        payload: false
+      })
+    })
+                 
     dispatch({
       type: SUBACCOUNT_LOADING,
       payload: false
     })
   }
 
-  export const createNewSubaccount = postData => dispatch => {
+  export const setSubacc = choosenSubacc => dispatch => {
+    
     dispatch({
       type: SUBACCOUNT_LOADING,
       payload: true
     })
-    
-    var object = {"id": 13, "name": postData};
-    
 
-    fetch('http://localhost:3000/subaccounts',{
-            method: 'POST',
-            headers: {
-                'Accept':'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(object)
-        }).then(res => res.json())
-          .then(postData =>
-            
-            dispatch({
-                type: SUBACCOUNT_CREATED,
-                payload: postData
-              })
-            );
-              
+    dispatch({
+      type: SUBACCOUNT_SET,
+      payload: choosenSubacc
+    })
+    
     dispatch({
       type: SUBACCOUNT_LOADING,
       payload: false
     })
   }
+

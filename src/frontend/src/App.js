@@ -32,6 +32,7 @@ export default class App extends Component {
                 <Route path="/activate" component={ActivationPage} />
                 <SecureRoute path="/history" routeGuard={AuthRouteGuard} component={NotFound} redirectToPathWhenFail="/login" />
                 <SecureRoute path="/report" routeGuard={AuthRouteGuard} component={NotFound} redirectToPathWhenFail="/login" />
+                <SecureRoute path="/properties" routeGuard={AuthRouteGuard} component={NotFound} redirectToPathWhenFail="/properties" />
                 <Route path="/regulations" component={Regulations} />
                 <Route component={NotFound} />
               </Switch>

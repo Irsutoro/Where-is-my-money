@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Dropdown } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { logout } from '../actions/loginActions'
+import { pullSubaccountData } from '../actions/subaccountActions'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -9,7 +10,18 @@ import logo from '../resources/images/logo.svg'
 import './Navigation.css'
 
 class Navigation extends Component {
+    constructor(props){
+        super(props)
+    }
+    componentWillMount(){
+        this.props.pullSubaccountData();
+    }
     render() {
+        const subs = this.props.subaccs.map(sub =>(
+            <div key={sub.id}>
+                <h3>{sub.name}</h3>
+            </div>
+        ))
         const loggedMenuItems = [
             (<Dropdown
                 key="1"
@@ -28,7 +40,10 @@ class Navigation extends Component {
             (<Menu.Item key="3" link active={this.props.location === '/report'}>
                 <Link to='/report'>Raport</Link>
             </Menu.Item>),
-            (<Menu.Item key="4" link position="right" onClick={this.props.logout}>
+            (<Menu.Item key="4" link active={this.props.location === '/properties'}>
+            <Link to='/properties'>Ustawienia</Link>
+            </Menu.Item>),
+            (<Menu.Item key="5" link position="right" onClick={this.props.logout}>
                 Wyloguj
             </Menu.Item>)
         ]
@@ -75,4 +90,4 @@ const mapStateToProps = state => ({
     location: state.routerReducer.location.pathname
 })
 
-export default connect(mapStateToProps, { logout })(Navigation);
+export default connect(mapStateToProps, { logout, pullSubaccountData })(Navigation);
