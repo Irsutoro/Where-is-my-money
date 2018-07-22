@@ -3,26 +3,76 @@ import {
   REGISTER_USER_ERROR,
   REGISTER_USER_SUCCESS,
   LOGIN_USER_ERROR,
-  LOGIN_USER_SUCCESS
+  LOGIN_USER_SUCCESS,
+  LOGOUT,
+  LOADING,
+  ACTIVATE_USER_ERROR,
+  ACTIVATE_USER_SUCCESS
 } from './types';
 
 import { routerActions } from 'react-router-redux'
+import axios from 'axios'
+
+const authUrl = 'http://www.iraminius.pl/wmm/api/auth/'
 
 export const registerUser = registerData => dispatch => {
   dispatch({
     type: LOGIN_FORM_LOADING,
     payload: true
   })
-  // register request with registerData, then =>
-  setTimeout(() => {
-    dispatch({
-      type: REGISTER_USER_SUCCESS
+  dispatch({
+    type: REGISTER_USER_ERROR,
+    payload: false
+  })
+
+  axios.post(authUrl, registerData)
+    .then(() => {
+      dispatch({
+        type: REGISTER_USER_SUCCESS
+      })
+    }).catch(() => {
+      dispatch({
+        type: REGISTER_USER_ERROR,
+        payload: true
+      })
+    }).finally(() => {
+      dispatch({
+        type: LOGIN_FORM_LOADING,
+        payload: false
+      })
     })
-    dispatch({
-      type: LOGIN_FORM_LOADING,
-      payload: false
+}
+
+export const activateUser = token => dispatch => {
+  dispatch({
+    type: LOADING,
+    payload: true
+  })
+  dispatch({
+    type: ACTIVATE_USER_ERROR,
+    payload: false
+  })
+
+  axios.put(authUrl, {}, {
+    params: {
+      token: token
+    }
+  })
+    .then(() => {
+      dispatch({
+        type: ACTIVATE_USER_SUCCESS
+      })
+    }).catch(() => {
+      dispatch({
+        type: ACTIVATE_USER_ERROR,
+        payload: true
+      })
+    }).finally(() => {
+      dispatch({
+        type: LOADING,
+        payload: false
+      })
     })
-  }, 3000)
 }
 
 export const loginUser = loginData => dispatch => {
@@ -30,23 +80,46 @@ export const loginUser = loginData => dispatch => {
     type: LOGIN_FORM_LOADING,
     payload: true
   })
+  dispatch({
+    type: LOGIN_USER_ERROR,
+    payload: false
+  })
 
-  setTimeout(() => {
-    if (loginData.login === 'ppiesiak' && loginData.password === '1234') {
-      dispatch(routerActions.push('/main'))
-      dispatch({
-        type: LOGIN_FORM_LOADING,
-        payload: false
-      })
-    } else {
-      dispatch({
-        type: LOGIN_USER_ERROR,
-        payload: true
-      })
-      dispatch({
-        type: LOGIN_FORM_LOADING,
-        payload: false
-      })
+  axios.get(authUrl,
+    {
+      params: {
+        login: loginData.login,
+        password: loginData.password
+      }
     }
-  }, 2000)
+  ).then(res => {
+    const authToken = res.data['auth_token']
+    sessionStorage.setItem('Authorization', authToken)
+
+    dispatch({
+      type: LOGIN_USER_SUCCESS
+    })
+
+    dispatch(routerActions.push('/report'))
+  }).catch(() => {
+    dispatch({
+      type: LOGIN_USER_ERROR,
+      payload: true
+    })
+  }).finally(() => {
+    dispatch({
+      type: LOGIN_FORM_LOADING,
+      payload: false
+    })
+  })
+}
+
+export const logout = () => dispatch => {
+  sessionStorage.removeItem('Authorization')
+
+  dispatch({
+    type: LOGOUT
+  })
+
+  dispatch(routerActions.push('/login'))
 }
