@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Dropdown } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { logout } from '../actions/loginActions'
-import { pullSubaccountData } from '../actions/subaccountActions'
+import { pullSubaccountData, getSubaccountFullData } from '../actions/subaccountActions'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -12,27 +12,27 @@ import './Navigation.css'
 class Navigation extends Component {
     constructor(props){
         super(props)
+        this.getSubaccData = this.getSubaccData.bind(this)
     }
-    componentWillMount(){
+    componentDidMount(){
         this.props.pullSubaccountData();
     }
+    getSubaccData(e,{value}) {
+        this.props.getSubaccountFullData(value);
+    }
     render() {
-        const subs = this.props.subaccs.map(sub =>(
-            <div key={sub.id}>
-                <h3>{sub.name}</h3>
-            </div>
-        ))
+        let subs = [];
+        subs = this.props.subaccs.map(sub =>({
+            key: sub.id, text:sub.name, value: sub.id
+        }))
         const loggedMenuItems = [
             (<Dropdown
                 key="1"
                 item
                 selection
                 placeholder="Wybierz subkonto"
-                options={[
-                    { key: 1, text: 'Elvis', value: 1},
-                    { key: 2, text: 'Zdzichu', value: 2},
-                    { key: 3, text: 'Marian', value: 3}
-                ]}
+                options={subs}
+                onChange = {this.getSubaccData}
             />),
             (<Menu.Item key="2" link active={this.props.location === '/history'}>
                 <Link to='/history'>Historia</Link>
@@ -47,8 +47,8 @@ class Navigation extends Component {
                 Wyloguj
             </Menu.Item>)
         ]
-
-        return (
+        
+        return (    
             <Menu
                 className="navigation"
                 stackable
@@ -74,6 +74,8 @@ class Navigation extends Component {
                 {this.props.logged &&
                     loggedMenuItems
                 }
+                
+
             </Menu >
         );
     }
@@ -82,12 +84,16 @@ class Navigation extends Component {
 Navigation.propTypes = {
     logged: PropTypes.bool.isRequired,
     logout: PropTypes.func.isRequired,
-    location: PropTypes.string.isRequired
+    location: PropTypes.string.isRequired,
+    pullSubaccountData: PropTypes.func.isRequired,
+    subaccs: PropTypes.array.isRequired,
+    getSubaccountFullData: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     logged: state.loginReducer.logged,
-    location: state.routerReducer.location.pathname
+    location: state.routerReducer.location.pathname,
+    subaccs: state.subAccs.pulled,
 })
 
-export default connect(mapStateToProps, { logout, pullSubaccountData })(Navigation);
+export default connect(mapStateToProps, { logout, pullSubaccountData, getSubaccountFullData })(Navigation);

@@ -2,29 +2,30 @@ import {
     SUBACCOUNT_ERROR,
     SUBACCOUNT_SUCCESS,
     SUBACCOUNT_LOADING,
-    SUBACCOUNT_CREATED,
-    SUBACCOUNT_SET } 
+    SUBACCOUNT_GET_FULL_DATA_LOADING,
+    SUBACCOUNT_GET_FULL_DATA_SUCCESS,
+    SUBACCOUNT_GET_FULL_DATA_ERROR} 
   from './types';
   
-  const subaccUrl = 'http://www.iraminius.pl/wmm/api/subaccounts'
+  const subaccUrl = "http://www.iraminius.pl/wmm/api/subaccounts"
+  const transatcionsUrl = "http://www.iraminius.pl/wmm/api/transactions"
 
   import axios from 'axios'
 
   export const pullSubaccountData = () => dispatch => {
-    console.log("ppulll")
     dispatch({
       type: SUBACCOUNT_LOADING,
       payload: true
     })
-    axios.get(subaccUrl, {
-      
+    const AuthStr = "Basic ".concat( window.sessionStorage.getItem('Authorization'))
+    axios.get(subaccUrl, { 
+      headers: {'Authorization': AuthStr}
     })
-    .then(res => res.json())
-    .then(subaccs => {
-      console.log(subaccs)
+    .then(res =>{
+      let subAccs = res.data
       dispatch({
         type: SUBACCOUNT_SUCCESS,
-        payload: subaccs
+        payload: subAccs
       })
     })
     .catch(()=>{
@@ -40,20 +41,37 @@ import {
     })
   }
 
-  export const setSubacc = choosenSubacc => dispatch => {
+  export const getSubaccountFullData = (choosenSubacc) => dispatch => {
     
     dispatch({
-      type: SUBACCOUNT_LOADING,
+      type: SUBACCOUNT_GET_FULL_DATA_LOADING,
       payload: true
     })
 
-    dispatch({
-      type: SUBACCOUNT_SET,
-      payload: choosenSubacc
+    const AuthStr = "Basic ".concat( window.sessionStorage.getItem('Authorization'))
+
+    axios.get(transatcionsUrl, { 
+      headers: {'Authorization': AuthStr},
+      params: {subaccount_id: choosenSubacc}
     })
-    
+    .then(res =>{
+      let fullData = res.data
+      dispatch({
+        type: SUBACCOUNT_GET_FULL_DATA_SUCCESS,
+        payload: fullData
+      })
+      console.log(fullData)
+    })
+    .catch(()=>{
+      dispatch({
+        type: SUBACCOUNT_GET_FULL_DATA_ERROR,
+        payload: false
+      })
+    })
+
+
     dispatch({
-      type: SUBACCOUNT_LOADING,
+      type: SUBACCOUNT_GET_FULL_DATA_LOADING,
       payload: false
     })
   }
