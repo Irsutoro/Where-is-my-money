@@ -5,6 +5,7 @@ from subaccount_service import SubaccountService
 from category_service import CategoryService
 from currency_service import CurrencyService
 from transaction_service import TransactionService
+from csv_service import CSVService
 from config import WITH_AUTHENTICATION, WITHOUT_AUTHENTICATION, CHERRYPY_CONFIG_DEFAULT
 
 
@@ -16,6 +17,8 @@ if __name__ == '__main__':
     cherrypy.tree.mount(CategoryService(), '/api/categories', WITH_AUTHENTICATION)
     cherrypy.tree.mount(TransactionService(), '/api/transactions', WITH_AUTHENTICATION)
     cherrypy.tree.mount(CurrencyService(), '/api/currency', WITH_AUTHENTICATION)
+    cherrypy.tree.mount(CSVService(), '/api/csv', WITH_AUTHENTICATION)
+
 
 
     cherrypy.engine.start()
