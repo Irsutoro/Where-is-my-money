@@ -76,7 +76,7 @@ class Navigation extends Component {
             (<Menu.Item key="4" link active={this.props.location === '/subaccounts'}>
                 <Link to='/subaccounts'>Subkonta</Link>
             </Menu.Item>),
-            (<Menu.Item key="5" link position="right" active={this.props.location === '/properties'}>
+            (<Menu.Item key="5" link active={this.props.location === '/properties'}>
             <Link to='/properties'>Ustawienia</Link>
             </Menu.Item>),
             (<Menu.Item key="6" link position="right" onClick={this.props.logout}>
