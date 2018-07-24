@@ -12,6 +12,7 @@ import {
 
 import { routerActions } from 'react-router-redux'
 import axios from 'axios'
+import { getSubaccounts } from './subaccountsActions';
 
 const authUrl = 'http://www.iraminius.pl/wmm/api/auth/'
 
@@ -96,6 +97,8 @@ export const loginUser = loginData => dispatch => {
   ).then(res => {
     const authToken = res.data['auth_token']
     sessionStorage.setItem('Authorization', `Basic ${authToken}`)
+
+    dispatch(getSubaccounts())
 
     dispatch({
       type: LOGIN_USER_SUCCESS

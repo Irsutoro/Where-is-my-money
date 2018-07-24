@@ -2,14 +2,11 @@ import {
   SUBACCOUNTS_ERROR,
   SUBACCOUNTS_SUCCESS,
   SUBACCOUNTS_LOADING,
-  SUBACCOUNT_GET_FULL_DATA_LOADING,
-  SUBACCOUNT_GET_FULL_DATA_SUCCESS,
-  SUBACCOUNT_GET_FULL_DATA_ERROR,
+  CHOOSE_SUBACCOUNT
 }
 from './types';
 
-const subaccUrl = "http://www.iraminius.pl/wmm/api/subaccounts"
-const transatcionsUrl = "http://www.iraminius.pl/wmm/api/transactions"
+const subaccUrl = "http://www.iraminius.pl/wmm/api/subaccounts/"
 
 import axios from 'axios'
 
@@ -30,6 +27,11 @@ export const getSubaccounts = () => dispatch => {
     })
     .then(res => {
       let subAccs = res.data
+
+      if (subAccs.length !== 0) {
+        dispatch(chooseSubaccount(subAccs[0]))
+      }
+
       dispatch({
         type: SUBACCOUNTS_SUCCESS,
         payload: subAccs
@@ -49,39 +51,53 @@ export const getSubaccounts = () => dispatch => {
     })
 }
 
-export const getSubaccountFullData = (choosenSubacc) => dispatch => {
-
+export const addSubaccount = (name) => dispatch => {
   dispatch({
-    type: SUBACCOUNT_GET_FULL_DATA_LOADING,
+    type: SUBACCOUNTS_LOADING,
     payload: true
   })
 
-  axios.get(transatcionsUrl, {
+  return axios.post(subaccUrl, {
+      name: name
+    }, {
       headers: {
         'Authorization': sessionStorage.getItem('Authorization')
-      },
-      params: {
-        subaccount_id: choosenSubacc
       }
     })
-    .then(res => {
-      let fullData = res.data
+    .finally(() => {
       dispatch({
-        type: SUBACCOUNT_GET_FULL_DATA_SUCCESS,
-        payload: fullData
-      })
-      console.log(fullData)
-    })
-    .catch(() => {
-      dispatch({
-        type: SUBACCOUNT_GET_FULL_DATA_ERROR,
+        type: SUBACCOUNTS_LOADING,
         payload: false
       })
+
+      dispatch(getSubaccounts())
     })
+}
 
-
+export const deleteSubaccount = (subaccountId) => dispatch => {
   dispatch({
-    type: SUBACCOUNT_GET_FULL_DATA_LOADING,
-    payload: false
+    type: SUBACCOUNTS_LOADING,
+    payload: true
+  })
+  
+  return axios.delete(subaccUrl + subaccountId, {
+      headers: {
+        'Authorization': sessionStorage.getItem('Authorization')
+      }
+    })
+    .finally(() => {
+      dispatch({
+        type: SUBACCOUNTS_LOADING,
+        payload: false
+      })
+
+      dispatch(getSubaccounts())
+    })
+}
+
+export const chooseSubaccount = (subaccount) => dispatch => {
+  dispatch({
+    type: CHOOSE_SUBACCOUNT,
+    payload: subaccount
   })
 }

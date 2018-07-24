@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getSubaccounts } from '../actions/subaccountsActions'
+import { getSubaccounts, addSubaccount } from '../actions/subaccountsActions'
 import CreateSubaccount from '../components/LoggedContent/CreateSubaccount';
+import { Container, Header } from 'semantic-ui-react'
 
 const withSubaccountCheck = (WrappedComponent) => {
   class SubaccountCheck extends Component {
     constructor(props){
       super(props)
+
+      if (this.props.subaccounts.length === 0) {
+        this.props.getSubaccounts()
+      }
     }
 
     render() {
       if (this.props.subaccounts.length === 0) {
-        this.props.getSubaccounts()
-        return <CreateSubaccount />
+        return (
+          <Container textAlign="center" fluid>
+            <Header as="h1">Stwórz swoje pierwsze subkonto</Header>
+            <CreateSubaccount addSubaccount={(name) => {this.props.addSubaccount(name)}} />
+          </Container>
+        )
       } else {
         return <WrappedComponent {...this.props} />;
       }
@@ -29,7 +38,7 @@ const withSubaccountCheck = (WrappedComponent) => {
     subaccounts: state.subaccountsReducer.subaccounts
   })
   
-  return connect(mapStateToProps, { getSubaccounts })(SubaccountCheck)
+  return connect(mapStateToProps, { getSubaccounts, addSubaccount })(SubaccountCheck)
 }
 
 export default withSubaccountCheck

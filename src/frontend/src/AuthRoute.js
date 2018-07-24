@@ -10,8 +10,6 @@ import { LOGIN_USER_SUCCESS } from './actions/types';
 const AuthRoute = ({ component: Component, logout, getSubaccounts, ...rest }) => (
     <Route {...rest} render={(props) => {
       if (sessionStorage.getItem('Authorization')) {
-        getSubaccounts()
-        
         store.dispatch({
           type: LOGIN_USER_SUCCESS
         })

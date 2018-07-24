@@ -2,9 +2,7 @@ import {
     SUBACCOUNTS_ERROR,
     SUBACCOUNTS_SUCCESS,
     SUBACCOUNTS_LOADING,
-    SUBACCOUNT_GET_FULL_DATA_LOADING,
-    SUBACCOUNT_GET_FULL_DATA_SUCCESS,
-    SUBACCOUNT_GET_FULL_DATA_ERROR
+    CHOOSE_SUBACCOUNT
   }
     from '../actions/types';
   
@@ -12,9 +10,7 @@ import {
     subaccountsLoading: false,
     subaccounts: [],
     subaccountsError: false,
-    getFullData: false,
-    fullData: [],
-    getFullDataError: false
+    choosenSubaccount: {}
   };
   
   export default function (state = initialState, action) {
@@ -34,20 +30,10 @@ import {
           ...state,
           subaccountsError: action.payload
         }
-      case SUBACCOUNT_GET_FULL_DATA_LOADING:
-        return{
+      case CHOOSE_SUBACCOUNT:
+        return {
           ...state,
-          getFullData: action.payload
-        }
-      case SUBACCOUNT_GET_FULL_DATA_SUCCESS:
-        return{
-          ...state,
-          fullData: action.payload
-        }
-      case SUBACCOUNT_GET_FULL_DATA_SUCCESS:
-        return{
-          ...state,
-          getFullDataError: action.payload
+          choosenSubaccount: action.payload
         }
       default:
         return state;

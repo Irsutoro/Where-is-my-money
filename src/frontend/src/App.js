@@ -18,6 +18,7 @@ import ActivationPage from './containers/ActivationPage';
 import AuthRoute from './AuthRoute';
 import HistoryPage from './containers/HistoryPage';
 import ReportPage from './containers/ReportPage';
+import SubaccountsPage from './containers/SubaccountsPage';
 
 export const store = configureStore()
 
@@ -35,6 +36,7 @@ export default class App extends Component {
                 <Route path="/activate" component={ActivationPage} />
                 <AuthRoute path="/history" component={HistoryPage} />
                 <AuthRoute path="/report" component={ReportPage} />
+                <AuthRoute path="/subaccounts" component={SubaccountsPage} />
                 <AuthRoute path="/properties" component={NotFound} />
                 <Route path="/regulations" component={Regulations} />
                 <Route component={NotFound} />
