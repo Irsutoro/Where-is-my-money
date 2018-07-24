@@ -43,6 +43,7 @@ class Navigation extends Component {
                 stackable
                 inverted
                 borderless
+                
                 fixed="top"
             >
                 <Menu.Item

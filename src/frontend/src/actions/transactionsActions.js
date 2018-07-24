@@ -59,8 +59,8 @@ export const getTransactionsPart = (from,to,subaccountId) => dispatch => {
         type: TRANSACTIONS_ERROR,
         payload: false
     })
-
-    axios.get(transactionsUrl, {
+    
+    return axios.get(transactionsUrl, {
             headers: {
                 'Authorization': sessionStorage.getItem('Authorization')
             },
