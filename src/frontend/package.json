@@ -4,9 +4,11 @@
   "description": "Where is my money?!",
   "dependencies": {
     "axios": "^0.18.0",
+    "chart.js": "^2.7.2",
     "parcel-bundler": "^1.9.7",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
+    "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-route-guard": "^1.0.7",
