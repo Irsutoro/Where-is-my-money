@@ -1,8 +1,13 @@
-import { LOGIN_USER_ERROR, LOGIN_USER_SUCCESS } from "./actions/types";
+import {
+    LOGIN_USER_ERROR,
+    LOGIN_USER_SUCCESS
+} from "./actions/types";
 import { store } from './App'
 
 const AuthRouteGuard = {
     shouldRoute() {
+        console.log('authGuard')
+        
         if (sessionStorage.getItem('Authorization')) {
             store.dispatch({
                 type: LOGIN_USER_SUCCESS

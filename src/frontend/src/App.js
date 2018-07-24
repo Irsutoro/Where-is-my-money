@@ -15,6 +15,9 @@ import NotFound from './components/general/NotFound'
 import LoginPage from './components/LoginPage/LoginPage'
 import Regulations from './components/general/Regulations'
 import ActivationPage from './containers/ActivationPage';
+import AuthRoute from './AuthRoute';
+import HistoryPage from './containers/HistoryPage';
+import ReportPage from './containers/ReportPage';
 
 export const store = configureStore()
 
@@ -30,9 +33,9 @@ export default class App extends Component {
                 <Route exact path="/" component={LoginPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/activate" component={ActivationPage} />
-                <SecureRoute path="/history" routeGuard={AuthRouteGuard} component={NotFound} redirectToPathWhenFail="/login" />
-                <SecureRoute path="/report" routeGuard={AuthRouteGuard} component={NotFound} redirectToPathWhenFail="/login" />
-                <SecureRoute path="/properties" routeGuard={AuthRouteGuard} component={NotFound} redirectToPathWhenFail="/properties" />
+                <AuthRoute path="/history" component={HistoryPage} />
+                <AuthRoute path="/report" component={ReportPage} />
+                <AuthRoute path="/properties" component={NotFound} />
                 <Route path="/regulations" component={Regulations} />
                 <Route component={NotFound} />
               </Switch>

@@ -1,7 +1,7 @@
 import {
-    SUBACCOUNT_ERROR,
-    SUBACCOUNT_SUCCESS,
-    SUBACCOUNT_LOADING,
+    SUBACCOUNTS_ERROR,
+    SUBACCOUNTS_SUCCESS,
+    SUBACCOUNTS_LOADING,
     SUBACCOUNT_GET_FULL_DATA_LOADING,
     SUBACCOUNT_GET_FULL_DATA_SUCCESS,
     SUBACCOUNT_GET_FULL_DATA_ERROR
@@ -9,9 +9,9 @@ import {
     from '../actions/types';
   
   const initialState = {
-    pullData: false,
-    pulled: [],
-    pullError: false,
+    subaccountsLoading: false,
+    subaccounts: [],
+    subaccountsError: false,
     getFullData: false,
     fullData: [],
     getFullDataError: false
@@ -19,20 +19,20 @@ import {
   
   export default function (state = initialState, action) {
     switch (action.type) {
-      case SUBACCOUNT_LOADING:
+      case SUBACCOUNTS_LOADING:
         return {
           ...state,
-          pullData: action.payload
+          subaccountsLoading: action.payload
         }
-      case SUBACCOUNT_SUCCESS:
+      case SUBACCOUNTS_SUCCESS:
         return {
           ...state,
-          pulled: action.payload
+          subaccounts: action.payload
         }
-      case SUBACCOUNT_ERROR:
+      case SUBACCOUNTS_ERROR:
         return {
           ...state,
-          pullError: action.payload
+          subaccountsError: action.payload
         }
       case SUBACCOUNT_GET_FULL_DATA_LOADING:
         return{

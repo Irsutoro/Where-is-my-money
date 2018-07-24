@@ -95,7 +95,7 @@ export const loginUser = loginData => dispatch => {
     }
   ).then(res => {
     const authToken = res.data['auth_token']
-    sessionStorage.setItem('Authorization', authToken)
+    sessionStorage.setItem('Authorization', `Basic ${authToken}`)
 
     dispatch({
       type: LOGIN_USER_SUCCESS

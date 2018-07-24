@@ -8,11 +8,10 @@ import './NotFound.css'
 export default class NotFound extends Component {
     render() {
         return (
-            
-        <div className="error-page">
-            <Image src={logo} size='medium'/>
-            <Header as='h1'>Nie znaleziono strony?!</Header>
-        </div>
+            <div className="error-page">
+                <Image src={logo} size='medium'/>
+                <Header as='h1'>Nie znaleziono strony?!</Header>
+            </div>
         );
     }
 }
