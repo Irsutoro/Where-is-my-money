@@ -116,8 +116,6 @@ let dataLineMinus = {
     ]
   };
 
-let plus = []
-let minus =[]
 
 const monthNames = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
   "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"
@@ -144,13 +142,13 @@ class ReportPage extends Component {
         let first = new Date(y,m,2).getUnixTime();
         let last = new Date(y,m+1,1).getUnixTime();
 
-        this.props.getTransactionsPart(first,last,1).then( () =>{
+        this.props.getTransactionsPart(first,last,this.props.choosenSubaccount.id).then( () =>{
             this.parseTransactionsToDougnutData();
         });
         //past months
         first = new Date(y,m-2,2).getUnixTime();    
         last = new Date(y,m+1,1).getUnixTime();
-        this.props.getTransactionsPart(first,last,1).then( () =>{
+        this.props.getTransactionsPart(first,last,this.props.choosenSubaccount.id).then( () =>{
             this.parseTransactionsToLineData();
         });
     }
@@ -162,12 +160,14 @@ class ReportPage extends Component {
         let first = new Date(y,m,2).getUnixTime();
         let last = new Date(y,m+1,1).getUnixTime();
 
-        this.props.getTransactionsPart(first,last,1).then( () =>{
+        this.props.getTransactionsPart(first,last,this.props.choosenSubaccount.id).then( () =>{
             this.parseTransactionsToDougnutData();
         });
     }
     parseTransactionsToDougnutData(){
-        
+        let plus = []
+        let minus =[]
+
         let JSONresult = JSON.stringify(this.props.transactionsPart);
         let arr = JSON.parse(JSONresult)
 
@@ -212,7 +212,6 @@ class ReportPage extends Component {
                 doughnutMinus: doughnutMinus
             }
         })
-        
     }
     parseTransactionsToLineData(){
         let JSONresult = JSON.stringify(this.props.transactionsPart);
@@ -302,24 +301,18 @@ class ReportPage extends Component {
             <Grid stackable>
                 <Grid.Row centered columns={16}>
                     <Grid.Column width = {8}>
-                        <centered>
                         <h1>Przychody w obecnym miesiącu:</h1>
-                        </centered>
                         <Doughnut data={this.state.doughnutPlus} />
                     </Grid.Column>
                     
                     <Grid.Column width = {8}>
-                        <centered>
                         <h1>Wydatki w obecnym miesiącu:</h1>
-                        </centered>
                         <Doughnut data={this.state.doughnutMinus} />
                     </Grid.Column>
                 </Grid.Row>
                 <Divider/>
                 <Grid.Row centered columns={9}>
-                <centered>
                 <h3>Aby wyeksportować przychody oraz wydatki z obecnego miesiąca, naciśnij poniższy przycisk.</h3>
-                </centered>
                     <Button onClick={this.getInfoCSV} size ="huge">
                         <CSVLink data={this.props.transactionsPart} filename="ostatniMiesiac.csv">
                             Eksport
@@ -343,10 +336,12 @@ class ReportPage extends Component {
 }
 ReportPage.propTypes = {
     transactionsPart: PropTypes.array.isRequired,
+    choosenSubaccount: PropTypes.object.isRequired,
     getTransactionsPart: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    transactionsPart: state.transactionsReducer.transactionsPart
+    transactionsPart: state.transactionsReducer.transactionsPart,
+    choosenSubaccount: state.subaccountsReducer.choosenSubaccount
 })
 export default connect(mapStateToProps, {getTransactionsPart})(withSubaccountsCheck(ReportPage))
