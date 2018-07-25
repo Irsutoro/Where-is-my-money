@@ -74,9 +74,8 @@ class TransactionService:
                 raise cherrypy.HTTPError(400, 'Bad Request')
 
     def DELETE(self, id):
-        request = cherrypy.request.json
         with WMM_MAIN_DB as db:
             user_id = db.execute(QUERIES['General']['UserId'], (cherrypy.request.login,), ResultSet.ONE)[0]
-            deleted = db.execute(QUERIES['Transaction']['Delete'], (user_id, id), ResultSet.ONE)
+            deleted = db.execute(QUERIES['Transaction']['Delete'], (int(id), user_id), ResultSet.ONE)
             if not deleted:
                 raise cherrypy.HTTPError(404, 'Entry not found')
