@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{textcomp}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -272,15 +273,91 @@
 
 	\begin{figure}[H]
 		\vspace*{-2cm}
-		\hspace*{-2cm}
-		\includegraphics[scale=0.45]{assets/mc1.png}
+		\hspace*{-1cm}
+		\includegraphics[scale=0.4]{assets/view1.png}
 		\caption[]{Interfejs ekranu logowania}
 		\label{fig:logowanie}
 	\end{figure}
+	\paragraph*{} Na powyższym rysunku widnieje widok ekranu logowania do aplikacji "Where's my money?!". Początkowo użytkownik proszony jest o podanie loginu oraz hasła, w przypadku gdy wcześniej już gościł w serwisie. W przeciwnym wypadku ma możliwość przełączenia się do widoku rejestracji.
 	\begin{figure}[H]
-		\hspace*{-2cm}
-		\includegraphics[scale=0.45]{assets/mc2.png}
+		\hspace*{-1cm}
+		\includegraphics[scale=0.4]{assets/view2.png}
 		\caption[]{Interfejs ekranu rejestracji}
-		\label{fig:rejestracja}
+		\label{fig:rejestr}
 	\end{figure}
-\end{document}
+	\paragraph*{} Kolejnym widokiem jest wyżej wspomniany widok rejestracji. Jest on wykorzystywany w przypadku, gdy osoba odwiedzająca stronę, nie posiada konta. Po uzupełnieniu niezbędnych informacji oraz przyciśnięciu przycisku Zarejestruj, użytkownik otrzymuje na adres email, podany w formularzu, token aktywacyjny, niezbędny do utworzenia konta. Następnie użytkownik jest przekierowany na stronę główną serwisu.
+\begin{figure}[H]
+	\hspace*{-1cm}
+	\includegraphics[scale=0.6]{assets/view3(1).png}
+	\caption[]{Interfejs ekranu raportów(1)}
+	\label{fig:raport1}
+\end{figure}
+\paragraph*{} Następnym widokiem, podzielonym na dwie części (Interfejs ekranu raportów(1) oraz Interfejs ekranu raportów(2)) jest widok przychodów oraz wydatków pochodzących z konta użytkownika w bieżącym miesiącu. Użytkownik ma możliwość pobrania tych informacji w postaci formatu CSV, dzięki przyciskowi mieszczącemu się poniżej dwóch grafów.  
+\begin{figure}[H]
+	\hspace*{0cm}
+	\includegraphics[scale=0.5]{assets/view3(2).png}
+	\caption[]{Interfejs ekranu raportów(2)}
+	\label{fig:raport2}
+\end{figure}
+\paragraph*{} Powyżej znajdują się dwa wykresy, podające informacje o przychodach oraz wydatkach z ostatnich trzech miesięcy. Następnie przycisk "Przejdź do historii" pozwala na przejście do widoku tabel ze wszystkimi wartościami konta użytkownika.
+\begin{figure}[H]
+	\hspace*{0.5cm}
+	\includegraphics[scale=0.5]{assets/view4.png}
+	\caption[]{Interfejs ekranu subkont}
+	\label{fig:subkonta}
+\end{figure} 
+\paragraph*{} Kolejnym widokiem jest widok ekranu z zarządzaniem subkontami. Pozwala on na dodanie nowego subkonta, przypisanego do konta użytkownika, a także na usunięcie wybranego subkonta.
+\begin{figure}[H]
+	\hspace*{-1.5cm}
+	\includegraphics[scale=0.7]{assets/view5.png}
+	\caption[]{Interfejs ekranu ustwień}
+	\label{fig:ustawienia}
+\end{figure}
+\paragraph*{} Na powyższym rysunku, widnieje widok ustawień. W tym widoku, użytkownik ma możliwość zmiany dotychczasowych ustawień konta gółwnego, takich jak login, hasło, czy adres email.
+\begin{figure}[H]
+	\hspace*{-1cm}
+	\includegraphics[scale=0.6]{assets/view6.png}
+	\caption[]{Interfejs ekranu historii}
+	\label{fig:historia}
+\end{figure}
+\paragraph*{} Następnym widokiem jest widok historii wszystkich wpisów użytkownika dla danego subkonta. Użytkownik ma możliwość dodania nowych wpisów, ich usunięcie lub edycję. Dodatkowo użytkownik ma możliwość dodać wyciąg z banku w postaci CSV.
+\begin{figure}[H]
+	\hspace*{-2cm}
+	\includegraphics[scale=0.6]{assets/view7.png}
+	\caption[]{Interfejs ekranu rejestracji}
+	\label{fig:edycja}
+\end{figure}
+\paragraph*{} Na kolejnym rysunku widnieje formularz uaktywniający się po wybraniu opcji edycji lub dodania nowego wpisu. Użytkownik proszony jest o podanie potrzebnych informacji, a także wybranie kategorii wpisu oraz waluty z wcześniej już przygotowanych tablic, przy czym użytkownik ma możliwość dodawania własnych kategorii.
+\section{Bezpieczeństwo}
+\paragraph*{} Aplikacja kliencka oparta jest o model bezpieczeństwa Basic Auth. Działa w oparciu o wymaganie nagłówków "Authorization" w każdym z żądań zasobów zwartością zbudowaną na podstawie loginu oraz hasła w base64. Na poniższym rysunku przedstawiony jest schemat żądania z przeglądarki wskazujący na użycie Basic Auth.
+\begin{figure}[H]
+	\hspace*{-1cm}
+	\includegraphics[scale=0.8]{assets/basicAuth.png}
+	\caption[]{Widok Basic Auth w przeglądarce}
+	\label{fig:basic }
+\end{figure}
+\section{Podsumowanie i perspektywy rozwoju}
+\subsection{Podział prac}
+Patryk Mroczyński:
+\begin{enumerate}
+	\item część serwerowa,
+	\item baza danych
+\end{enumerate}
+Jakub Wiśniewski:
+\begin{enumerate}
+	\item część aplikacji klienckiej,
+	\item zarządzanie wirtualnym prywatnym serwerem
+\end{enumerate}
+Oskar Rutkowski:
+\begin{enumerate}
+	\item część aplikacji klienckiej
+\end{enumerate}
+\subsection{Przebieg prac}
+\paragraph *{} Projekt zespołowy "Where's my money?!" przebiegł bez większych komplikacji. Każdy z członków zespołu wywiązał się ze swoich zadań. W przypadku problemów cały zespół przejawiał chęć pomocy przy ich rozwiązaniu. Zamierzone wymagania funkcjonalne oraz niefunkcjonalne zostały w większości spełnione. Zadania zostały wykonane dobrze, jednakże niektóre aspekty programistyczne mogłbyby zostać zrealizowane bardziej optymalnie. Warto zwrócić uwagę na wygodę użytkowania aplikacji, zespół programistyczny skupił się głównie na wykonaniu założeń, dlatego też szata graficzna jest wykonana jedynie podstawowo. Realizację zadań możnabyło rozłożyć w bardziej optymalnych odstępach czasowych, dla większej wygody członków zespołu.
+\subsection{Perspektywy}
+\paragraph*{} W przypadku perspektyw rozwoju, projekt możnaby wzbogacić o samodzielnie działający serwer do obsługi baz danych oraz aplikacji klienckich. Inną propozycją mogłoby być udoskonalenie aplikacji klienckiej o dodatkowe wersje językowe. Możnaby zwrócić większą uwagę na obsługę błędów, dobrym pomysłem byłoby większe uodpornienie aplikacji na negatywne działania użytkownika oraz stworzenie testów aplikcaji.
+\subsection{Przekierowanie do kodu źródłowego}
+\paragraph*{} Poniżej zostaje zamieszczony link do kodu źródłowego zarówno aplikacji serwerowej jak i aplikacji klienckiej.
+\paragraph*{}
+\url{https://github.com/Irsutoro/Where-is-my-money}
+\end{document} 
