@@ -71,29 +71,27 @@
 			\begin{itemize}
 				\item \textbf{GET /api/transactions/} - zwraca listę transakcji dla użytkownika.
 
-				\item \textbf{GET /api/transactions/:id/} - zwraca szczegóły transakcji o podanym id.
-
 				\item \textbf{POST /api/transactions/} - dodaje nową transakcję do historii.
 
 				\item \textbf{PUT /api/transactions/:id/} - aktualizuje informacje o transakcji.
 
 				\item \textbf{DELETE /api/transactions/:id/} - usuwa transakcję o podanym id.
 			\end{itemize}
-		\item CsvSettingApi
-			\begin{itemize}
-				\item \textbf{GET /api/csvsettings/} - zwraca listę predefiniowanych ustawień arkuszy dla banków oraz własne ustawienia użytkownika.
+		% \item CsvSettingApi
+		% 	\begin{itemize}
+		% 		\item \textbf{GET /api/csvsettings/} - zwraca listę predefiniowanych ustawień arkuszy dla banków oraz własne ustawienia użytkownika.
 
-				\item \textbf{GET /api/csvsettings/:id/} - zwraca pojedyncze ustawienie CSV.
+		% 		\item \textbf{GET /api/csvsettings/:id/} - zwraca pojedyncze ustawienie CSV.
 
-				\item \textbf{POST /api/csvsettings/} - tworzy nowe ustawienie arkusza.
+		% 		\item \textbf{POST /api/csvsettings/} - tworzy nowe ustawienie arkusza.
 
-				\item \textbf{PUT /api/csvsettings/:id/} - aktualizuje informacje o ustawieniu arkusza.
+		% 		\item \textbf{PUT /api/csvsettings/:id/} - aktualizuje informacje o ustawieniu arkusza.
 
-				\item \textbf{DELETE /api/csvsettings/:id/} - usuwa ustawienie arkusza o podanym id.
-			\end{itemize}
+		% 		\item \textbf{DELETE /api/csvsettings/:id/} - usuwa ustawienie arkusza o podanym id.
+		% 	\end{itemize}
 		\item CategoryApi
 			\begin{itemize}
-				\item \textbf{GET /api/categories/} - zwraca listę predefiniowanych kategorii oraz własnych użytkownika.
+				\item \textbf{GET /api/categories/} - zwraca listę kategorii użytkownika.
 
 				\item \textbf{POST /api/categories/} - dodaje nową kategorię.
 
@@ -101,16 +99,26 @@
 
 				\item \textbf{DELETE /api/categories/:id/} - usuwa kategorię o podanym id.
 			\end{itemize}
-		\item CategoryMappingApi
+		\item CsvAPI
 			\begin{itemize}
-				\item \textbf{GET /api/categorymapping/} - zwraca listę mapowań dla użytkownika.
+				\item \textbf{GET /api/csv/} - zwraca listę dostępnych układów CSV.
 
-				\item \textbf{POST /api/categorymapping/} - dodaje nowe mapowanie.
-
-				\item \textbf{PUT /api/categorymapping/:id/} - aktualizuje informacje o mapowaniu o danym id.
-
-				\item \textbf{DELETE /api/categorymapping/:id/} - usuwa mapowanie o podanym id.
+				\item \textbf{POST /api/csv/} - przetwarza plik CSV, zwracając JSON z informcjami o wydatkach.
 			\end{itemize}
+		\item CurrencyAPI
+			\begin{itemize}
+				\item \textbf{GET /api/currency/} - zwraca listę dostępnych walut.
+			\end{itemize}
+		% \item CategoryMappingApi
+		% 	\begin{itemize}
+		% 		\item \textbf{GET /api/categorymapping/} - zwraca listę mapowań dla użytkownika.
+
+		% 		\item \textbf{POST /api/categorymapping/} - dodaje nowe mapowanie.
+
+		% 		\item \textbf{PUT /api/categorymapping/:id/} - aktualizuje informacje o mapowaniu o danym id.
+
+		% 		\item \textbf{DELETE /api/categorymapping/:id/} - usuwa mapowanie o podanym id.
+		% 	\end{itemize}
 	\end{itemize}
 	\section{Wymagania}
 	\paragraph{} W rozdziale opisane są wymagania funkcjonalne oraz niefunkcjonalne z podziałem na aktorów.
@@ -134,8 +142,8 @@
 				\item Możliwość modyfikacji i usuwania wpisów w aplikacji.
 				\item Możliwość generowania raportów z określonego przedziału czasowego dla określonych kategorii i subkont.
 				\item Możliwość eksportowania swoich raportów finansowych jako pliki w formacie CSV lub PDF.
-				\item Możliwość wybrania układu pliku CSV między predefiniowanymi bankami lub zdefiniowanym przez siebie układem przy dodawaniu wyciągu z konta bankowego.
-				\item Możliwość dodania wzoru tytułu oraz dopasowania do niego kategorii, aby zautomatyzować uzupełnianie kategorii przy dodawaniu wpisów z pliku w formacie CSV.
+				\item Możliwość wybrania układu pliku CSV między predefiniowanymi bankami % lub zdefiniowanym przez siebie układem przy dodawaniu wyciągu z konta bankowego.
+				%\item Możliwość dodania wzoru tytułu oraz dopasowania do niego kategorii, aby zautomatyzować uzupełnianie kategorii przy dodawaniu wpisów z pliku w formacie CSV.
 				\item Możliwość dodawania komentarzy do wpisów.
 			\end{itemize}
 	\end{itemize}
