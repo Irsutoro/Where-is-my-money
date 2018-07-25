@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Button, Header, Icon, Modal, Form, Input, Dropdown } from 'semantic-ui-react'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
+import 'react-datepicker/dist/react-datepicker.css';
 
 let categoryInput = React.createRef()
 
@@ -10,12 +13,15 @@ class AddTransactionModal extends Component {
 
     this.state = {
       modalOpen: false,
-      transaction: {}
+      transaction: {
+        date: moment()
+      }
     }
 
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleDateChange = this.handleDateChange.bind(this)
   }
 
   handleOpen() {
@@ -29,6 +35,15 @@ class AddTransactionModal extends Component {
   handleChange(e, { value }) {
     let transaction = this.state.transaction
     transaction[e.target.name] = value
+
+    this.setState({
+      transaction: transaction
+    })
+  }
+
+  handleDateChange(date) {
+    let transaction = this.state.transaction
+    transaction.date = date
 
     this.setState({
       transaction: transaction
@@ -63,7 +78,15 @@ class AddTransactionModal extends Component {
           <Form>
             <Form.Field required>
               <label>Data</label>
-              <Input name="date" value={this.state.transaction.date} placeholder={this.state.transaction.date} onChange={this.handleChange} />
+              <DatePicker
+                  selected={this.state.transaction.date}
+                  onChange={this.handleDateChange}
+                  dateFormat="DD-MM-YYYY, HH:mm"
+                  showTimeSelect
+                  timeIntervals={15}
+                  timeFormat="HH:mm"
+                  timeCaption="time"
+              />
             </Form.Field>
             <Form.Field required>
               <label>Wartość</label>
@@ -106,7 +129,7 @@ class AddTransactionModal extends Component {
               subaccount_id: this.props.subaccountId,
               category_id: this.state.transaction.category_id,
               currency_id: this.state.transaction.currency_id,
-              date: this.state.transaction.date,
+              date: this.state.transaction.date.unix(),
               amount: this.state.transaction.amount,
               comment: this.state.transaction.comment
             })

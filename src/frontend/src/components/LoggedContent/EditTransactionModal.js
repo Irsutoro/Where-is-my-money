@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Button, Header, Icon, Modal, Form, Input, Dropdown } from 'semantic-ui-react'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
+import 'react-datepicker/dist/react-datepicker.css';
 
 let categoryInput = React.createRef()
 
@@ -16,6 +19,7 @@ class EditTransactionModal extends Component {
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleDateChange = this.handleDateChange.bind(this)
   }
 
   handleOpen() {
@@ -29,6 +33,15 @@ class EditTransactionModal extends Component {
   handleChange(e, { value }) {
     let transaction = this.state.transaction
     transaction[e.target.name] = value
+
+    this.setState({
+      transaction: transaction
+    })
+  }
+
+  handleDateChange(date) {
+    let transaction = this.state.transaction
+    transaction.date = date.unix()
 
     this.setState({
       transaction: transaction
@@ -63,7 +76,15 @@ class EditTransactionModal extends Component {
           <Form>
             <Form.Field required>
               <label>Data</label>
-              <Input name="date" value={this.state.transaction.date} placeholder={this.state.transaction.date} onChange={this.handleChange} />
+              <DatePicker
+                  selected={moment(this.state.transaction.date * 1000)}
+                  onChange={this.handleDateChange}
+                  dateFormat="DD-MM-YYYY, HH:mm"
+                  showTimeSelect
+                  timeIntervals={15}
+                  timeFormat="HH:mm"
+                  timeCaption="time"
+              />
             </Form.Field>
             <Form.Field required>
               <label>Wartość</label>
