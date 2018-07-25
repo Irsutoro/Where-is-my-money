@@ -129,7 +129,6 @@
 			\begin{itemize}
 				\item Możliwość skorzystania z wersji testowej aplikacji bez rejestracji.
 				\item Możliwość rejestracji oraz logowania.
-				\item Możliwość wysłania prośby o zresetowanie hasła poprzez podanie adresu email.
 			\end{itemize}
 
 		\item Zalogowany użytkownik
@@ -137,13 +136,12 @@
 				\item Możliwość wylogowania.
 				\item Możliwość edycji w opcjach konta adresu email, hasła oraz nazwy konta.
 				\item Możliwość tworzenia subkont, do których może przypisywać wybrane wydatki oraz przychody.
-				\item Możliwość dodawania wyciągów z konta dowolnego banku jako plik w formacie CSV.
+				\item Możliwość dodawania wyciągów z konta wybranych banków jako plik w formacie CSV.
 				\item Możliwość ręcznego dodawania wpisów, wpisując kwotę oraz dobierając kategorię, a także walutę.
 				\item Możliwość modyfikacji i usuwania wpisów w aplikacji.
 				\item Możliwość generowania raportów z określonego przedziału czasowego dla określonych kategorii i subkont.
 				\item Możliwość eksportowania swoich raportów finansowych jako pliki w formacie CSV lub PDF.
-				\item Możliwość wybrania układu pliku CSV między predefiniowanymi bankami % lub zdefiniowanym przez siebie układem przy dodawaniu wyciągu z konta bankowego.
-				%\item Możliwość dodania wzoru tytułu oraz dopasowania do niego kategorii, aby zautomatyzować uzupełnianie kategorii przy dodawaniu wpisów z pliku w formacie CSV.
+				\item Możliwość wybrania układu pliku CSV między predefiniowanymi bankami.
 				\item Możliwość dodawania komentarzy do wpisów.
 			\end{itemize}
 	\end{itemize}
@@ -152,9 +150,7 @@
 	\begin{itemize}
 		\item Aplikacja serwerowa napisana w języku Python3.
 		\item Aplikacja serwerowa wykorzystuje relacyjną bazę danych PostgreSQL.
-		\item Osobna baza danych dla wersji testowej oraz dla pełnej wersji dla zalogowanych użytkowników.
 		\item Aplikacja nie wymaga od użytkownika instalowania dodatkowego oprogramowania poza aktualną przeglądarką.
-		\item Wykorzystanie architektury PWA (z ang. Progressive Web Applications) w celu instalowania aplikacji na urządzeniach mobilnych.
 		\item Aby użytkownik mógł korzystać z aplikacji musi się poprawanie zalogować na założone w serwisie konto.
 		\item Dane użytkownika są przechowywane w bazie danych.
 		\item Hasło użytkownika przechowywane jest jako wynik funkcji skrótu SHA-256.
