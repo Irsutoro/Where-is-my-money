@@ -2,7 +2,9 @@ import {
     TRANSACTIONS_LOADING,
     TRANSACTIONS_SUCCESS,
     TRANSACTIONS_PART_SUCCESS,
-    TRANSACTIONS_ERROR
+    TRANSACTIONS_ERROR,
+    CURRENCIES_UPDATE,
+    CATEGORIES_UPDATE
 }
 from '../actions/types';
 
@@ -10,7 +12,9 @@ const initialState = {
     transactionsLoading: false,
     transactions: [],
     transactionsPart: [],
-    transactionsError: false
+    transactionsError: false,
+    currencies: [],
+    categories: []
 };
 
 export default function (state = initialState, action) {
@@ -34,6 +38,16 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 transactionsPart: action.payload
+            }
+        case CURRENCIES_UPDATE:
+            return {
+                ...state,
+                currencies: action.payload
+            }
+        case CATEGORIES_UPDATE:
+            return {
+                ...state,
+                categories: action.payload
             }
         default:
             return state;

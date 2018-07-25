@@ -9,6 +9,7 @@ from './types';
 const subaccUrl = "http://www.iraminius.pl/wmm/api/subaccounts/"
 
 import axios from 'axios'
+import { getTransactions } from './transactionsActions';
 
 export const getSubaccounts = () => dispatch => {
   dispatch({
