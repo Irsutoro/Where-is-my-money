@@ -26,7 +26,7 @@ class TransactionService:
                 query += ' AND category_id = %s'
                 parameters += (int(category_id),)
 
-            data = db.execute(query,parameters,ResultSet.ALL)
+            data = db.execute(query, parameters, ResultSet.ALL)
             result = []
             for d in data:
                 result.append({
@@ -36,7 +36,6 @@ class TransactionService:
                     'comment': d[3],
                     'category': d[4],
                     'subaccount': d[5],
-                    'currency': d[6],
                 })
         return result
 

@@ -12,7 +12,7 @@ class SubaccountService:
         with WMM_MAIN_DB as db:
             user_id = db.execute(QUERIES['General']['UserId'], (cherrypy.request.login,), ResultSet.ONE)[0]
             subaccount_list = db.execute(QUERIES['Subaccount']['List'], (user_id,), ResultSet.ALL)
-            return [{'id': id, 'name': name} for id, name in subaccount_list]
+            return [{'id': id, 'name': name, 'currency': currency, 'description': description} for id, name, currency, description in subaccount_list]
 
     @cherrypy.tools.json_in()
     def POST(self):

@@ -16,7 +16,9 @@ CREATE TABLE users (
 CREATE TABLE subaccounts (
     id serial PRIMARY KEY,
     user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    name varchar(30) NOT NULL
+    name varchar(30) NOT NULL,
+    currency_id int NOT NULL REFERENCES currencies(id) ON DELETE CASCADE,
+    description varchar(100) NOT NULL
 );
 
 CREATE TABLE categories (
@@ -54,7 +56,6 @@ CREATE TABLE entries (
     user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     category_id int NOT NULL REFERENCES categories(id) ON DELETE RESTRICT,
     subaccount_id int NOT NULL REFERENCES subaccounts(id) ON DELETE RESTRICT,
-    currency_id int NOT NULL REFERENCES currencies(id),
     date bigint NOT NULL,
     amount double precision NOT NULL,
     comment varchar(200)
@@ -74,9 +75,6 @@ CREATE TABLE tokens (
 
 INSERT INTO token_categories (name) VALUES ('activation'), ('reset_password');
 INSERT INTO currencies (fullname, code) VALUES ('Polski Złoty', 'PLN'), ('Dollar', 'USD');
-
-\connect postgres
-CREATE DATABASE wmm_test TEMPLATE wmm;
 
 
 
