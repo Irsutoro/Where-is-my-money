@@ -1,0 +1,7 @@
+[Email]
+Address = email.address@aa.bb
+Password = yourpassword
+
+[Server]
+Host = aa_host
+Port = aa_port

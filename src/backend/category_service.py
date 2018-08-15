@@ -42,8 +42,3 @@ class CategoryService:
             deleted = db.execute(QUERIES['Category']['Delete'], (id, user_id), ResultSet.NONE)
             if not deleted:
                     raise cherrypy.HTTPError(404, 'Category not found')
-
-
-if __name__ == '__main__':
-    cherrypy.config.update(CHERRYPY_CONFIG_DEFAULT)
-    cherrypy.quickstart(CategoryService(), '/api/categories', WITH_AUTHENTICATION)

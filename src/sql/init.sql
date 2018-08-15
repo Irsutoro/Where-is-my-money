@@ -13,6 +13,12 @@ CREATE TABLE users (
     registration_date date NOT NULL
 );
 
+CREATE TABLE currencies (
+    id serial PRIMARY KEY,
+    fullname varchar(40) UNIQUE NOT NULL,
+    code varchar(3) UNIQUE NOT NULL
+);
+
 CREATE TABLE subaccounts (
     id serial PRIMARY KEY,
     user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -25,12 +31,6 @@ CREATE TABLE categories (
     id serial PRIMARY KEY,
     user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     name varchar(30) NOT NULL
-);
-
-CREATE TABLE currencies (
-    id serial PRIMARY KEY,
-    fullname varchar(40) UNIQUE NOT NULL,
-    code varchar(3) UNIQUE NOT NULL
 );
 
 CREATE TABLE title_to_category_map (

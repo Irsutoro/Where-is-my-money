@@ -7,8 +7,11 @@ class ResultSet(Enum):
     ALL = auto()
 
 class Database:
-    def __init__(self, dbname, user, host, password, port):
-        self.connection_string = f'dbname={dbname} user={user} host={host} password={password} port={port}'
+    def __init__(self, dbname, user, host, port, password = None):
+        if password:
+            self.connection_string = f'dbname={dbname} user={user} host={host} password={password} port={port}'
+        else:
+            self.connection_string = f'dbname={dbname} user={user} host={host} port={port}'
         self.connection = None
 
     def __enter__(self):

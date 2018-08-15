@@ -42,18 +42,18 @@
 	\begin{itemize}
 		\item AuthApi
 			\begin{itemize}
-				\item \textbf{GET /api/auth/:login/:password} - zwraca token basic auth dla użytkownika o podanym loginie i haśle.
+				\item \textbf{GET /api/auth/} - zwraca token basic auth dla użytkownika o podanym loginie i haśle. Wymaga podania dwóch parametrów login oraz password.
 
-				\item \textbf{POST /api/auth/} - tworzy nowego użytkownika.
+				\item \textbf{POST /api/auth/} - tworzy nowego użytkownika. Wymaga w ciele funkcji tekstu w formacie JSON, który reprezentuje słownik z kluczami login, password, username oraz email.
 
-				\item \textbf{PUT /api/auth/:token} - aktywuje konto użytkownika.
+				\item \textbf{PUT /api/auth/} - aktywuje konto użytkownika. Wymaga podania parametru token.
 			\end{itemize}
 		\item UserApi
 			\begin{itemize}
 
-				\item \textbf{GET /api/user/} - zwraca szczegóły użytkownika.
+				\item \textbf{GET /api/user/} - zwraca szczegóły użytkownika jako tekst w formacie JSON, który reprezentuje słownik z kluczami email, username oraz registration\_date.
 
-				\item \textbf{PUT /api/user/} - aktualizuje informacje o użytkowniku.
+				\item \textbf{PUT /api/user/} - aktualizuje informacje o użytkowniku. Wymaga podania w ciele funkcji tekstu w formacie JSON z co najmniej jednym z kluczy password, email oraz username.
 
 				\item \textbf{DELETE /api/user/} - usuwa użytkownika.
 
@@ -288,7 +288,7 @@
 	\caption[]{Interfejs ekranu raportów(1)}
 	\label{fig:raport1}
 \end{figure}
-\paragraph*{} Następnym widokiem, podzielonym na dwie części (Interfejs ekranu raportów(1) oraz Interfejs ekranu raportów(2)) jest widok przychodów oraz wydatków pochodzących z konta użytkownika w bieżącym miesiącu. Użytkownik ma możliwość pobrania tych informacji w postaci formatu CSV, dzięki przyciskowi mieszczącemu się poniżej dwóch grafów.  
+\paragraph*{} Następnym widokiem, podzielonym na dwie części (Interfejs ekranu raportów(1) oraz Interfejs ekranu raportów(2)) jest widok przychodów oraz wydatków pochodzących z konta użytkownika w bieżącym miesiącu. Użytkownik ma możliwość pobrania tych informacji w postaci formatu CSV, dzięki przyciskowi mieszczącemu się poniżej dwóch grafów.
 \begin{figure}[H]
 	\hspace*{0cm}
 	\includegraphics[scale=0.5]{assets/view3(2).png}
@@ -301,7 +301,7 @@
 	\includegraphics[scale=0.5]{assets/view4.png}
 	\caption[]{Interfejs ekranu subkont}
 	\label{fig:subkonta}
-\end{figure} 
+\end{figure}
 \paragraph*{} Kolejnym widokiem jest widok ekranu z zarządzaniem subkontami. Pozwala on na dodanie nowego subkonta, przypisanego do konta użytkownika, a także na usunięcie wybranego subkonta.
 \begin{figure}[H]
 	\hspace*{-1.5cm}
@@ -356,4 +356,4 @@ Oskar Rutkowski:
 \paragraph*{} Poniżej zostaje zamieszczony link do kodu źródłowego zarówno aplikacji serwerowej jak i aplikacji klienckiej.
 \paragraph*{}
 \url{https://github.com/Irsutoro/Where-is-my-money}
-\end{document} 
+\end{document}
