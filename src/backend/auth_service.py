@@ -52,6 +52,8 @@ class AuthService:
 
     def _register_user(self, login: str, password: str, email: str, username: str) -> int:
         query = 'INSERT INTO users (login, password, email, username, registration_date) VALUES (%s, %s, %s, %s, current_date) RETURNING id'
+        if len(password) != 64:
+            raise cherrypy.HTTPError(400, "Bad request")
         with WMM_MAIN_DB as db:
             try:
                 user_id = db.execute(query, (login, password, email, username), ResultSet.ONE)[0]

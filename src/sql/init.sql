@@ -75,7 +75,7 @@ CREATE TABLE tokens (
 
 INSERT INTO token_categories (name) VALUES ('activation'), ('reset_password');
 INSERT INTO currencies (fullname, code) VALUES ('Polski Złoty', 'PLN'), ('Dollar', 'USD');
-
+INSERT INTO csv_formats (id, user_id, name, title_index, date_index, amount_index, starting_row, separator) VALUES(1, NULL, 'mbank', 3, 1, 7, 39, ';');
 
 
 
