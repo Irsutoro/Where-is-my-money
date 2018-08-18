@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Segment, Tab, Container, Button, Grid, Column, Row, Divider } from 'semantic-ui-react';
-import {Doughnut, Line} from 'react-chartjs-2'
+import {Doughnut, Line,Bar} from 'react-chartjs-2'
 import {CSVLink} from 'react-csv'
 import { Link } from 'react-router-dom'
 import withSubaccountsCheck from './withSubaccountsCheck';
@@ -115,42 +115,94 @@ let dataLineMinus = {
       }
     ]
   };
-
-
+let barData = {
+    
+    labels: [],
+    datasets: [
+      {
+        label: 'Suma wydatków i przychodów',
+        backgroundColor: '#7FB069',
+        borderColor: '#9ab069',
+        borderWidth: 1,
+        hoverBackgroundColor: '#7a8c52',
+        hoverBorderColor: '#7a8c52',
+        data: []
+      }
+    ]
+  };
 const monthNames = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
-  "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"
-];
+  "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+const weekNames = ["Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota","Niedziela"];
 
 class ReportPage extends Component {
     constructor(props){
         super(props)
         this.state = {
+            subaccountId: this.props.choosenSubaccount.id,
             doughnutPlus: doughnutPlus,
             doughnutMinus: doughnutMinus,
             dataLinePlus: dataLinePlus,
-            dataLineMinus: dataLineMinus
+            dataLineMinus: dataLineMinus,
+            barData: barData
         }
         this.parseTransactionsToDougnutData = this.parseTransactionsToDougnutData.bind(this)
         this.parseTransactionsToLineData = this.parseTransactionsToLineData.bind(this)
+        this.parseTransactionsToBarData = this.parseTransactionsToBarData.bind(this)
         this.getInfoCSV = this.getInfoCSV.bind(this)
     }
     componentDidMount(){
-        let date = new Date(),y = date.getFullYear(), m=date.getMonth();
+        let date = new Date(),y = date.getFullYear(), m=date.getMonth(),d=date.getDate();
         Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
 
         //current month
         let first = new Date(y,m,2).getUnixTime();
         let last = new Date(y,m+1,1).getUnixTime();
 
-        this.props.getTransactionsPart(first,last,this.props.choosenSubaccount.id).then( () =>{
+        this.props.getTransactionsPart(first,last,this.state.subaccountId).then( () =>{
             this.parseTransactionsToDougnutData();
         });
         //past months
         first = new Date(y,m-2,2).getUnixTime();    
         last = new Date(y,m+1,1).getUnixTime();
-        this.props.getTransactionsPart(first,last,this.props.choosenSubaccount.id).then( () =>{
+        this.props.getTransactionsPart(first,last,this.state.subaccountId).then( () =>{
             this.parseTransactionsToLineData();
         });
+        //past 7days
+        first = new Date(y,m,-7).getUnixTime();
+        last = new Date(y,m,d+1).getUnixTime();
+        this.props.getTransactionsPart(first,last,this.state.subaccountId).then(()=>{
+            this.parseTransactionsToBarData();
+        })
+    }
+    componentWillReceiveProps(anotherAccount){
+        if (anotherAccount.choosenSubaccount.id !== this.state.subaccountId) {
+            let date = new Date(),y = date.getFullYear(), m=date.getMonth(),d=date.getDate();
+            Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
+
+            //current month
+            let first = new Date(y,m,2).getUnixTime();
+            let last = new Date(y,m+1,1).getUnixTime();
+
+            this.props.getTransactionsPart(first,last,this.state.subaccountId).then( () =>{
+                this.parseTransactionsToDougnutData();
+            });
+            //past months
+            first = new Date(y,m-2,2).getUnixTime();    
+            last = new Date(y,m+1,1).getUnixTime();
+            this.props.getTransactionsPart(first,last,this.state.subaccountId).then( () =>{
+                this.parseTransactionsToLineData();
+            });
+            //past 7days
+            first = new Date(y,m,-7).getUnixTime();
+            last = new Date(y,m,d+1).getUnixTime();
+            this.props.getTransactionsPart(first,last,this.state.subaccountId).then(()=>{
+                this.parseTransactionsToBarData();
+            })
+        }
+
+        this.setState({
+            subaccountId: anotherAccount.choosenSubaccount.id
+        })
     }
     getInfoCSV(){
         let date = new Date(),y = date.getFullYear(), m=date.getMonth();
@@ -274,9 +326,9 @@ class ReportPage extends Component {
         amsplustemp.push(currentPlus);
 
         let amsminustemp =[];
-        amsminustemp.push(pastpastMinus*(-1));
-        amsminustemp.push(pastMinus*(-1));
-        amsminustemp.push(currentMinus*(-1));
+        amsminustemp.push(pastpastMinus);
+        amsminustemp.push(pastMinus);
+        amsminustemp.push(currentMinus);
         
         let monthTable = [];
         monthTable.push(pastpastMonthName);
@@ -296,16 +348,113 @@ class ReportPage extends Component {
             }
         })
     }
+    parseTransactionsToBarData(){
+    
+        var JSONresult = JSON.stringify(this.props.transactionsPart)    
+        var arr = JSON.parse(JSONresult);
+        let date = new Date(),y = date.getFullYear(), m=date.getMonth(),d=date.getDate();
+        Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
+
+        let todaySum=0;
+        let firstPastSum=0;
+        let secondPastSum=0;
+        let thirdPastSum=0;
+        let fourthPastSum=0;
+        let fifthPastSum=0;
+        let sixthPastSum=0;
+
+        let todayFirstHour = new Date(y,m,d,0,0).getUnixTime();
+        let todayLastHour = new Date(y,m,d,23,59,59).getUnixTime();
+        let todayDayName = weekNames[new Date(y,m,d-1).getDay()];
+        
+        let firstPastFirstHour = new Date(y,m,d-1,0,0).getUnixTime();
+        let firstPastLastHour = new Date(y,m,d-1,23,59,59).getUnixTime();
+        let firstPastDayName = weekNames[new Date(y,m,d-2).getDay()]
+        
+        let secondPastFirstHour = new Date(y,m,d-2,0,0).getUnixTime();
+        let secondPastLastHour = new Date(y,m,d-2,23,59,59).getUnixTime();
+        let secondPastDayName = weekNames[new Date(y,m,d-3).getDay()]
+        
+        let thirdPastFirstHour = new Date(y,m,d-3,0,0).getUnixTime();
+        let thirdPastLastHour = new Date(y,m,d-3,23,59,59).getUnixTime();
+        let thirdPastDayName = weekNames[new Date(y,m,d-4).getDay()]
+
+        let fourthPastFirstHour = new Date(y,m,d-4,0,0).getUnixTime();
+        let fourthPastLastHour = new Date(y,m,d-4,23,59,59).getUnixTime();
+        let fourthPastDayName = weekNames[new Date(y,m,d-5).getDay()]
+        
+        let fifthPastFirstHour = new Date(y,m,d-5,0,0).getUnixTime();
+        let fifthPastLastHour = new Date(y,m,d-5,23,59,59).getUnixTime();
+        let fifthPastDayName = weekNames[new Date(y,m,d-6).getDay()]
+
+        let sixthPastFirstHour = new Date(y,m,d-6,0,0).getUnixTime();
+        let sixthPastLastHour = new Date(y,m,d-6,23,59,59).getUnixTime();
+        let sixthPastDayName = weekNames[new Date(y,m,d-7).getDay()]
+        
+        console.log(todayFirstHour)
+        arr.forEach(function (a) {
+            if(a.date>firstPastLastHour ){
+                todaySum+=a.amount;
+            }
+            if(a.date>firstPastFirstHour && a.date <= firstPastLastHour){
+                firstPastSum+=a.amount;
+            }
+            if(a.date>secondPastFirstHour && a.date<= secondPastLastHour){
+                secondPastSum+=a.amount;
+            }
+            if(a.date>thirdPastFirstHour && a.date<= thirdPastLastHour){
+                thirdPastSum+=a.amount;
+            }
+            if(a.date>fourthPastFirstHour && a.date<= fourthPastLastHour){
+                fourthPastSum+=a.amount;
+            }
+            if(a.date>fifthPastFirstHour && a.date<= fifthPastLastHour){ 
+                fifthPastSum+=a.amount;
+            }
+            if(a.date>sixthPastFirstHour && a.date<= sixthPastLastHour){
+                sixthPastSum+=a.amount;
+            }
+            
+        }, Object.create(null));
+    
+        let amounts =[];
+        amounts.push(sixthPastSum);
+        amounts.push(fifthPastSum);
+        amounts.push(fourthPastSum);
+        amounts.push(thirdPastSum);
+        amounts.push(secondPastSum);
+        amounts.push(firstPastSum);
+        amounts.push(todaySum);
+        
+        let monthDayTable =[];
+        monthDayTable.push(sixthPastDayName);
+        monthDayTable.push(fifthPastDayName);
+        monthDayTable.push(fourthPastDayName);
+        monthDayTable.push(thirdPastDayName);
+        monthDayTable.push(secondPastDayName);
+        monthDayTable.push(firstPastDayName);
+        monthDayTable.push(todayDayName);
+        
+        barData.datasets[0].data = amounts;
+        barData.labels = monthDayTable;
+
+        this.setState(()=>{
+            return{
+                barData:barData
+            }
+        })
+        
+      }
     render() {
         return (    
             <Grid stackable>
                 <Grid.Row centered columns={16}>
-                    <Grid.Column width = {8}>
+                    <Grid.Column width = {7}>
                         <h1>Przychody w obecnym miesiącu:</h1>
                         <Doughnut data={this.state.doughnutPlus} />
                     </Grid.Column>
                     
-                    <Grid.Column width = {8}>
+                    <Grid.Column width = {7}>
                         <h1>Wydatki w obecnym miesiącu:</h1>
                         <Doughnut data={this.state.doughnutMinus} />
                     </Grid.Column>
@@ -320,15 +469,22 @@ class ReportPage extends Component {
                     </Button>
                 </Grid.Row>
                 <Divider/>
-                <Grid.Row centered columns={2}>
-                    <Grid.Column>
+                <Grid.Row centered columns={16}>
+                    <Grid.Column width={7}>
                         <h2>Przychody w ostatnich 3 miesiącach:</h2>
                         <Line data={dataLinePlus}/>
                     </Grid.Column>
-                    <Grid.Column>
+                    <Grid.Column width={7}>
                         <h2>Wydatki w ostatnich 3 miesiącach:</h2>
                         <Line data={dataLineMinus}/>
                     </Grid.Column>
+                </Grid.Row>
+                <Divider/>
+                <Grid.Row centered columns={16}>
+                    <Grid.Column width={14}>
+                    <h2>Podsumowanie majątku w ostatnich dniach</h2>
+                    <Bar data={barData}/>
+                    </Grid.Column >
                 </Grid.Row>
             </Grid>
         );
