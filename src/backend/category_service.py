@@ -32,7 +32,7 @@ class CategoryService:
         request = cherrypy.request.json
         user_id = self._get_user_id(cherrypy.request.login)
         try:
-            self._create_category(user_id, request['name'])
+            self._create_category(request['name'], user_id)
         except (KeyError, TypeError):
             raise cherrypy.HTTPError(400, "Bad request")
 

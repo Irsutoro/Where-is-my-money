@@ -31,7 +31,7 @@ class SubaccountService:
         request = cherrypy.request.json
         user_id = self._get_user_id(cherrypy.request.login)
         try:
-            self._create_subaccount(user_id, request['name'], request['currency_id'], request['description'])
+            self._create_subaccount(user_id, request['name'], request['currency_id'], request.get('description'))
         except (KeyError, TypeError):
             raise cherrypy.HTTPError(400, "Bad request")
 

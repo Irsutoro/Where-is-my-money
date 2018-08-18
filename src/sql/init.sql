@@ -24,7 +24,7 @@ CREATE TABLE subaccounts (
     user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     name varchar(30) NOT NULL,
     currency_id int NOT NULL REFERENCES currencies(id) ON DELETE CASCADE,
-    description varchar(100) NOT NULL
+    description varchar(100)
 );
 
 CREATE TABLE categories (

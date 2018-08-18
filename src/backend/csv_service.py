@@ -4,7 +4,7 @@ from database_management import ResultSet
 import csv
 import cherrypy
 from typing import List, Dict, Union
-
+import time
 @cherrypy.expose
 class CSVService:
 
@@ -28,7 +28,8 @@ class CSVService:
         csv_info = self._get_csv_info(format_id)
         entries = self._read_csv_file(csv_file, csv_info['starting_row'], csv_info['title_index'], csv_info['date_index'], csv_info['amount_index'], csv_info['separator'])
         user_id = self._get_user_id(cherrypy.request.login)
-        category_id = self._get_user_id(user_id)
+        category_id = self._get_category(user_id)
+        self._add_entries(entries, user_id, category_id, subaccount_id)
 
 
     def _add_entries(self, entries: List[Dict[str, int]], user_id: int, category_id: int, subaccount_id: int):
@@ -37,7 +38,9 @@ class CSVService:
 
         first_entry = True
         for entry in entries:
-            parameters += (user_id, category_id, subaccount_id, entry['date'], entry['amount'], entry['title'])
+            pattern = '%Y-%m-%d'
+            epoch = int(time.mktime(time.strptime(entry['date'], pattern)))
+            parameters += (user_id, category_id, subaccount_id, epoch, entry['amount'].replace(',','.'), entry['title'])
             if first_entry:
                 first_entry = False
                 query += '(%s, %s, %s, %s, %s, %s)'

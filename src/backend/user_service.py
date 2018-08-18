@@ -39,6 +39,8 @@ class UserService:
 
     def _update_password(self, new_password: str, login: str) -> None:
         query = 'UPDATE users set password = %s WHERE login = %s'
+        if len(new_password) != 64:
+            raise cherrypy.HTTPError(400, "Bad request")
         with WMM_MAIN_DB as db:
             db.execute(query, (new_password, login), ResultSet.NONE)
 
