@@ -52,14 +52,16 @@ export const getSubaccounts = () => dispatch => {
     })
 }
 
-export const addSubaccount = (name) => dispatch => {
+export const addSubaccount = (name, currencyId) => dispatch => {
   dispatch({
     type: SUBACCOUNTS_LOADING,
     payload: true
   })
 
   return axios.post(subaccUrl, {
+      currency_id: currencyId,
       name: name
+      
     }, {
       headers: {
         'Authorization': sessionStorage.getItem('Authorization')
