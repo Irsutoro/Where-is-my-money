@@ -15,15 +15,20 @@ class Navigation extends Component {
         super(props)
 
         this.state = {
-            subaccountsDropdown: (
+            subaccountName:"",
+            subaccountsDropdown: [(
+               
                 <Dropdown
                     key="1"
                     item
                     selection
                     placeholder="Wybierz subkonto"
                     options={this.getSubaccountsChoices(this.props.subaccounts)}
-                />
-            )
+                />),
+                (<Menu.Item key="2">
+                    Waluta: {this.subaccountName}
+                </Menu.Item>
+            )]
         }
 
         this.getSubaccountsChoices = this.getSubaccountsChoices.bind(this)
@@ -39,8 +44,10 @@ class Navigation extends Component {
 
     componentWillReceiveProps(newProps) {
         if (Object.keys(newProps.choosenSubaccount).length !== 0) {
+            console.log(newProps.choosenSubaccount.currency)
             this.setState({
-                subaccountsDropdown: (
+                subaccountName: newProps.choosenSubaccount.currency,
+                subaccountsDropdown: [(
                     <Dropdown
                         key="1"
                         item
@@ -48,18 +55,24 @@ class Navigation extends Component {
                         placeholder="Wybierz subkonto"
                         value={newProps.choosenSubaccount.id}
                         options={this.getSubaccountsChoices(newProps.subaccounts)}
-                    />
-                )
+                    />),
+                    (<Menu.Item key="2">
+                        Waluta: {newProps.choosenSubaccount.currency}
+                    </Menu.Item>
+                )]
             })
         } else {
             this.setState({
-                subaccountsDropdown: (
+                subaccountsDropdown: [(
                     <Dropdown
                         key="1"
                         item
                         placeholder="Wybierz subkonto"
-                    />
-                )
+                    />),
+                    (<Menu.Item key="2">
+                        Waluta:
+                    </Menu.Item>
+                )]
             })
         }
     }
@@ -67,19 +80,19 @@ class Navigation extends Component {
     render() {
         const loggedMenuItems = [
             this.state.subaccountsDropdown,
-            (<Menu.Item key="2" link active={this.props.location === '/history'}>
+            (<Menu.Item key="3" link active={this.props.location === '/history'}>
                 <Link to='/history'>Historia</Link>
             </Menu.Item>),
-            (<Menu.Item key="3" link active={this.props.location === '/report'}>
+            (<Menu.Item key="4" link active={this.props.location === '/report'}>
                 <Link to='/report'>Raport</Link>
             </Menu.Item>),
-            (<Menu.Item key="4" link active={this.props.location === '/subaccounts'}>
+            (<Menu.Item key="5" link active={this.props.location === '/subaccounts'}>
                 <Link to='/subaccounts'>Subkonta</Link>
             </Menu.Item>),
-            (<Menu.Item key="5" link active={this.props.location === '/properties'}>
+            (<Menu.Item key="6" link active={this.props.location === '/properties'}>
             <Link to='/properties'>Ustawienia</Link>
             </Menu.Item>),
-            (<Menu.Item key="6" link position="right" onClick={this.props.logout}>
+            (<Menu.Item key="7" link position="right" onClick={this.props.logout}>
                 Wyloguj
             </Menu.Item>)
         ]

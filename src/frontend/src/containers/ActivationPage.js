@@ -11,7 +11,7 @@ import logo from '../resources/images/logo.svg';
 class ActivationPage extends Component {
     componentDidMount(){
         let url = new URL(window.location.href);
-        //'http://iraminius.pl/wmm/activate?token=0UGB9CR1P5I40ZIBV4SJBNQYXX2JPP'
+        //'http://iraminius.pl/wmm/activate?token=0FA58AHGNAP1E6M50E6F8GGBMLUPR7'
         let searchParams = new URLSearchParams(url.search);
         console.log(searchParams.get("token"));
         this.props.activateUser(searchParams.get("token"));
