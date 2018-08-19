@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Segment, Tab, Container, Button, Grid, Column, Row, Divider, Form } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import withSubaccountsCheck from './withSubaccountsCheck';
+import sha256 from 'sha256';
 import {getUserProperties,setUserProperties} from '../actions/propertiesActions'
 
 class PropertiesPage extends Component {
@@ -29,7 +30,7 @@ class PropertiesPage extends Component {
     
         const changeData = {
           username: this.state.username,
-          password: this.state.password,
+          password: sha256(this.state.password),
           email: this.state.email
         }
     

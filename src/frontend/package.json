@@ -18,7 +18,8 @@
     "react-route-guard": "^1.0.7",
     "react-table": "^6.8.6",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sha256": "^0.2.0"
   },
   "scripts": {
     "start": "parcel --no-cache ./public/index.html"

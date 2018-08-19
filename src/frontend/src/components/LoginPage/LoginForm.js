@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import sha256 from 'sha256';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ export default class LoginForm extends Component {
 
     const loginData = {
       login: this.state.login,
-      password: this.state.password
+      password: sha256(this.state.password)
     }
 
     this.props.submit(loginData)
