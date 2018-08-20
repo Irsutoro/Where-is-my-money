@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import { Form, Button, Header, Icon, Modal } from 'semantic-ui-react';
+import { Form, Button, Header, Icon, Modal, Message } from 'semantic-ui-react';
 import sha256 from 'sha256';
 
 export default class RegisterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      formError: '',
       login: '',
       password: '',
+      passwordError: '',
+      repeatPassword: '',
+      repeatError: '',
       email: '',
       username: '',
       modalOpen: false
@@ -20,7 +24,44 @@ export default class RegisterForm extends Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    let fieldName = e.target.name
+    let newValue = e.target.value
+
+    let formError = false
+    let passwordError = false
+    let repeatError = false
+
+    let passwordMatched = true
+    let passwordRegex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&? "])(?!.*[ ]).*$/
+    if (fieldName === 'password') {
+      passwordMatched = passwordRegex.test(newValue)
+    } else {
+      passwordMatched = passwordRegex.test(this.state.password)
+    }
+
+    if (!passwordMatched) {
+      formError = true
+      passwordError = true
+    } else {
+      let equalPasswords = true
+      if (fieldName === 'repeatPassword') {
+        equalPasswords = newValue === this.state.password
+      } else if (fieldName === 'password') {
+        equalPasswords = this.state.repeatPassword === newValue
+      } else {
+        equalPasswords = this.state.repeatPassword === this.state.password
+      }
+
+      formError = !equalPasswords
+      repeatError = !equalPasswords
+    }
+
+    this.setState({
+      [e.target.name]: e.target.value,
+      formError: formError,
+      passwordError: passwordError,
+      repeatError: repeatError
+    });
   }
 
   handleSubmit(e) {
@@ -48,12 +89,31 @@ export default class RegisterForm extends Component {
   }
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} error={this.state.formError}>
         <Form.Input fluid label='Login' placeholder='Login' name='login' value={this.state.login} onChange={this.handleChange} />
         <Form.Input fluid label='Nazwa' placeholder='Nazwa' name='username' value={this.state.username} onChange={this.handleChange} />
+        <Form.Input fluid label='Hasło' placeholder='Hasło' name='password' type="password" value={this.state.password} onChange={this.handleChange} error={this.state.passwordError}/>
+        <Form.Input fluid label='Powtórz hasło' placeholder='Powtórz hasło' name='repeatPassword' type="password" value={this.state.repeatPassword} onChange={this.handleChange} error={this.state.repeatError} />
         <Form.Input fluid label='Email' placeholder='Email' name='email' value={this.state.email} onChange={this.handleChange} />
-        <Form.Input fluid label='Hasło' placeholder='Hasło' name='password' type="password" value={this.state.password} onChange={this.handleChange} />
-        <Form.Button onClick={this.handleOpenModal}>Zarejestruj</Form.Button>
+        <Message
+          hidden={!this.state.passwordError}
+          error
+          header='Hasło musi składać się z:'
+          content={(
+              <ul>
+                <li>co najmniej 8 znaków</li>
+                <li>przynajmniej 1 wielkiej litery</li>
+                <li>przynajmniej 1 cyfry</li>
+                <li>inimum 1 znaku specjalnego</li>
+              </ul>
+          )}
+        />
+        <Message
+          hidden={!this.state.repeatError}
+          error
+          header='Hasła nie zgadzają się'
+        />
+        <Form.Button onClick={this.handleOpenModal} disabled={this.state.formError}>Zarejestruj</Form.Button>
         <Modal
           open={this.state.modalOpen}
           onClose={this.handleCloseModal}
