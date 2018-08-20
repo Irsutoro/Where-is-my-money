@@ -21,7 +21,7 @@ class SubaccountService:
         return user_id
 
     def _get_subaccounts(self, user_id: int) -> List[Dict[str, Union[str, int]]]:
-        query = 'SELECT id, name, code, description FROM subaccounts JOIN currencies c on c.id = currency_id WHERE user_id = %s'
+        query = 'SELECT s.id, name, code, description FROM subaccounts s JOIN currencies c on c.id = s.currency_id WHERE user_id = %s'
         with WMM_MAIN_DB as db:
             subaccounts = db.execute(query, (user_id,), ResultSet.ALL)
         return [{'id': id, 'name': name, 'currency': currency, 'description': description} for id, name, currency, description in subaccounts]
