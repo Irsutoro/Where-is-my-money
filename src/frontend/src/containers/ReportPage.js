@@ -7,6 +7,9 @@ import {CSVLink} from 'react-csv'
 import { Link } from 'react-router-dom'
 import withSubaccountsCheck from './withSubaccountsCheck';
 import {getTransactionsPart} from '../actions/transactionsActions'
+import AnimationCount from 'react-count-animation';
+import './ReportPage.css'
+
 let doughnutPlus={
     labels: [],
     datasets: [{
@@ -130,6 +133,14 @@ let barData = {
       }
     ]
   };
+let settings = {
+    start: 0,
+    count: 0,
+    duration: 10000,
+    decimals: 2,
+    useGroup: false,
+    animation: 'up',
+  };
 const monthNames = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
   "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 const weekNames = ["Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota","Niedziela"];
@@ -139,15 +150,18 @@ class ReportPage extends Component {
         super(props)
         this.state = {
             subaccountId: this.props.choosenSubaccount.id,
+            subaccountCurrency: this.props.choosenSubaccount.currency,
             doughnutPlus: doughnutPlus,
             doughnutMinus: doughnutMinus,
             dataLinePlus: dataLinePlus,
             dataLineMinus: dataLineMinus,
-            barData: barData
+            barData: barData,
+            settings: settings
         }
         this.parseTransactionsToDougnutData = this.parseTransactionsToDougnutData.bind(this)
         this.parseTransactionsToLineData = this.parseTransactionsToLineData.bind(this)
         this.parseTransactionsToBarData = this.parseTransactionsToBarData.bind(this)
+        this.parseTransactionsToWeekMoney = this.parseTransactionsToWeekMoney.bind(this)
         this.getInfoCSV = this.getInfoCSV.bind(this)
     }
     componentDidMount(){
@@ -172,6 +186,7 @@ class ReportPage extends Component {
         last = new Date(y,m,d+1).getUnixTime();
         this.props.getTransactionsPart(first,last,this.state.subaccountId).then(()=>{
             this.parseTransactionsToBarData();
+            this.parseTransactionsToWeekMoney();
         })
     }
     componentWillReceiveProps(anotherAccount){
@@ -197,6 +212,7 @@ class ReportPage extends Component {
             last = new Date(y,m,d+1).getUnixTime();
             this.props.getTransactionsPart(first,last,this.state.subaccountId).then(()=>{
                 this.parseTransactionsToBarData();
+                this.parseTransactionsToWeekMoney();
             })
         }
 
@@ -222,7 +238,7 @@ class ReportPage extends Component {
 
         let JSONresult = JSON.stringify(this.props.transactionsPart);
         let arr = JSON.parse(JSONresult)
-
+        console.log(arr)
         arr.forEach(function (a) {
             if(a.amount>0){
               if (!plus[a.category]) {
@@ -391,27 +407,26 @@ class ReportPage extends Component {
         let sixthPastLastHour = new Date(y,m,d-6,23,59,59).getUnixTime();
         let sixthPastDayName = weekNames[new Date(y,m,d-7).getDay()]
         
-        console.log(todayFirstHour)
         arr.forEach(function (a) {
-            if(a.date>firstPastLastHour ){
+            if(a.date>=firstPastLastHour ){
                 todaySum+=a.amount;
             }
-            if(a.date>firstPastFirstHour && a.date <= firstPastLastHour){
+            if(a.date>=firstPastFirstHour && a.date <= firstPastLastHour){
                 firstPastSum+=a.amount;
             }
-            if(a.date>secondPastFirstHour && a.date<= secondPastLastHour){
+            if(a.date>=secondPastFirstHour && a.date<= secondPastLastHour){
                 secondPastSum+=a.amount;
             }
-            if(a.date>thirdPastFirstHour && a.date<= thirdPastLastHour){
+            if(a.date>=thirdPastFirstHour && a.date<= thirdPastLastHour){
                 thirdPastSum+=a.amount;
             }
-            if(a.date>fourthPastFirstHour && a.date<= fourthPastLastHour){
+            if(a.date>=fourthPastFirstHour && a.date<= fourthPastLastHour){
                 fourthPastSum+=a.amount;
             }
-            if(a.date>fifthPastFirstHour && a.date<= fifthPastLastHour){ 
+            if(a.date>=fifthPastFirstHour && a.date<= fifthPastLastHour){ 
                 fifthPastSum+=a.amount;
             }
-            if(a.date>sixthPastFirstHour && a.date<= sixthPastLastHour){
+            if(a.date>=sixthPastFirstHour && a.date<= sixthPastLastHour){
                 sixthPastSum+=a.amount;
             }
             
@@ -445,6 +460,30 @@ class ReportPage extends Component {
         })
         
       }
+    parseTransactionsToWeekMoney(){
+        var JSONresult = JSON.stringify(this.props.transactionsPart)    
+        var arr = JSON.parse(JSONresult);
+        let date = new Date(),y = date.getFullYear(), m=date.getMonth(),d=date.getDate();
+        Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
+
+        let weekSum=0;
+
+        let todayLastHour = new Date(y,m,d,23,59,59).getUnixTime();
+        let sixthPastFirstHour = new Date(y,m,d-6,0,0).getUnixTime();
+        
+        arr.forEach(function (a) {
+            weekSum+=a.amount;
+        }, Object.create(null));
+
+        settings.count = weekSum;
+
+        this.setState(()=>{
+            return{
+                settings: settings
+            }
+        })
+        
+    }
     render() {
         return (    
             <Grid stackable>
@@ -485,6 +524,14 @@ class ReportPage extends Component {
                     <h2>Podsumowanie majątku w ostatnich dniach</h2>
                     <Bar data={barData}/>
                     </Grid.Column >
+                </Grid.Row>
+                <Divider/>
+                <Grid.Row centered columns={3}>
+                    
+                    <div className="counter">
+                    <h2>Zarobiłeś w tym tygodniu: </h2><br/>
+                        <AnimationCount {...settings}/><br/><br/><br/> {this.state.subaccountCurrency}
+                    </div>
                 </Grid.Row>
             </Grid>
         );

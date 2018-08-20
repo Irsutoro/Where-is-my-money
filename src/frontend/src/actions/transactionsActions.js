@@ -1,9 +1,10 @@
-import { TRANSACTIONS_LOADING, TRANSACTIONS_ERROR, TRANSACTIONS_SUCCESS,TRANSACTIONS_PART_SUCCESS, CURRENCIES_UPDATE, CATEGORIES_UPDATE }
+import { TRANSACTIONS_LOADING, TRANSACTIONS_ERROR,FILE_LOADING, TRANSACTIONS_SUCCESS,TRANSACTIONS_PART_SUCCESS, CURRENCIES_UPDATE, CATEGORIES_UPDATE,FORMATS_UPDATE }
 from './types';
 
 const transactionsUrl = "http://www.iraminius.pl/wmm/api/transactions/"
 const currenciesUrl = "http://www.iraminius.pl/wmm/api/currency/"
 const categoriesUrl = "http://www.iraminius.pl/wmm/api/categories/"
+const csvUrl = "http://www.iraminius.pl/wmm/api/csv/"
 
 import axios from 'axios'
 
@@ -65,7 +66,7 @@ export const addTransaction = (transaction) => dispatch => {
           }
         })
         .then(() => {
-            dispatch(getTransactions())
+            dispatch(getTransactions(transaction.subaccount_id))
         })
         .finally(() => {
           dispatch({
@@ -92,11 +93,11 @@ export const updateTransaction = (id, transaction) => dispatch => {
             payload: false
           })
     
-          dispatch(getTransactions())
+          dispatch(getTransactions(transaction.subaccount_id))
         })
 }
 
-export const deleteTransaction = (id) => dispatch => {
+export const deleteTransaction = (id, subaccountId) => dispatch => {
     dispatch({
         type: TRANSACTIONS_LOADING,
         payload: true
@@ -113,7 +114,7 @@ export const deleteTransaction = (id) => dispatch => {
             payload: false
           })
     
-          dispatch(getTransactions())
+          dispatch(getTransactions(subaccountId))
         })
 }
 
@@ -187,7 +188,45 @@ export const getCategories = () => dispatch => {
         })
     })
 }
+export const getFormats = () => dispatch => {
+    axios.get(csvUrl, {
+        headers: {
+            'Authorization': sessionStorage.getItem('Authorization')
+        }
+    })
+    .then(res => {
+        let formats = res.data
+        dispatch({
+            type: FORMATS_UPDATE,
+            payload: formats
+        })
+    })
+}
+export const updateCsvFile = (formatId,subaccountId,file) => dispatch => {
+    dispatch({
+        type: FILE_LOADING,
+        payload: true
+      })
+      var formData = new FormData();
+      formData.append("csv_file",file);
+      formData.append("format_id",formatId);
+      formData.append("subaccount_id",subaccountId);
+      axios.post(csvUrl, formData, {
+        headers: {
+            'Authorization': sessionStorage.getItem('Authorization'),
+            'Content-Type':'multipart/form-data'
+        }
+    })
+    .finally(() => {
+        dispatch({
+          type: FILE_LOADING,
+          payload: false
+        })
+        dispatch(getTransactions(subaccountId))
+      })
 
+      
+}
 export const addCategory = (name) => dispatch => {
     axios.post(categoriesUrl, {
         name: name

@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import { Segment, Table, Container, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import withSubaccountsCheck from './withSubaccountsCheck';
-import { getTransactions, updateTransaction, addTransaction, deleteTransaction, getCategories, getCurrencies, addCategory, deleteCategory } from '../actions/transactionsActions'
+import { getTransactions, updateTransaction, addTransaction, deleteTransaction, getCategories, getCurrencies, addCategory, deleteCategory, getFormats, updateCsvFile } from '../actions/transactionsActions'
 import EditTransactionModal from '../components/LoggedContent/EditTransactionModal';
 import AddTransactionModal from '../components/LoggedContent/AddTransactionModel';
+import UploadFromFile from '../components/LoggedContent/UploadFromFile';
 
 class HistoryPage extends Component {
 
@@ -26,6 +27,7 @@ class HistoryPage extends Component {
     componentDidMount() {
         this.props.getCategories()
         this.props.getCurrencies()
+        this.props.getFormats()
         this.props.getTransactions(this.state.subaccountId).then(() => {
             this.setState({ 
                 data: _.sortBy(this.props.transactions, ['date']).reverse()
@@ -59,6 +61,12 @@ class HistoryPage extends Component {
                     subaccountId={this.state.subaccountId}
                     getCurrencies={this.props.getCurrencies}
                     getCategories={this.props.getCategories}
+                />
+                <UploadFromFile
+                    formats={this.props.formats}
+                    getFormats={this.props.getFormats}
+                    subaccountId={this.state.subaccountId}
+                    updateCsvFile={this.props.updateCsvFile}
                 />
                 {/* <Button onClick={() => {
                     this.state.exportView()
@@ -97,7 +105,8 @@ class HistoryPage extends Component {
                                 </Table.Cell>
                                 <Table.Cell>
                                     <Button onClick={() => {
-                                        this.props.deleteTransaction(transaction.id)
+                                        console.log(transaction.subaccount_id)
+                                        this.props.deleteTransaction(transaction.id, transaction.subaccount_id)
                                     }}>Usuń</Button>
                                 </Table.Cell>
                             </Table.Row>
@@ -119,7 +128,8 @@ const mapStateToProps = state => ({
     choosenSubaccount: state.subaccountsReducer.choosenSubaccount,
     transactions: state.transactionsReducer.transactions,
     currencies: state.transactionsReducer.currencies,
-    categories: state.transactionsReducer.categories
+    categories: state.transactionsReducer.categories,
+    formats: state.transactionsReducer.formats
 })
 
-export default connect(mapStateToProps, { getTransactions, updateTransaction, addTransaction, deleteTransaction, getCategories, getCurrencies, addCategory, deleteCategory })(withSubaccountsCheck(HistoryPage))
+export default connect(mapStateToProps, { getTransactions, updateTransaction, addTransaction, deleteTransaction, getCategories, getCurrencies, addCategory, deleteCategory, getFormats, updateCsvFile })(withSubaccountsCheck(HistoryPage))
