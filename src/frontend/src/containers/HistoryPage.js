@@ -16,6 +16,7 @@ class HistoryPage extends Component {
 
         this.state = {
             subaccountId: this.props.choosenSubaccount.id,
+            subaccountCurrency: this.props.choosenSubaccount.currency,
             sortedColumn: null,
             sortDirection: null,
             data: []
@@ -26,7 +27,7 @@ class HistoryPage extends Component {
         this.props.getCategories()
         this.props.getCurrencies()
         this.props.getTransactions(this.state.subaccountId).then(() => {
-            this.setState({
+            this.setState({ 
                 data: _.sortBy(this.props.transactions, ['date']).reverse()
             })
         })
@@ -50,7 +51,7 @@ class HistoryPage extends Component {
                     this.props.getTransactions(this.state.subaccountId)
                 }}>Odśwież wpisy</Button>
                 <AddTransactionModal
-                    currencies={this.props.currencies}
+                    subaccountCurrency={this.props.choosenSubaccount.currency}
                     categories={this.props.categories}
                     addTransaction={this.props.addTransaction}
                     addCategory={this.props.addCategory}
@@ -67,7 +68,6 @@ class HistoryPage extends Component {
                         <Table.Row>
                             <Table.HeaderCell>Data</Table.HeaderCell>
                             <Table.HeaderCell>Wartość</Table.HeaderCell>
-                            <Table.HeaderCell>Waluta</Table.HeaderCell>
                             <Table.HeaderCell>Kategoria</Table.HeaderCell>
                             <Table.HeaderCell>Komentarz</Table.HeaderCell>
                             <Table.HeaderCell>Edytuj</Table.HeaderCell>
@@ -80,13 +80,12 @@ class HistoryPage extends Component {
                             <Table.Row key={index}>
                                 <Table.Cell>{new Date(transaction.date * 1000).toLocaleDateString()}</Table.Cell>
                                 <Table.Cell>{transaction.amount}</Table.Cell>
-                                <Table.Cell>{transaction.currency}</Table.Cell>
                                 <Table.Cell>{transaction.category}</Table.Cell>
                                 <Table.Cell>{transaction.comment}</Table.Cell>
                                 <Table.Cell>
                                     <EditTransactionModal
                                         transaction={transaction}
-                                        currencies={this.props.currencies}
+                                        subaccountCurrency={this.props.choosenSubaccount.currency}
                                         categories={this.props.categories}
                                         updateTransaction={this.props.updateTransaction}
                                         addCategory={this.props.addCategory}
