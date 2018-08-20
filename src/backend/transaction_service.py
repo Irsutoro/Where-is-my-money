@@ -148,7 +148,7 @@ class TransactionService:
         self._delete_entry(user_id, id)
 
     def _delete_entry(self, user_id: int, entry_id: int) -> None:
-        query = 'DELETE FROM entries WHERE id = %s AND user_id = %s'
+        query = 'DELETE FROM entries WHERE id = %s AND user_id = %s RETURNING id'
         with WMM_MAIN_DB as db:
             deleted = db.execute(query, (entry_id, user_id), ResultSet.ONE)
         if not deleted:
