@@ -7,6 +7,7 @@ import withSubaccountsCheck from './withSubaccountsCheck';
 import sha256 from 'sha256';
 import {getUserProperties,setUserProperties} from '../actions/propertiesActions'
 
+import './PropertiesPage.css'
 class PropertiesPage extends Component {
     constructor(props){
         super(props)
@@ -39,7 +40,14 @@ class PropertiesPage extends Component {
     render() {
         
         return (    
-            <Grid stackable>
+            <Grid stackable className="mainGrid">
+                <Grid.Row >
+                <div className="imageTextprop">
+                    <div className="imageText-textprop">
+                        ustawienia konta
+                    </div>
+                </div>
+                </Grid.Row >
                 <Grid.Row centered columns={16}>
                     <Grid.Column width = {8}>
                     <Form onSubmit={this.handleSubmit} >

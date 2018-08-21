@@ -486,7 +486,14 @@ class ReportPage extends Component {
     }
     render() {
         return (    
-            <Grid stackable>
+            <Grid stackable className="mainGrid">
+            <Grid.Row >
+            <div className="imageText">
+                <div className="imageText-text">
+                    Raporty
+                </div>
+            </div>
+            </Grid.Row >
                 <Grid.Row centered columns={16}>
                     <Grid.Column width = {7}>
                         <h1>Przychody w obecnym miesiącu:</h1>

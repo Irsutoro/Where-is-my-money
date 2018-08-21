@@ -1,5 +1,20 @@
 h1,h2,h3{
     text-align: center;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    font-size: 2vw;
+    padding: 40px 25px;
+    text-align: center;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+    color: #131313;
+    color: #2c2c2c;
+    letter-spacing: .05em;
+    text-shadow: 
+      4px 4px 0px #ffffff, 
+      7px 7px 0px rgba(0, 0, 0, 0.2);
+}
+.mainGrid{
+    background-color: #f8f8f8
 }
 .counter{
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
@@ -27,5 +42,33 @@ h1,h2,h3{
     letter-spacing: .05em;
     text-shadow: 
       4px 4px 0px #d5d5d5, 
+      7px 7px 0px rgba(0, 0, 0, 0.2);
+  }
+  .imageText{
+      background-color: #131313;
+      background-image: url('../resources/images/mon3.jpg');
+      background-size: cover;
+      height: 13em;
+      width: 100%;
+      position: relative;
+  }
+  .imageText-text{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    font-size: 5vw;
+    padding: 40px 25px;
+    text-align: center;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+    color: #131313;
+    color: #e4e4e4;
+    letter-spacing: .05em;
+    text-shadow: 
+      4px 4px 0px #2c2c2c, 
       7px 7px 0px rgba(0, 0, 0, 0.2);
   }

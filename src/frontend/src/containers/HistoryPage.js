@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash'
 import { connect } from 'react-redux';
-import { Segment, Table, Container, Button } from 'semantic-ui-react';
+import { Segment, Table, Container, Button, Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import withSubaccountsCheck from './withSubaccountsCheck';
 import { getTransactions, updateTransaction, addTransaction, deleteTransaction, getCategories, getCurrencies, addCategory, deleteCategory, getFormats, updateCsvFile } from '../actions/transactionsActions'
@@ -10,6 +10,7 @@ import EditTransactionModal from '../components/LoggedContent/EditTransactionMod
 import AddTransactionModal from '../components/LoggedContent/AddTransactionModel';
 import UploadFromFile from '../components/LoggedContent/UploadFromFile';
 
+import './HistoryPage.css'
 class HistoryPage extends Component {
 
     constructor(props) {
@@ -48,7 +49,16 @@ class HistoryPage extends Component {
 
     render() {
         return (
-            <Container fluid>
+            <Grid stackable className="mainGrid">
+            <Grid.Row >
+            <div className="imageTexthis">
+                <div className="imageText-texthis">
+                    Historia wpisów
+                </div>
+            </div>
+            </Grid.Row >
+            <Grid.Row centered columns={10}>
+                <Grid.Column width={10}>
                 <Button onClick={() => {
                     this.props.getTransactions(this.state.subaccountId)
                 }}>Odśwież wpisy</Button>
@@ -113,7 +123,9 @@ class HistoryPage extends Component {
                         ))}
                     </Table.Body>
                 </Table>
-            </Container>
+                </Grid.Column>
+            </Grid.Row>
+            </Grid>
         );
     }
 }

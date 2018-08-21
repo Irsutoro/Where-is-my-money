@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Segment, Tab, Container, Button, Table, Grid } from 'semantic-ui-react';
+import { Segment, Tab, Container, Button, Table, Grid, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import withSubaccountsCheck from './withSubaccountsCheck';
 import { getSubaccounts, addSubaccount, deleteSubaccount } from '../actions/subaccountsActions'
 import{getCurrencies} from '../actions/transactionsActions'
 import CreateSubaccount from '../components/LoggedContent/CreateSubaccount';
 
+import './SubaccountsPage.css'
 class SubaccountsPage extends Component {
     render() {
         return (
-            <Container fluid>
-            <Grid stackable>
-            
+            <Grid stackable className="mainGrid">
+            <Grid.Row >
+            <div className="imageTextsub">
+                <div className="imageText-textsub">
+                    zarządzanie subkontami
+                </div>
+            </div>
+            </Grid.Row >
             <Grid.Row columns={16} centered>
             
                 <Grid.Column width={8}>
@@ -23,6 +29,7 @@ class SubaccountsPage extends Component {
                         currencies={this.props.currencies}
                     />
                 </Grid.Column>
+                <Divider vertical/>
                 <Grid.Column width={8}>
                 <h1> Panel zarządzania istniejącymi subkontami:</h1>
                     <Table celled>
@@ -51,9 +58,6 @@ class SubaccountsPage extends Component {
                 </Grid.Column>
             </Grid.Row>
             </Grid>
-                
-                
-            </Container>
         );
     }
 }

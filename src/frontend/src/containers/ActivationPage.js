@@ -19,10 +19,13 @@ class ActivationPage extends Component {
     render() {
         return (
             <Grid stackable>
-                <Grid.Row>
-                    <Image src={logo} size='small' centered/>
-                </Grid.Row>
-                <Divider/>
+            <Grid.Row >
+            <div className="imageTextact">
+                <div className="imageText-textact">
+                    Aktywacja konta
+                </div>
+            </div>
+            </Grid.Row >
                 <Grid.Row centered columns={16}>
                     <h2>Twoje konto zostało aktywowane. Zarządzaj swoimi finansami już teraz! Aby wrócić na stronę główną naciśnij poniższy przycisk.</h2>
                 </Grid.Row>

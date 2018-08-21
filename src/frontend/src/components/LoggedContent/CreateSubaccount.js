@@ -10,7 +10,7 @@ const CreateSubaccount = ({ addSubaccount, currencies }) => {
     return (
         <Grid stackable>
                 <Grid.Row centered columns={16}>
-                    <h2>Podaj nazwę subkonta</h2>
+                    <h4>Podaj nazwę subkonta</h4>
                     <Input
                         placeholder='Nazwa'
                         focus
@@ -20,10 +20,10 @@ const CreateSubaccount = ({ addSubaccount, currencies }) => {
                     </Input>
                 </Grid.Row>
                 <Grid.Row centered columns={8}>
-                <Grid.Column width={3}>
-                </Grid.Column>
                 <Grid.Column width={2}>
-                    <h2>Wybierz walutę subkonta</h2>
+                </Grid.Column>
+                <Grid.Column width={4}>
+                    <h4>Wybierz walutę subkonta</h4>
                         <Dropdown fluid selection  options={currencies.map(currency => {
                             return {
                             text: currency.code,
@@ -33,7 +33,7 @@ const CreateSubaccount = ({ addSubaccount, currencies }) => {
                             ref={currencyId}
                         />
                 </Grid.Column >
-                <Grid.Column width={3}>
+                <Grid.Column width={2}>
                 </Grid.Column>
                    
                 </Grid.Row>
