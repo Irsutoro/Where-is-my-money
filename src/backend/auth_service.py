@@ -121,7 +121,7 @@ class AuthService:
         user_id = self._get_user_id(login)
         query = 'INSERT INTO categories (user_id, name) VALUES (%s, %s), (%s, %s), (%s, %s)'
         with WMM_MAIN_DB as db:
-            db.execute(query, (user_id, 'hobby', user_id, 'praca', user_id, 'dom'), ResultSet.NONE)
+            db.execute(query, (user_id, 'Hobby', user_id, 'Praca', user_id, 'Dom'), ResultSet.NONE)
 
     def _get_user_id(self, login: str) -> int:
         query = 'SELECT id FROM users WHERE login = %s'
