@@ -1,25 +1,45 @@
 import React, { Component } from 'react';
-import { Container, Header, Button } from 'semantic-ui-react';
+import { Container, Header, Button, Divider, Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loginUser } from '../../actions/loginActions'
 import PropTypes from 'prop-types'
-
+import './IntroContainer.css'
 class IntroContainer extends Component {
     render() {
         return (
-            <Container textAlign="center" fluid>
-                <Header as='h1' >Where's my money?!</Header>
-                <Header as='h2' >Najlepsza aplikacja do zarządzania Twoim budżetem<br/> na wyciągnięcie ręki!</Header>
-                <Header as='h2' >Miej kontrolę nad swoimi finansami,<br/> dzięki naszej aplikacji.</Header>
-
+            <Grid fluid className="mainText" centered>
+                <Grid.Row columns={12} centered>
+                <Grid.Column width={8}>
+                <Header className="mainText-h1" >Where's my money?!</Header>
+                <Divider className="loginDivider"/>
+                </Grid.Column>
+                </Grid.Row>
+                
+                
+                <Grid.Row columns={12} centered>
+                <Grid.Column width={8} centered>
+                <Header className="mainText-h2" >Najlepsza aplikacja do zarządzania Twoim budżetem<br/> na wyciągnięcie ręki!</Header>
+                <Divider className="loginDivider"/>
+                </Grid.Column>
+                </Grid.Row>
+                
+                <Grid.Row columns={12} centered>
+                <Grid.Column width={8}>
+                <Header className="mainText-h2" >Miej kontrolę nad swoimi finansami,<br/> dzięki naszej aplikacji.</Header>
+                </Grid.Column>
+                </Grid.Row>
+                <Grid.Row columns={12} centered>
+                <Grid.Column width={8} centered>
                 <Button onClick={() => {
                     this.props.loginUser({
                         login: "test",
                         password: "test"
                     })
                 }}>Wypróbuj wersję demo!</Button>
-            </Container>
+                </Grid.Column>
+                </Grid.Row>
+            </Grid>
         );
     }
 }

@@ -12,18 +12,14 @@ export default class LoginPage extends Component {
 
     render() {
         return (
-            <Container fluid className="login-page">
-                <Grid stackable>
-                    <Grid.Column width={8}>
+                <Grid stackable fluid className="login-page">
+                    <Grid.Column width={8} className="colImage">
                         <IntroContainer />
                     </Grid.Column>
-                    <Grid.Column width={1}>
-                    </Grid.Column>
-                    <Grid.Column width={6}>
+                    <Grid.Column width={8} className="colLog">
                         <LoginSegment />
                     </Grid.Column>
                 </Grid>
-            </Container>
         );
     }
 }

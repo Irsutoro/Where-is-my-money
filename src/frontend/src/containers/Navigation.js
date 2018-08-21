@@ -79,26 +79,7 @@ class Navigation extends Component {
 
     render() {
         const loggedMenuItems = [
-            this.state.subaccountsDropdown,
-            (<Menu.Item key="3" link active={this.props.location === '/history'}>
-                <Link to='/history'>Historia</Link>
-            </Menu.Item>),
-            (<Menu.Item key="4" link active={this.props.location === '/report'}>
-                <Link to='/report'>Raport</Link>
-            </Menu.Item>),
-            (<Menu.Item key="5" link active={this.props.location === '/subaccounts'}>
-                <Link to='/subaccounts'>Subkonta</Link>
-            </Menu.Item>),
-            (<Menu.Item key="6" link active={this.props.location === '/properties'}>
-            <Link to='/properties'>Ustawienia</Link>
-            </Menu.Item>),
-            (<Menu.Item key="7" link position="right" onClick={this.props.logout}>
-                Wyloguj
-            </Menu.Item>)
-        ]
-        
-        return (    
-            <Menu
+            (<Menu
                 className="navigation"
                 stackable
                 inverted
@@ -119,14 +100,35 @@ class Navigation extends Component {
                             className="logo"
                         />
                     </Link>
-                </Menu.Item>
-
+                </Menu.Item>),
+            {this.state.subaccountsDropdown},
+            (<Menu.Item key="3" link active={this.props.location === '/history'}>
+                <Link to='/history'>Historia</Link>
+            </Menu.Item>),
+            (<Menu.Item key="4" link active={this.props.location === '/report'}>
+                <Link to='/report'>Raport</Link>
+            </Menu.Item>),
+            (<Menu.Item key="5" link active={this.props.location === '/subaccounts'}>
+                <Link to='/subaccounts'>Subkonta</Link>
+            </Menu.Item>),
+            (<Menu.Item key="6" link active={this.props.location === '/properties'}>
+            <Link to='/properties'>Ustawienia</Link>
+            </Menu.Item>),
+            (<Menu.Item key="7" link position="right" onClick={this.props.logout}>
+                Wyloguj
+            </Menu.Item>),
+            ( </Menu >)
+        ]
+        
+        return (    
+            
+<div>
                 {this.props.logged &&
                     loggedMenuItems
                 }
                 
-
-            </Menu >
+</div>
+           
         );
     }
 }

@@ -1,3 +1,38 @@
 .login-page {
     padding: 8%;
 }
+.colImage{
+    background-color: #131313;
+    background-image: url('../../resources/images/mon9.jpg');
+    background-size: cover;
+    height: 13em;
+    width: 100%;
+    position: relative;
+    margin-top: -4em;
+    height: 101vh;
+}
+.colLog{
+    padding-top: 26vh;
+    margin-top: -4em;
+    background-color: #2c2c2c;
+}
+.imageText-textprop{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-size: 5vw;
+  padding: 40px 25px;
+  text-align: center;
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+  color: #131313;
+  color: #e4e4e4;
+  letter-spacing: .05em;
+  text-shadow: 
+    4px 4px 0px #2c2c2c, 
+    7px 7px 0px rgba(0, 0, 0, 0.2);
+}
