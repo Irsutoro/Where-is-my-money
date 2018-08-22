@@ -44,7 +44,6 @@ class Navigation extends Component {
 
     componentWillReceiveProps(newProps) {
         if (Object.keys(newProps.choosenSubaccount).length !== 0) {
-            console.log(newProps.choosenSubaccount.currency)
             this.setState({
                 subaccountName: newProps.choosenSubaccount.currency,
                 subaccountsDropdown: [(

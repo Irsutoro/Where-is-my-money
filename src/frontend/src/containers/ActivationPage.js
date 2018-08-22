@@ -13,7 +13,6 @@ class ActivationPage extends Component {
         let url = new URL(window.location.href);
         //'http://iraminius.pl/wmm/activate?token=0FA58AHGNAP1E6M50E6F8GGBMLUPR7'
         let searchParams = new URLSearchParams(url.search);
-        console.log(searchParams.get("token"));
         this.props.activateUser(searchParams.get("token"));
     }
     render() {

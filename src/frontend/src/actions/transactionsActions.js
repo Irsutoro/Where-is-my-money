@@ -41,10 +41,28 @@ export const getTransactions = (subaccountId) => dispatch => {
             })
         })
         .catch(() => {
+            return axios.get(transactionsUrl, {
+                headers: {
+                    'Authorization': sessionStorage.getItem('Authorization')
+                },
+                params:{
+                    subaccount_id: subaccountId
+                }
+            })
+            .then(res => {
+                let transactions = res.data
+    
+                dispatch({
+                    type: TRANSACTIONS_SUCCESS,
+                    payload: transactions
+                })
+            })
+            .catch(() => {
             dispatch({
                 type: TRANSACTIONS_ERROR,
                 payload: true
             })
+        })
         })
         .finally(() => { 
             dispatch({
@@ -146,10 +164,31 @@ export const getTransactionsPart = (from,to,subaccountId) => dispatch => {
             })
         })
         .catch(() => {
+
+            return axios.get(transactionsUrl, {
+                headers: {
+                    'Authorization': sessionStorage.getItem('Authorization')
+                },
+                params:{
+                    subaccount_id: subaccountId,
+                    time_from: from,
+                    time_to: to
+                }
+            })
+            .then(res => {
+                let transactionsPart = res.data
+                dispatch({
+                    type: TRANSACTIONS_PART_SUCCESS,
+                    payload: transactionsPart
+                })
+            })
+            .catch(() => {
             dispatch({
                 type: TRANSACTIONS_ERROR,
                 payload: true
             })
+        })
+        
         })
         .finally(() => { 
             dispatch({
@@ -172,6 +211,20 @@ export const getCurrencies = () => dispatch => {
             payload: currencies
         })
     })
+    .catch(() =>{
+        axios.get(currenciesUrl, {
+            headers: {
+                'Authorization': sessionStorage.getItem('Authorization')
+            }
+        })
+        .then(res => {
+            let currencies = res.data
+            dispatch({
+                type: CURRENCIES_UPDATE,
+                payload: currencies
+            })
+        })
+    })
 }
 
 export const getCategories = () => dispatch => {
@@ -187,6 +240,20 @@ export const getCategories = () => dispatch => {
             payload: categories
         })
     })
+    .catch(()=>{
+        axios.get(categoriesUrl, {
+            headers: {
+                'Authorization': sessionStorage.getItem('Authorization')
+            }
+        })
+        .then(res => {
+            let categories = res.data
+            dispatch({
+                type: CATEGORIES_UPDATE,
+                payload: categories
+            })
+        })
+    })
 }
 export const getFormats = () => dispatch => {
     axios.get(csvUrl, {
@@ -199,6 +266,20 @@ export const getFormats = () => dispatch => {
         dispatch({
             type: FORMATS_UPDATE,
             payload: formats
+        })
+    })
+    .catch(()=>{
+        axios.get(csvUrl, {
+            headers: {
+                'Authorization': sessionStorage.getItem('Authorization')
+            }
+        })
+        .then(res => {
+            let formats = res.data
+            dispatch({
+                type: FORMATS_UPDATE,
+                payload: formats
+            })
         })
     })
 }

@@ -115,7 +115,6 @@ class HistoryPage extends Component {
                                 </Table.Cell>
                                 <Table.Cell>
                                     <Button onClick={() => {
-                                        console.log(transaction.subaccount_id)
                                         this.props.deleteTransaction(transaction.id, transaction.subaccount_id)
                                     }}>Usuń</Button>
                                 </Table.Cell>

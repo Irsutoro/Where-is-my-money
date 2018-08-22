@@ -226,7 +226,6 @@ class ReportPage extends Component {
             let date = new Date(),y = date.getFullYear(), m=date.getMonth(),d=date.getDate();
             Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
 
-            console.log('subaccount changed')
             let newSubaccountId = anotherAccount.choosenSubaccount.id
 
             //current month
@@ -273,7 +272,6 @@ class ReportPage extends Component {
 
         let JSONresult = JSON.stringify(this.props.transactionsPart);
         let arr = JSON.parse(JSONresult)
-        console.log(arr)
         arr.forEach(function (a) {
             if(a.amount>0){
               if (!plus[a.category]) {
