@@ -32,7 +32,7 @@ class PropertiesPage extends Component {
         let passwordError = false
 
         let passwordMatched = true
-        let passwordRegex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&? "])(?!.*[ ]).*$/
+        let passwordRegex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()?.])(?!.*[ ]).*$/
         if (fieldName === 'password') {
             passwordMatched = passwordRegex.test(newValue)
         } else {
@@ -88,7 +88,7 @@ class PropertiesPage extends Component {
                                     <li>co najmniej 8 znaków</li>
                                     <li>przynajmniej 1 wielkiej litery</li>
                                     <li>przynajmniej 1 cyfry</li>
-                                    <li>inimum 1 znaku specjalnego</li>
+                                    <li>inimum 1 znaku specjalnego (!@#$%^&*()?.)</li>
                                 </ul>
                             )}
                             />
