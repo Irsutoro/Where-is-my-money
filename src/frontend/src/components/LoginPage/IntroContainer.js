@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { loginUser } from '../../actions/loginActions'
 import PropTypes from 'prop-types'
 import './IntroContainer.css'
+
+import sha256 from 'sha256';
 class IntroContainer extends Component {
     render() {
         return (
@@ -33,8 +35,8 @@ class IntroContainer extends Component {
                 <Grid.Column width={8} centered>
                 <Button onClick={() => {
                     this.props.loginUser({
-                        login: "test",
-                        password: "test"
+                        login: "kontodemo",
+                        password: sha256("Kont12@test")
                     })
                 }}>Wypróbuj wersję demo!</Button>
                 </Grid.Column>
