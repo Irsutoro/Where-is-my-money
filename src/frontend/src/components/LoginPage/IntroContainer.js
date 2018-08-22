@@ -32,7 +32,7 @@ class IntroContainer extends Component {
                 </Grid.Column>
                 </Grid.Row>
                 <Grid.Row columns={12} centered>
-                <Grid.Column width={8} centered>
+                <Grid.Column width={8} centered className="align-center">
                 <Button onClick={() => {
                     this.props.loginUser({
                         login: "kontodemo",

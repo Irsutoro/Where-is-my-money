@@ -1,3 +1,7 @@
+.align-center {
+    text-align: center !important;
+}
+
 .mainText{
     margin-top: 26vh!important;
     text-align: center!important;
