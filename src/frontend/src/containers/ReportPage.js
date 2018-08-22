@@ -146,6 +146,7 @@ const monthNames = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec"
 const weekNames = ["Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota","Niedziela"];
 
 class ReportPage extends Component {
+
     constructor(props){
         super(props)
         this.state = {
@@ -164,6 +165,7 @@ class ReportPage extends Component {
         this.parseTransactionsToWeekMoney = this.parseTransactionsToWeekMoney.bind(this)
         this.getInfoCSV = this.getInfoCSV.bind(this)
     }
+
     componentDidMount(){
         let date = new Date(),y = date.getFullYear(), m=date.getMonth(),d=date.getDate();
         Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
@@ -172,45 +174,78 @@ class ReportPage extends Component {
         let first = new Date(y,m,2).getUnixTime();
         let last = new Date(y,m+1,1).getUnixTime();
 
-        this.props.getTransactionsPart(first,last,this.state.subaccountId).then( () =>{
-            this.parseTransactionsToDougnutData();
-        });
+        this.props.getTransactionsPart(first,last,this.state.subaccountId)
+            .then( () =>{
+                this.parseTransactionsToDougnutData();
+            })
+            .catch(() => {
+                this.setState(()=>{
+                    return{
+                        doughnutPlus: doughnutPlus,
+                        doughnutMinus: doughnutMinus
+                    }
+                })
+            })
+
         //past months
         first = new Date(y,m-2,2).getUnixTime();    
         last = new Date(y,m+1,1).getUnixTime();
-        this.props.getTransactionsPart(first,last,this.state.subaccountId).then( () =>{
-            this.parseTransactionsToLineData();
-        });
+        this.props.getTransactionsPart(first,last,this.state.subaccountId)
+            .then( () =>{
+                this.parseTransactionsToLineData();
+            })
+            .catch( () => {
+                this.setState(()=>{
+                    return{
+                        dataLinePlus: dataLinePlus,
+                        dataLineMinus: dataLineMinus
+                    }
+                })
+            })
+
         //past 7days
         first = new Date(y,m,-7).getUnixTime();
         last = new Date(y,m,d+1).getUnixTime();
-        this.props.getTransactionsPart(first,last,this.state.subaccountId).then(()=>{
-            this.parseTransactionsToBarData();
-            this.parseTransactionsToWeekMoney();
-        })
+        this.props.getTransactionsPart(first,last,this.state.subaccountId)
+            .then(()=>{
+                this.parseTransactionsToBarData();
+                this.parseTransactionsToWeekMoney();
+            })
+            .catch(() => {
+                this.setState(()=>{
+                    return{
+                        barData: barData,
+                        settings: settings
+                    }
+                })
+            })
     }
+
     componentWillReceiveProps(anotherAccount){
         if (anotherAccount.choosenSubaccount.id !== this.state.subaccountId) {
             let date = new Date(),y = date.getFullYear(), m=date.getMonth(),d=date.getDate();
             Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
 
+            console.log('subaccount changed')
+            let newSubaccountId = anotherAccount.choosenSubaccount.id
+
             //current month
             let first = new Date(y,m,2).getUnixTime();
             let last = new Date(y,m+1,1).getUnixTime();
 
-            this.props.getTransactionsPart(first,last,this.state.subaccountId).then( () =>{
+            this.props.getTransactionsPart(first,last,newSubaccountId).then( () =>{
                 this.parseTransactionsToDougnutData();
             });
             //past months
             first = new Date(y,m-2,2).getUnixTime();    
             last = new Date(y,m+1,1).getUnixTime();
-            this.props.getTransactionsPart(first,last,this.state.subaccountId).then( () =>{
+            this.props.getTransactionsPart(first,last,newSubaccountId).then( () =>{
                 this.parseTransactionsToLineData();
             });
             //past 7days
             first = new Date(y,m,-7).getUnixTime();
             last = new Date(y,m,d+1).getUnixTime();
-            this.props.getTransactionsPart(first,last,this.state.subaccountId).then(()=>{
+            this.props.getTransactionsPart(first,last,newSubaccountId).then(()=>{
                 this.parseTransactionsToBarData();
                 this.parseTransactionsToWeekMoney();
             })

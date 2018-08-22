@@ -1,12 +1,20 @@
+.login-container {
+    height: 100%;
+    display: flex !important;
+}
+
+.join-app {
+    margin: auto;
+}
 
 .login-segment {
     padding: 0 !important;
     background: rgba(0, 0, 0, 0) !important;
     border: none !important;
     box-shadow: none !important;
+    width: 80%;
     max-width: 300px;
     margin: auto !important;
-    margin-top: 26vh!important;
 }
 
 .login-segment:before {

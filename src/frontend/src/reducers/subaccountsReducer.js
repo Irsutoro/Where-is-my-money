@@ -28,7 +28,8 @@ import {
       case SUBACCOUNTS_ERROR:
         return {
           ...state,
-          subaccountsError: action.payload
+          subaccountsError: action.payload,
+          subaccounts: []
         }
       case CHOOSE_SUBACCOUNT:
         return {

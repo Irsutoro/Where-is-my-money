@@ -17,6 +17,7 @@ const withSubaccountCheck = (WrappedComponent) => {
         this.props.getCurrencies();
       }
     }
+    
     render() {
       if (this.props.subaccounts.length === 0) {
         return (

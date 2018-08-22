@@ -49,13 +49,13 @@ class LoginSegment extends Component {
         )
 
         return (
-            <Container fluid>
+            <Container fluid className="login-container">
                 {!this.props.logged &&
                     loginSegment
                 }
                 {this.props.logged &&
                     (
-                        <Link to="/report">
+                        <Link to="/report" className="join-app">
                             <Button>
                                 Wejdź do aplikacji
                             </Button>
