@@ -175,7 +175,7 @@
 	\paragraph{} W rozdziale opisane zostały relacje pomiędzy tabelami w relacyjnej bazie danych.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\linewidth]{assets/erd.png}
+		\includegraphics[width=0.8\linewidth]{assets/bd2.png}
 		\caption[]{Model związków encji}
 		\label{fig:erd}
 	\end{figure}
@@ -184,7 +184,7 @@
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{assets/rel.png}
+		\includegraphics[width=1\linewidth]{assets/bd1.png}
 		\caption[]{Model relacyjny}
 		\label{fig:rel}
 	\end{figure}
@@ -269,61 +269,87 @@
 
 	\begin{figure}[H]
 		\vspace*{-2cm}
-		\hspace*{-1cm}
-		\includegraphics[scale=0.4]{assets/view1.png}
+		\hspace*{-4cm}
+		\includegraphics[scale=0.4]{assets/log.png}
 		\caption[]{Interfejs ekranu logowania}
 		\label{fig:logowanie}
 	\end{figure}
 	\paragraph*{} Na powyższym rysunku widnieje widok ekranu logowania do aplikacji "Where's my money?!". Początkowo użytkownik proszony jest o podanie loginu oraz hasła, w przypadku gdy wcześniej już gościł w serwisie. W przeciwnym wypadku ma możliwość przełączenia się do widoku rejestracji.
 	\begin{figure}[H]
-		\hspace*{-1cm}
-		\includegraphics[scale=0.4]{assets/view2.png}
+		\hspace*{-4cm}
+		\includegraphics[scale=0.4]{assets/rejestr.png}
 		\caption[]{Interfejs ekranu rejestracji}
 		\label{fig:rejestr}
 	\end{figure}
 	\paragraph*{} Kolejnym widokiem jest wyżej wspomniany widok rejestracji. Jest on wykorzystywany w przypadku, gdy osoba odwiedzająca stronę, nie posiada konta. Po uzupełnieniu niezbędnych informacji oraz przyciśnięciu przycisku Zarejestruj, użytkownik otrzymuje na adres email, podany w formularzu, token aktywacyjny, niezbędny do utworzenia konta. Następnie użytkownik jest przekierowany na stronę główną serwisu.
 \begin{figure}[H]
-	\hspace*{-1cm}
-	\includegraphics[scale=0.6]{assets/view3(1).png}
+	\hspace*{-3cm}
+	\includegraphics[scale=0.6]{assets/rap1.png}
 	\caption[]{Interfejs ekranu raportów(1)}
-	\label{fig:raport1}
+	\label{fig:rap1}
 \end{figure}
-\paragraph*{} Następnym widokiem, podzielonym na dwie części (Interfejs ekranu raportów(1) oraz Interfejs ekranu raportów(2)) jest widok przychodów oraz wydatków pochodzących z konta użytkownika w bieżącym miesiącu. Użytkownik ma możliwość pobrania tych informacji w postaci formatu CSV, dzięki przyciskowi mieszczącemu się poniżej dwóch grafów.
+\paragraph*{} Następnym widokiem, podzielonym na wiele części (Interfejs ekranu raportów(1), Interfejs ekranu raportów(2), Interfejs ekranu raportów(3), Interfejs ekranu raportów(4)) jest widok przychodów oraz wydatków pochodzących z konta użytkownika w bieżącym miesiącu. Użytkownik ma możliwość pobrania tych informacji w postaci formatu CSV, dzięki przyciskowi mieszczącemu się poniżej dwóch grafów.
 \begin{figure}[H]
-	\hspace*{0cm}
-	\includegraphics[scale=0.5]{assets/view3(2).png}
+	\hspace*{-2cm}
+	\includegraphics[scale=0.5]{assets/rap2.png}
 	\caption[]{Interfejs ekranu raportów(2)}
-	\label{fig:raport2}
+	\label{fig:rap2}
 \end{figure}
 \paragraph*{} Powyżej znajdują się dwa wykresy, podające informacje o przychodach oraz wydatkach z ostatnich trzech miesięcy. Następnie przycisk "Przejdź do historii" pozwala na przejście do widoku tabel ze wszystkimi wartościami konta użytkownika.
 \begin{figure}[H]
-	\hspace*{0.5cm}
-	\includegraphics[scale=0.5]{assets/view4.png}
+	\hspace*{-2cm}
+	\includegraphics[scale=0.5]{assets/rap3.png}
+	\caption[]{Interfejs ekranu raportów(2)}
+	\label{fig:rap3}
+\end{figure}
+\begin{figure}[H]
+	\hspace*{-2cm}
+	\includegraphics[scale=0.5]{assets/rap4.png}
+	\caption[]{Interfejs ekranu raportów(2)}
+	\label{fig:rap4}
+\end{figure}
+\begin{figure}[H]
+	\hspace*{-2cm}
+	\includegraphics[scale=0.5]{assets/sub.png}
 	\caption[]{Interfejs ekranu subkont}
 	\label{fig:subkonta}
 \end{figure}
 \paragraph*{} Kolejnym widokiem jest widok ekranu z zarządzaniem subkontami. Pozwala on na dodanie nowego subkonta, przypisanego do konta użytkownika, a także na usunięcie wybranego subkonta.
 \begin{figure}[H]
-	\hspace*{-1.5cm}
-	\includegraphics[scale=0.7]{assets/view5.png}
+	\hspace*{-4.5cm}
+	\includegraphics[scale=0.7]{assets/ust.png}
 	\caption[]{Interfejs ekranu ustwień}
 	\label{fig:ustawienia}
 \end{figure}
 \paragraph*{} Na powyższym rysunku, widnieje widok ustawień. W tym widoku, użytkownik ma możliwość zmiany dotychczasowych ustawień konta gółwnego, takich jak login, hasło, czy adres email.
 \begin{figure}[H]
-	\hspace*{-1cm}
-	\includegraphics[scale=0.6]{assets/view6.png}
+	\hspace*{-3cm}
+	\includegraphics[scale=0.6]{assets/his.png}
 	\caption[]{Interfejs ekranu historii}
 	\label{fig:historia}
 \end{figure}
 \paragraph*{} Następnym widokiem jest widok historii wszystkich wpisów użytkownika dla danego subkonta. Użytkownik ma możliwość dodania nowych wpisów, ich usunięcie lub edycję. Dodatkowo użytkownik ma możliwość dodać wyciąg z banku w postaci CSV.
 \begin{figure}[H]
+	\hspace*{-3cm}
+	\includegraphics[scale=0.6]{assets/aktyw.png}
+	\caption[]{Interfejs ekranu aktywacji}
+	\label{fig:akty}
+\end{figure}
+\paragraph*{} Kolejnym widokiem jest widok aktywacji konta. Użytkownik po udanym przejściu przez proces rejestracji, jest przekierowany na tą właśnie stronę, z ktrórej może powrócić na stronę główną.
+\begin{figure}[H]
+	\hspace*{-3cm}
+	\includegraphics[scale=0.6]{assets/braksub.png}
+	\caption[]{Interfejs ekranu braku subkont}
+	\label{fig:braksub}
+\end{figure}
+\paragraph*{} Powyższy rysunek przedstawia widok tworzenia nowego subkonta, w przypadku gdy użytkownik nie ma żadnego aktywnego subkonta.
+\begin{figure}[H]
 	\hspace*{-2cm}
-	\includegraphics[scale=0.6]{assets/view7.png}
+	\includegraphics[scale=0.6]{assets/dod.png}
 	\caption[]{Interfejs ekranu rejestracji}
 	\label{fig:edycja}
 \end{figure}
-\paragraph*{} Na kolejnym rysunku widnieje formularz uaktywniający się po wybraniu opcji edycji lub dodania nowego wpisu. Użytkownik proszony jest o podanie potrzebnych informacji, a także wybranie kategorii wpisu oraz waluty z wcześniej już przygotowanych tablic, przy czym użytkownik ma możliwość dodawania własnych kategorii.
+\paragraph*{} Na kolejnym rysunku widnieje formularz uaktywniający się po wybraniu opcji edycji lub dodania nowego wpisu. Użytkownik proszony jest o podanie potrzebnych informacji, a także wybranie kategorii wpisu z wcześniej już przygotowanych tablic, przy czym użytkownik ma możliwość dodawania własnych kategorii.
 \section{Bezpieczeństwo}
 \paragraph*{} Aplikacja kliencka oparta jest o model bezpieczeństwa Basic Auth. Działa w oparciu o wymaganie nagłówków "Authorization" w każdym z żądań zasobów zwartością zbudowaną na podstawie loginu oraz hasła w base64. Na poniższym rysunku przedstawiony jest schemat żądania z przeglądarki wskazujący na użycie Basic Auth.
 \begin{figure}[H]
@@ -332,6 +358,7 @@
 	\caption[]{Widok Basic Auth w przeglądarce}
 	\label{fig:basic }
 \end{figure}
+\paragraph*{} Dodatkowo wszystkie hasła użytkowników są wynikiem funkcji skrótu SHA-256, co pozwala na bezpieczniejszą wymianę danych.
 \section{Podsumowanie i perspektywy rozwoju}
 \subsection{Podział prac}
 Patryk Mroczyński:
