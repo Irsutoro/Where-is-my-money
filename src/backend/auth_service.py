@@ -4,7 +4,7 @@ from base64 import b64encode
 import json
 import cherrypy
 import psycopg2
-from typing import Dict
+from typing import Dict, List
 import configparser
 from config import CHERRYPY_CONFIG_DEFAULT, WITHOUT_AUTHENTICATION
 from database_management import ResultSet
@@ -100,6 +100,7 @@ class AuthService:
     def PUT(self, token: str) -> Dict[str, str]:
         activated_login = self._activate_account(token)
         self._deactivate_token(token)
+        self._add_default_categories(activated_login)
         return {'activated_login': activated_login}
 
     def _activate_account(self, token: str) -> None:
@@ -115,3 +116,15 @@ class AuthService:
         query = 'UPDATE tokens SET expiration_date = current_date WHERE value = %s'
         with WMM_MAIN_DB as db:
             db.execute(query, (token,), ResultSet.NONE)
+
+    def _add_default_categories(self, login: str) -> None:
+        user_id = self._get_user_id(login)
+        query = 'INSERT INTO categories (user_id, name) VALUES (%s, %s), (%s, %s), (%s, %s)'
+        with WMM_MAIN_DB as db:
+            db.execute(query, (user_id, 'Hobby', user_id, 'Praca', user_id, 'Dom'), ResultSet.NONE)
+
+    def _get_user_id(self, login: str) -> int:
+        query = 'SELECT id FROM users WHERE login = %s'
+        with WMM_MAIN_DB as db:
+            user_id = db.execute(query, (login,), ResultSet.ONE)[0]
+        return user_id
