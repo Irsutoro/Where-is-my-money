@@ -119,9 +119,9 @@ export default class RegisterForm extends Component {
           onClose={this.handleCloseModal}
           basic
           size='small'>
-            <Header icon='money' content='Aktywacja konta'></Header>
+            <Header icon='money'>Aktywacja konta</Header>
           <Modal.Content>
-            <h3>Na podany adres e-mail została wysłana wiadomość aktywacyjna. <br/>Aby aktywować swoje konto, wystarczy podążać za instrukcją w wysłanej wiadomości.</h3>
+            <h4>Na podany adres e-mail została wysłana wiadomość aktywacyjna. <br/>Aby aktywować swoje konto, wystarczy podążać za instrukcją w wysłanej wiadomości.</h4>
             <br/>
           
             <Button color='green' onClick={this.handleCloseModal} inverted>
