@@ -42,15 +42,19 @@ class NestedModal extends Component {
         <Modal.Header>Dodaj kategorię</Modal.Header>
         <Modal.Content>
               <Input
-                placeholder='Nazwa kategorii'
+                placeholder='Nazwa kategorii (max 30 znaków)'
                 focus
                 ref={categoryInput}
               >
                 <input />
                 
                 <Button onClick={() => {
-                  this.props.addCategory(categoryInput.current.inputRef.value);
-                  this.close();
+                  if (categoryInput.current.inputRef.value.length > 30) {
+                    alert('Nazwa kategorii nie może przekraczać 30 znaków')
+                  } else {
+                    this.props.addCategory(categoryInput.current.inputRef.value);
+                    this.close();
+                  }
                 }}>Dodaj kategorię</Button>
               </Input>
               <br/>

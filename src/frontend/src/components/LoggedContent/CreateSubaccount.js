@@ -39,7 +39,11 @@ const CreateSubaccount = ({ addSubaccount, currencies }) => {
                 </Grid.Row>
                 <Grid.Row centered columns={16}>
                     <Button onClick={() => {
-                        addSubaccount(nameInput.current.inputRef.value,currencyId.current.state.value)
+                        if (nameInput.current.inputRef.value.length > 30) {
+                            alert('Nazwa subkonta nie może przekraczać 30 znaków')
+                          } else {
+                            addSubaccount(nameInput.current.inputRef.value,currencyId.current.state.value)
+                          }
                     }}>Utwórz subkonto</Button>
                 </Grid.Row>
             </Grid>
