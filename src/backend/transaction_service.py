@@ -67,7 +67,7 @@ class TransactionService:
             if authorized:
                 self._insert_new_transaction(user_id, request['category_id'],
                                             request['subaccount_id'],
-                                            request['date'], request['amount'],
+                                            request['date'], round(float(request['amount'].replace(',','.')),2),
                                             request.get('comment', None))
             else:
                 raise cherrypy.HTTPError(401, 'Unauthorized')
@@ -98,7 +98,7 @@ class TransactionService:
             if not self._authorize_category(user_id, request['category_id']):
                 raise cherrypy.HTTPError(401, 'Unauthorized')
 
-        query, parameters = self._generate_update_query(request.get('category_id'), request.get('subaccount_id'), request.get('date'), request.get('amount'), request.get('comment'), id, user_id)
+        query, parameters = self._generate_update_query(request.get('category_id'), request.get('subaccount_id'), request.get('date'), round(float(request.get('amount').replace(',','.')),2), request.get('comment'), id, user_id)
 
         with WMM_MAIN_DB as db:
             updated = db.execute(query, parameters, ResultSet.ONE)
