@@ -55,13 +55,21 @@ export default class RegisterForm extends Component {
       formError = !equalPasswords
       repeatError = !equalPasswords
     }
-
-    this.setState({
-      [e.target.name]: e.target.value,
-      formError: formError,
-      passwordError: passwordError,
-      repeatError: repeatError
-    });
+    if(e.target.name === "login" && e.target.value.length >20){
+      alert("Długość loginu nie może być większa niż 20 znaków.")
+    }
+    else if(e.target.name === "username" && e.target.value.length >50){
+      alert("Długość nazwy użytkownika nie może być większa niż 50 znaków.")
+    }
+    else{
+      this.setState({
+        [e.target.name]: e.target.value,
+        formError: formError,
+        passwordError: passwordError,
+        repeatError: repeatError
+      });
+    }
+    
   }
 
   handleSubmit(e) {

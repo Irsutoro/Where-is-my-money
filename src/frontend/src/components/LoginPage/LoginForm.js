@@ -17,7 +17,13 @@ export default class LoginForm extends Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    if(e.target.name === "login" && e.target.value.length >20){
+      alert("Długość nazwy lub hasła nie może być większa niż 20 znaków.")
+    }
+    else{
+      this.setState({ [e.target.name]: e.target.value });
+    }
+    
   }
 
   handleSubmit(e) {
