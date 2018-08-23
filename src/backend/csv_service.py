@@ -40,7 +40,7 @@ class CSVService:
         for entry in entries:
             pattern = '%Y-%m-%d'
             epoch = int(time.mktime(time.strptime(entry['date'], pattern)))
-            parameters += (user_id, category_id, subaccount_id, epoch, entry['amount'].replace(',','.'), entry['title'])
+            parameters += (user_id, category_id, subaccount_id, epoch, round(float(entry['amount'].replace(',','.')),2), entry['title'])
             if first_entry:
                 first_entry = False
                 query += '(%s, %s, %s, %s, %s, %s)'
