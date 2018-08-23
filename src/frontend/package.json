@@ -25,7 +25,8 @@
     "sha256": "^0.2.0"
   },
   "scripts": {
-    "start": "parcel --no-cache ./public/index.html"
+    "start": "parcel --no-cache ./public/index.html",
+    "build": "parcel build ./public/index.html --public-url ./"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
