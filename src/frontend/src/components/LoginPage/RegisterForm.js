@@ -112,7 +112,7 @@ export default class RegisterForm extends Component {
                 <li>co najmniej 8 znaków</li>
                 <li>przynajmniej 1 wielkiej litery</li>
                 <li>przynajmniej 1 cyfry</li>
-                <li>inimum 1 znaku specjalnego (!@#$%^&*()?.)</li>
+                <li>Minimum 1 znaku specjalnego (!@#$%^&*()?.)</li>
               </ul>
           )}
         />

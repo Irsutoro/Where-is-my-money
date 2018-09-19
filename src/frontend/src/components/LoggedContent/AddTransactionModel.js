@@ -99,9 +99,14 @@ class AddTransactionModal extends Component {
     let transaction = this.state.transaction
     transaction[e.target.name] = value
 
-    this.setState({
-      transaction: transaction
-    })
+    if(transaction.comment.length >50){
+      alert("Komentarz nie może być dłuższy niż 50 znaków.")
+    }
+    else{
+      this.setState({
+        transaction: transaction
+      })
+    }
   }
 
   handleDateChange(date) {
@@ -136,7 +141,7 @@ class AddTransactionModal extends Component {
             </Form.Field>
             <Form.Field required>
               <label>Wartość</label>
-              <Input name="amount" value={this.state.transaction.amount} placeholder={this.state.transaction.amount} onChange={this.handleChange} />
+              <Input name="amount" type="number" value={this.state.transaction.amount} placeholder={this.state.transaction.amount} onChange={this.handleChange} />
             </Form.Field>
             
             <Form.Field required>

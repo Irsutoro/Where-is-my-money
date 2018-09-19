@@ -43,12 +43,17 @@ class PropertiesPage extends Component {
             formError = true
             passwordError = true
         }
-
-        this.setState({
-            [e.target.name]: e.target.value,
-            formError: formError,
-            passwordError: passwordError
-        });
+        if(e.target.name === "username" && e.target.value.length >20){
+            alert("Długość nazwy lub hasła nie może być większa niż 20 znaków.")
+          }
+          else{
+            this.setState({
+                [e.target.name]: e.target.value,
+                formError: formError,
+                passwordError: passwordError
+            });
+          }
+        
       }
     
       handleSubmit(e) {
@@ -88,7 +93,7 @@ class PropertiesPage extends Component {
                                     <li>co najmniej 8 znaków</li>
                                     <li>przynajmniej 1 wielkiej litery</li>
                                     <li>przynajmniej 1 cyfry</li>
-                                    <li>inimum 1 znaku specjalnego (!@#$%^&*()?.)</li>
+                                    <li>Minimum 1 znaku specjalnego (!@#$%^&*()?.)</li>
                                 </ul>
                             )}
                             />
